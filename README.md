@@ -1,4 +1,4 @@
-# The Common &amp; Recent<br>Bogey<br>Golf Club
+# The Common &amp; Recent Bogey Golf Club&trade;
 
 > Let's keep it real.
 
