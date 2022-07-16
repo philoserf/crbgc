@@ -1,6 +1,4 @@
----
-title: The Common &amp; Recent Bogey Golf Club&trade;
----
+# The Common &amp; Recent Bogey Golf Club&trade;
 
 > We can shoot 84 here. Right?&trade;
 
