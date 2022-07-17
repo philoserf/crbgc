@@ -1,4 +1,4 @@
-# The Common &amp; Recent Bogey Golf Club
+# The Common &amp; Recent Bogey Golf Club<sup>&trade;</sup>
 
 > We can shoot 84 here. Right?&trade;
 
