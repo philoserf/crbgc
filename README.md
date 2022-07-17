@@ -2,8 +2,6 @@
 
 > We can shoot 84 here. Right?&trade;
 
-***
-
 - established circa 2000
 - founded by Dean Chase and Mark Ayers
 
