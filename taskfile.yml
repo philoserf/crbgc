@@ -1,0 +1,34 @@
+version: "3"
+
+tasks:
+  prettier:
+    desc: Format markdown files with Prettier
+    cmds:
+      - npx prettier --write "**/*.md"
+
+  prettier:check:
+    desc: Check markdown formatting with Prettier (without changing files)
+    cmds:
+      - npx prettier --check "**/*.md"
+
+  markdownlint:
+    desc: Lint markdown files with markdownlint and fix issues
+    cmds:
+      - npx markdownlint-cli --fix "**/*.md"
+
+  markdownlint:check:
+    desc: Check markdown files with markdownlint (without fixing)
+    cmds:
+      - npx markdownlint-cli "**/*.md"
+
+  format:
+    desc: Format and fix all files
+    cmds:
+      - task: prettier
+      - task: markdownlint
+
+  check:
+    desc: Check all files without changing them
+    cmds:
+      - task: prettier:check
+      - task: markdownlint:check
