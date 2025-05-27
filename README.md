@@ -1,6 +1,6 @@
 # The Common & Recent Bogey Golf Club&trade;
 
-AKA the <abbr title="Common &amp; Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common &amp; Recent">C&amp;R</abbr>.
+AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common & Recent">C&amp;R</abbr>.
 
 Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com).
 
@@ -54,7 +54,7 @@ The C&R exists to promote the ancient art of taking a pleasant walk on nice lawn
 
 ### Article VI: Annual Traditions
 
-1. **Founders Day**: Annual recognition of Mark Ayers and Dean Chase's vision
+1. **Founders' Day**: Annual recognition of Mark Ayers and Dean Chase's vision
 2. **Dew Sweeper Championship**: Early morning tournament for the truly dedicated
 3. **Zen Juice Appreciation Day**: Celebration of the medicinal properties of course-side scotch
 
