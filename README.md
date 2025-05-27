@@ -1,12 +1,23 @@
 # The Common &amp; Recent Bogey Golf Club&trade;
 
+AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common & Recent">C&amp;R</abbr>.
+
+Established circa 2000 by Mark Ayers and Dean Chase.
+
 ![golf ball in deep green grass](golf-ball-in-grass.jpeg)
 
-a.k.a the <abbr>C&amp;RBGC</abbr> or the <abbr>C&amp;R</abbr>.
-
-Established circa 2000 by Mark Ayers and Dean Chase
-
 > We can shoot an 84 here, right?
+
+## Table of Contents
+
+- [Mission & Philosophy](#article-i-mission--philosophy)
+- [Membership](#article-ii-membership)
+- [Rules of Play](#article-iii-rules-of-play)
+- [Scoring & Handicaps](#article-iv-scoring--handicaps)
+- [Course Etiquette](#article-v-course-etiquette)
+- [Annual Traditions](#article-vi-annual-traditions)
+- [Amendments](#article-vii-amendments)
+- [Glossary](#glossary)
 
 ## Bylaws
 
@@ -52,28 +63,17 @@ These bylaws may be amended by majority vote of members present during any round
 
 ---
 
-_"In the end, it's not about the score you post, but the stories you tell afterward."_  
-— C&R Philosophy
+> In the end, it's not about the score you post, but the stories you tell afterward.  
+> —C&R Philosophy
 
 ## Glossary
 
-_Dew Sweeper_  
-one who enjoys an earlier morning round of golf, generally first off the tee
-
-_Golf_  
-a walk on a nice lawn with friends
-
-_Zen Juice_  
-scotch whisky drank from a flask while golfing, particularly when taken after a poor stroke
-
-_84_  
-the theoretical perfect score for any C&R member on any course, regardless of par or actual ability
-
-_Gallery_  
-any witness to a golf shot, whose presence automatically improves the quality of said shot
-
-_Reasonable Search_  
-the amount of time spent looking for a lost ball before someone suggests it's time to move on
+_84_: the theoretical perfect score for any C&R member on any course, regardless of par or actual ability.  
+_Dew Sweeper_: one who enjoys an earlier morning round of golf, generally first off the tee.  
+_Gallery_: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
+_Golf_: a walk on a nice lawn with friends.  
+_Reasonable Search_: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
+_Zen Juice_: scotch whisky drank from a flask while golfing, particularly when taken after a poor stroke.  
 
 ---
 
