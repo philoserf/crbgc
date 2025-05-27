@@ -73,7 +73,7 @@ _Dew Sweeper_: one who enjoys an earlier morning round of golf, generally first 
 _Gallery_: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
 _Golf_: a walk on a nice lawn with friends.  
 _Reasonable Search_: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
-_Zen Juice_: scotch whisky drank from a flask while golfing, particularly when taken after a poor stroke.  
+_Zen Juice_: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
 
 ---
 
