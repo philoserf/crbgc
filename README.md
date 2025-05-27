@@ -1,6 +1,6 @@
-# The Common &amp; Recent Bogey Golf Club&trade;
+# The Common & Recent Bogey Golf Club&trade;
 
-AKA the <abbr title="Common &amp Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common &amp; Recent">C&amp;R</abbr>.
+AKA the <abbr title="Common &amp; Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common &amp; Recent">C&amp;R</abbr>.
 
 Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com).
 
