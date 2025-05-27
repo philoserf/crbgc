@@ -1,8 +1,8 @@
 # The Common &amp; Recent Bogey Golf Club&trade;
 
-AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common & Recent">C&amp;R</abbr>.
+AKA the <abbr title="Common &amp Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common &amp; Recent">C&amp;R</abbr>.
 
-Established circa 2000 by Mark Ayers and Dean Chase.
+Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com).
 
 ![golf ball in deep green grass](golf-ball-in-grass.jpeg)
 
@@ -10,6 +10,7 @@ Established circa 2000 by Mark Ayers and Dean Chase.
 
 ## Table of Contents
 
+- [Bylaws](#bylaws)
 - [Mission & Philosophy](#article-i-mission--philosophy)
 - [Membership](#article-ii-membership)
 - [Rules of Play](#article-iii-rules-of-play)
@@ -53,7 +54,7 @@ The C&R exists to promote the ancient art of taking a pleasant walk on nice lawn
 
 ### Article VI: Annual Traditions
 
-1. **Founder's Day**: Annual recognition of Mark Ayers and Dean Chase's vision
+1. **Founders Day**: Annual recognition of Mark Ayers and Dean Chase's vision
 2. **Dew Sweeper Championship**: Early morning tournament for the truly dedicated
 3. **Zen Juice Appreciation Day**: Celebration of the medicinal properties of course-side scotch
 
@@ -63,7 +64,7 @@ These bylaws may be amended by majority vote of members present during any round
 
 ---
 
-> In the end, it's not about the score you post, but the stories you tell afterward.  
+> It's not about the score you post but the stories you tell.  
 > —C&R Philosophy
 
 ## Glossary
