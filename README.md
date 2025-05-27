@@ -78,4 +78,4 @@ _Zen Juice_: scotch whisky drunk from a flask while golfing, particularly when t
 
 ---
 
-&copy; 2022-2025 by [Mark Ayers](https://philoserf.com/). All rights reserved.
+© 2022–2025 by [Mark Ayers](https://philoserf.com/). All rights reserved.
