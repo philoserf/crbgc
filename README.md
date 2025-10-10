@@ -1,4 +1,4 @@
-# The Common & Recent Bogey Golf Club&trade;
+# The Common & Recent Bogey Golf Club
 
 AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common & Recent">C&amp;R</abbr>.
 
