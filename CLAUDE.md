@@ -8,7 +8,7 @@ Static website for the Common & Recent Bogey Golf Club (C&RBGC), hosted via GitH
 
 ## Development Commands
 
-Uses Task runner (taskfile.yml):
+Uses Task runner (taskfile.yml) with Bun:
 
 - `task format` - Format and fix markdown files (prettier + markdownlint)
 - `task check` - Check formatting without changes
