@@ -10,15 +10,17 @@ Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com
 
 ## Table of Contents
 
-- [Bylaws](#bylaws)
-- [Mission & Philosophy](#article-i-mission--philosophy)
-- [Membership](#article-ii-membership)
-- [Rules of Play](#article-iii-rules-of-play)
-- [Scoring & Handicaps](#article-iv-scoring--handicaps)
-- [Course Etiquette](#article-v-course-etiquette)
-- [Annual Traditions](#article-vi-annual-traditions)
-- [Amendments](#article-vii-amendments)
-- [Glossary](#glossary)
+- [The Common \& Recent Bogey Golf Club](#the-common--recent-bogey-golf-club)
+  - [Table of Contents](#table-of-contents)
+  - [Bylaws](#bylaws)
+    - [Article I: Mission \& Philosophy](#article-i-mission--philosophy)
+    - [Article II: Membership](#article-ii-membership)
+    - [Article III: Rules of Play](#article-iii-rules-of-play)
+    - [Article IV: Scoring \& Handicaps](#article-iv-scoring--handicaps)
+    - [Article V: Course Etiquette](#article-v-course-etiquette)
+    - [Article VI: Annual Traditions](#article-vi-annual-traditions)
+    - [Article VII: Amendments](#article-vii-amendments)
+  - [Glossary](#glossary)
 
 ## Bylaws
 
