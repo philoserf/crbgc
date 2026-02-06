@@ -11,24 +11,12 @@ tasks:
     cmds:
       - bunx prettier --check "**/*.md"
 
-  markdownlint:
-    desc: Lint markdown files with markdownlint and fix issues
-    cmds:
-      - bunx markdownlint-cli --fix "**/*.md"
-
-  markdownlint:check:
-    desc: Check markdown files with markdownlint (without fixing)
-    cmds:
-      - bunx markdownlint-cli "**/*.md"
-
   format:
     desc: Format and fix all files
     cmds:
       - task: prettier
-      - task: markdownlint
 
   check:
     desc: Check all files without changing them
     cmds:
       - task: prettier:check
-      - task: markdownlint:check
