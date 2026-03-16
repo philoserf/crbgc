@@ -4,3 +4,6 @@ repository:
   name: crbgc
   description: "a website for the Common & Recent Bogey Golf Club"
   homepage: https://crbgc.org/
+  topics:
+    - website
+    - golf
