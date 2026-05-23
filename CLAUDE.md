@@ -1,27 +1,20 @@
-# AGENTS.md
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-Static website for the Common & Recent Bogey Golf Club (C&RBGC), hosted via GitHub Pages at crbgc.org. The README.md is auto-rendered as the website homepage.
+Static website for the Common & Recent Bogey Golf Club (C&RBGC), hosted via GitHub Pages at crbgc.org. `README.md` is auto-rendered as the homepage; `CNAME` maps the custom domain. No build step.
 
 ## Development Commands
 
-Uses Task runner (Taskfile.yml) with Bun:
+Task runner (`Taskfile.yml`) with Bun:
 
-- `task format` - Format markdown files (prettier)
-- `task check` - Check formatting without changes
-- `python -m http.server` - Serve site locally on <http://localhost:8000>
+- `task format` — Format markdown with Prettier (`bunx prettier --write "**/*.md"`)
+- `task check` — Check formatting without writing (`bunx prettier --check "**/*.md"`)
 
-## Architecture
+## Conventions
 
-Static GitHub Pages site — no build step required. The README.md serves as the homepage content. CNAME maps the custom domain crbgc.org.
-
-Configuration:
-
-- `Taskfile.yml` - Task runner definitions (format, check)
-
-## Important Notes
-
-- Always run `task format` before committing markdown changes
-- Keep copyright years current in README.md footer (currently 2022–2025, update to include current year)
-- README uses `<abbr>` HTML tags for abbreviation tooltips (e.g., C&RBGC) — this is intentional
+- Run `task format` before committing markdown changes.
+- `<abbr>` HTML tags in `README.md` (e.g., C&RBGC tooltips) are intentional — allowed in `.markdownlint.json` via the `MD033` allowlist.
+- Keep the copyright year range in the `README.md` footer current.
