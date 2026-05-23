@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Static website for the Common & Recent Bogey Golf Club (C&RBGC), hosted via GitHub Pages at crbgc.org. `README.md` is auto-rendered as the homepage; `CNAME` maps the custom domain. No build step.
 
+The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
+
 ## Development Commands
 
 Task runner (`Taskfile.yml`) with Bun:
