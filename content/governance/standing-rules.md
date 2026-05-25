@@ -1,9 +1,12 @@
 ---
 title: "Standing Rules"
 description: "Standing Rules of the Common & Recent Bogey Golf Club, adopted under Article VII of the Bylaws."
+weight: 20
+adopted: 2026-05-25
+last_amended: 2026-05-25
 ---
 
-Adopted under [Article VII](/#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogey Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
+Adopted under [Article VII](/governance/bylaws/#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogey Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
 
 ## Rules of Play
 
