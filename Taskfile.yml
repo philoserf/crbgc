@@ -20,3 +20,13 @@ tasks:
     desc: Check all files without changing them
     cmds:
       - task: prettier:check
+
+  serve:
+    desc: Run Hugo dev server with drafts
+    cmds:
+      - hugo server -D
+
+  build:
+    desc: Build the site to ./public
+    cmds:
+      - hugo --minify --gc
