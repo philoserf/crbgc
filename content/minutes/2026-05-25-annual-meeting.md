@@ -3,8 +3,8 @@ title: "Minutes — 2026 Annual Meeting"
 description: "Minutes of the 2026 Annual Meeting, May 25, 2026."
 date: 2026-05-25T19:00:00-04:00
 meeting_type: annual
-approved: true
-approved_on: 2026-05-25
+approved: false
+approved_on:
 presiding: "Mark Ayers, Captain"
 secretary: "Dean Chase, Secretary-Treasurer"
 present: ["Mark Ayers", "Dean Chase"]
@@ -42,7 +42,7 @@ By unanimous voice vote, the following officers were elected for the 2026 term:
 
 ## Approval of These Minutes
 
-These minutes were read and approved by unanimous voice vote at the meeting.
+These minutes are presented in draft and will be read and considered for approval at the [2027 Annual Meeting](/notices/notice-of-2027-annual-meeting/).
 
 ## Adjournment
 
