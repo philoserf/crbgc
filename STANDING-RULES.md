@@ -15,12 +15,12 @@ Adopted under [Article VII](README.md#article-vii--standing-rules) of the Bylaws
 
 1. **The 84 Standard.** Members shall consider all courses playable to an 84, regardless of actual difficulty.
 2. **Zen Juice Protocol.** Consumption of scotch whisky from a flask is permitted and encouraged, particularly after a poor shot.
-3. **Dew Sweeper Priority.** A Member first off the tee on a given day shall hold bragging rights for the remainder of that day.
-4. **Gallery Rule.** Any shot witnessed by another person shall be deemed to have improved by one stroke category.
+3. **Dew Sweeper Priority.** A Member first off the tee shall hold bragging rights for the rest of that day.
+4. **Gallery Rule.** Any shot witnessed by a Gallery shall be deemed to have improved by one stroke category.
 
 ## Course Etiquette
 
-1. **Pace of Play.** Slow play is acceptable when accompanied by good conversation.
+1. **Pace of Play.** Slow play is acceptable with good conversation.
 2. **Lost Ball Protocol.** After a Reasonable Search, a Member shall drop a ball and play on.
 
 ## Scoring & Handicaps
@@ -30,7 +30,7 @@ Adopted under [Article VII](README.md#article-vii--standing-rules) of the Bylaws
 
 ## Annual Traditions
 
-1. **Founders' Day.** Annual recognition of Mark Ayers and Dean Chase's vision.
+1. **Founders' Day.** Annual tribute to Mark Ayers and Dean Chase's founding vision.
 2. **Dew Sweeper Championship.** Annual tournament for the truly dedicated, contested at sunrise near the summer solstice.
 3. **Zen Juice Appreciation Day.** Annual celebration of the medicinal properties of course-side scotch.
 

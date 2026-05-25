@@ -36,7 +36,7 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 4. Member in Good Standing.** A Member is a "Member in Good Standing" if such Member (a) has not resigned, (b) has not been expelled under Section 6, and (c) is current in any dues established by Standing Rule.
 
-**Section 5. Resignation.** A Member may resign by written notice to the Secretary-Treasurer. Resignation is effective upon receipt of such notice.
+**Section 5. Resignation.** A Member may resign by written notice to the Secretary-Treasurer. Resignation is effective upon receipt.
 
 **Section 6. Discipline.** A Member other than a Charter Member may be suspended or expelled for conduct prejudicial to the Object of the Club upon the affirmative vote of two-thirds of the Members in Good Standing, following written notice of the charges and an opportunity to be heard.
 
@@ -88,7 +88,7 @@ The rules contained in the current edition of _Robert's Rules of Order Newly Rev
 
 **Section 3. Scope of Amendment.** No amendment offered from the floor may exceed the scope of the notice given under Section 1.
 
-**Section 4. Record.** The vote on any proposed amendment shall be recorded in the minutes by the name of each Member voting and the manner of such vote.
+**Section 4. Record.** The vote on any proposed amendment shall be recorded in the minutes by the name of each Member voting and the manner of the vote.
 
 ### Adoption
 
