@@ -4,8 +4,6 @@ AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <
 
 Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com).
 
-![a golfer walking the fairway, carry bag on shoulder, flagstick ahead](walking-the-fairway.jpeg)
-
 > We can shoot an 84 here, right?
 
 ## Table of Contents
