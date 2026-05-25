@@ -4,9 +4,10 @@ Adopted under [Article VII](README.md#article-vii--standing-rules) of the Bylaws
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Rules of Play](#rules-of-play)
 - [Course Etiquette](#course-etiquette)
-- [Scoring & Handicaps](#scoring--handicaps)
+- [Scoring \& Handicaps](#scoring--handicaps)
 - [Annual Traditions](#annual-traditions)
 - [Glossary](#glossary)
 
@@ -20,25 +21,23 @@ Adopted under [Article VII](README.md#article-vii--standing-rules) of the Bylaws
 ## Course Etiquette
 
 1. **Pace of Play.** Slow play is acceptable when accompanied by good conversation.
-2. **Lost Ball Policy.** After a Reasonable Search, a Member shall drop a ball and play on.
-3. **Sand Trap Philosophy.** Bunkers are temporary obstacles, not permanent residences.
+2. **Lost Ball Protocol.** After a Reasonable Search, a Member shall drop a ball and play on.
 
 ## Scoring & Handicaps
 
 1. **Honor System.** All scores shall be reported on the honor system.
-2. **Official Club Score.** The 84 Standard shall be the official Club score for any round, regardless of the actual stroke count.
-3. **No Handicap Index.** The Club shall not maintain a handicap index for any Member.
+2. **No Handicap Index.** The Club shall not maintain a handicap index for any Member.
 
 ## Annual Traditions
 
 1. **Founders' Day.** Annual recognition of Mark Ayers and Dean Chase's vision.
-2. **Dew Sweeper Championship.** Annual tournament for the truly dedicated, contested at sunrise.
+2. **Dew Sweeper Championship.** Annual tournament for the truly dedicated, contested at sunrise near the summer solstice.
 3. **Zen Juice Appreciation Day.** Annual celebration of the medicinal properties of course-side scotch.
 
 ---
 
 > It's not about the score you post but the stories you tell.  
-> —C&R Philosophy
+> —C&RBGC Philosophy
 
 ## Glossary
 

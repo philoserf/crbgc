@@ -1,24 +1,20 @@
 # The Common & Recent Bogey Golf Club
 
-AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <abbr title="Common & Recent">C&amp;R</abbr>.
-
-Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com).
+Established circa 2000 by [Mark Ayers](https://philoserf.com/) and [Dean Chase](https://deanisthedevil.com/).
 
 > We can shoot an 84 here, right?
 
 ## Table of Contents
 
-- [Bylaws](#bylaws)
-  - [Article I — Name](#article-i--name)
-  - [Article II — Object](#article-ii--object)
-  - [Article III — Members](#article-iii--members)
-  - [Article IV — Officers](#article-iv--officers)
-  - [Article V — Meetings](#article-v--meetings)
-  - [Article VI — Parliamentary Authority](#article-vi--parliamentary-authority)
-  - [Article VII — Standing Rules](#article-vii--standing-rules)
-  - [Article VIII — Amendment of Bylaws](#article-viii--amendment-of-bylaws)
-  - [Adoption](#adoption)
-- [Standing Rules](STANDING-RULES.md)
+- [Article I — Name](#article-i--name)
+- [Article II — Object](#article-ii--object)
+- [Article III — Members](#article-iii--members)
+- [Article IV — Officers](#article-iv--officers)
+- [Article V — Meetings](#article-v--meetings)
+- [Article VI — Parliamentary Authority](#article-vi--parliamentary-authority)
+- [Article VII — Standing Rules](#article-vii--standing-rules)
+- [Article VIII — Amendment of Bylaws](#article-viii--amendment-of-bylaws)
+- [Adoption](#adoption)
 
 ## Bylaws
 
