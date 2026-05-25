@@ -10,17 +10,15 @@ Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com
 
 ## Table of Contents
 
-- [The Common \& Recent Bogey Golf Club](#the-common--recent-bogey-golf-club)
-  - [Table of Contents](#table-of-contents)
-  - [Bylaws](#bylaws)
-    - [Article I: Mission \& Philosophy](#article-i-mission--philosophy)
-    - [Article II: Membership](#article-ii-membership)
-    - [Article III: Rules of Play](#article-iii-rules-of-play)
-    - [Article IV: Scoring \& Handicaps](#article-iv-scoring--handicaps)
-    - [Article V: Course Etiquette](#article-v-course-etiquette)
-    - [Article VI: Annual Traditions](#article-vi-annual-traditions)
-    - [Article VII: Amendments](#article-vii-amendments)
-  - [Glossary](#glossary)
+- [Bylaws](#bylaws)
+  - [Article I: Mission \& Philosophy](#article-i-mission--philosophy)
+  - [Article II: Membership](#article-ii-membership)
+  - [Article III: Rules of Play](#article-iii-rules-of-play)
+  - [Article IV: Scoring \& Handicaps](#article-iv-scoring--handicaps)
+  - [Article V: Course Etiquette](#article-v-course-etiquette)
+  - [Article VI: Annual Traditions](#article-vi-annual-traditions)
+  - [Article VII: Amendments](#article-vii-amendments)
+- [Glossary](#glossary)
 
 ## Bylaws
 
@@ -30,25 +28,24 @@ The C&R exists to promote the ancient art of taking a pleasant walk on nice lawn
 
 ### Article II: Membership
 
-1. **Open Enrollment**: Any person who believes golf is fundamentally about having a good time is eligible for membership
-2. **Founding Principles**: Members must acknowledge that the perfect round exists somewhere between aspiration and reality
-3. **Character Requirement**: Must be able to laugh at their own golf swing
+- [ ] TODO (rewrite)
 
 ### Article III: Rules of Play
+
+- [ ] TODO (rewrite)
 
 1. **The 84 Standard**: All courses shall be considered playable to an 84, regardless of actual difficulty
 2. **Zen Juice Protocol**: Consumption of scotch whisky from a flask is not only permitted but encouraged, particularly after poor shots
 3. **Dew Sweeper Priority**: Early morning players have bragging rights for the remainder of the day
-4. **Foot Wedge Rule**: Improving one's lie is acceptable when it enhances the overall enjoyment of the round
-5. **Gallery Rule**: All shots witnessed by others automatically improve by one stroke category
+4. **Gallery Rule**: All shots witnessed by others automatically improve by one stroke category
 
 ### Article IV: Scoring & Handicaps
 
-1. **Optimistic Scoring**: When in doubt, round down
-2. **Weather Adjustments**: Scores may be adjusted for adverse conditions including (but not limited to): wind, rain, sun glare, allergies, and general malaise
-3. **Equipment Malfunctions**: Clubs, balls, and tees are subject to temporary failures that may affect scoring
+- [ ] TODO (rewrite)
 
 ### Article V: Course Etiquette
+
+- [ ] TODO (rewrite)
 
 1. **Pace of Play**: Slow play is acceptable when accompanied by good conversation
 2. **Lost Ball Policy**: After a reasonable search (defined as "when someone suggests giving up"), drop a ball and play on
@@ -80,4 +77,4 @@ _Zen Juice_: scotch whisky drunk from a flask while golfing, particularly when t
 
 ---
 
-© 2022–2025 by [Mark Ayers](https://philoserf.com/). All rights reserved.
+© 2022–2026 by [Mark Ayers](https://philoserf.com/). All rights reserved.
