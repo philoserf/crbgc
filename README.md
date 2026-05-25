@@ -4,76 +4,99 @@ AKA the <abbr title="Common & Recent Bogey Golf Club">C&amp;RBGC</abbr> or the <
 
 Established circa 2000 by Mark Ayers and [Dean Chase](https://deanisthedevil.com).
 
-![a golfer walking the fairway, carry bag on shoulder, flagstick ahead](walking-the-fairway.jpeg)
-
 > We can shoot an 84 here, right?
 
 ## Table of Contents
 
 - [Bylaws](#bylaws)
-  - [Article I: Mission \& Philosophy](#article-i-mission--philosophy)
-  - [Article II: Membership](#article-ii-membership)
-  - [Article III: Rules of Play](#article-iii-rules-of-play)
-  - [Article IV: Scoring \& Handicaps](#article-iv-scoring--handicaps)
-  - [Article V: Course Etiquette](#article-v-course-etiquette)
-  - [Article VI: Annual Traditions](#article-vi-annual-traditions)
-  - [Article VII: Amendments](#article-vii-amendments)
-- [Glossary](#glossary)
+  - [Article I — Name](#article-i--name)
+  - [Article II — Object](#article-ii--object)
+  - [Article III — Members](#article-iii--members)
+  - [Article IV — Officers](#article-iv--officers)
+  - [Article V — Meetings](#article-v--meetings)
+  - [Article VI — Parliamentary Authority](#article-vi--parliamentary-authority)
+  - [Article VII — Standing Rules](#article-vii--standing-rules)
+  - [Article VIII — Amendment of Bylaws](#article-viii--amendment-of-bylaws)
+  - [Adoption](#adoption)
+- [Standing Rules](STANDING-RULES.md)
 
 ## Bylaws
 
-### Article I: Mission & Philosophy
+### Article I — Name
 
-The C&R exists to promote the ancient art of taking a pleasant walk on nice lawns with friends, occasionally interrupted by the hitting of small white balls toward distant holes.
+The name of this organization shall be **The Common & Recent Bogey Golf Club** (the "Club"), which may also be referred to as the "C&RBGC" or the "C&R."
 
-### Article II: Membership
+### Article II — Object
 
-- [ ] TODO (rewrite)
+The Object of the Club shall be to promote the ancient art of taking a pleasant walk on agreeable lawns in the company of friends, occasionally interrupted by the striking of small white balls toward distant holes.
 
-### Article III: Rules of Play
+### Article III — Members
 
-- [ ] TODO (rewrite)
+**Section 1. Classes.** The Club shall have two classes of members: Charter Members and Members. Each is a "Member" for purposes of these Bylaws.
 
-1. **The 84 Standard**: All courses shall be considered playable to an 84, regardless of actual difficulty
-2. **Zen Juice Protocol**: Consumption of scotch whisky from a flask is not only permitted but encouraged, particularly after poor shots
-3. **Dew Sweeper Priority**: Early morning players have bragging rights for the remainder of the day
-4. **Gallery Rule**: All shots witnessed by others automatically improve by one stroke category
+**Section 2. Charter Members.** The Charter Members of the Club are **Mark Ayers** and **Dean Chase**, who founded the Club circa 2000. Charter membership is for life and may not be revoked.
 
-### Article IV: Scoring & Handicaps
+**Section 3. Admission of Members.** A person may be admitted as a Member only upon the unanimous affirmative vote of all then-living Charter Members.
 
-- [ ] TODO (rewrite)
+**Section 4. Member in Good Standing.** A Member is a "Member in Good Standing" if such Member (a) has not resigned, (b) has not been expelled under Section 6, and (c) is current in any dues established by Standing Rule.
 
-### Article V: Course Etiquette
+**Section 5. Resignation.** A Member may resign by written notice to the Secretary-Treasurer. Resignation is effective upon receipt of such notice.
 
-- [ ] TODO (rewrite)
+**Section 6. Discipline.** A Member other than a Charter Member may be suspended or expelled for conduct prejudicial to the Object of the Club upon the affirmative vote of two-thirds of the Members in Good Standing, following written notice of the charges and an opportunity to be heard.
 
-1. **Pace of Play**: Slow play is acceptable when accompanied by good conversation
-2. **Lost Ball Policy**: After a reasonable search (defined as "when someone suggests giving up"), drop a ball and play on
-3. **Sand Trap Philosophy**: Bunkers are temporary obstacles, not permanent residences
+**Section 7. Dues.** Dues, if any, shall be established and altered by Standing Rule. No dues are required as of the date of these Bylaws.
 
-### Article VI: Annual Traditions
+### Article IV — Officers
 
-1. **Founders' Day**: Annual recognition of Mark Ayers and Dean Chase's vision
-2. **Dew Sweeper Championship**: Early morning tournament for the truly dedicated
-3. **Zen Juice Appreciation Day**: Celebration of the medicinal properties of course-side scotch
+**Section 1. Officers.** The officers of the Club shall be a **Captain** and a **Secretary-Treasurer**.
 
-### Article VII: Amendments
+**Section 2. Qualifications.** Each officer shall be a Member in Good Standing.
 
-These bylaws may be amended by majority vote of members present during any round where someone actually shoots an 84.
+**Section 3. Election and Term.** Officers shall be elected annually at the Annual Meeting and shall serve until their successors are elected. There shall be no limit on the number of terms an officer may serve.
 
----
+**Section 4. Duties of the Captain.** The Captain shall preside at all meetings of the Club, shall be the official spokesperson of the Club, and shall perform such other duties as are customary to the office.
 
-> It's not about the score you post but the stories you tell.  
-> —C&R Philosophy
+**Section 5. Duties of the Secretary-Treasurer.** The Secretary-Treasurer shall keep the minutes of all meetings, maintain the roll of Members, have custody of the records and funds of the Club, and render an accounting of funds at each Annual Meeting.
 
-## Glossary
+**Section 6. Vacancies.** A vacancy in any office shall be filled for the unexpired term by election at the next meeting.
 
-_84_: the theoretical perfect score for any C&R member on any course, regardless of par or actual ability.  
-_Dew Sweeper_: one who enjoys an earlier morning round of golf, generally first off the tee.  
-_Gallery_: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
-_Golf_: a walk on a nice lawn with friends.  
-_Reasonable Search_: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
-_Zen Juice_: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
+**Section 7. Removal.** An officer may be removed from office, with or without cause, by the vote required for amendment of these Bylaws.
+
+### Article V — Meetings
+
+**Section 1. Annual Meeting.** The Club shall hold one regular meeting in each calendar year, designated the **Annual Meeting**, at such time and place as the Captain may determine, on not less than fourteen (14) days' written notice to all Members.
+
+**Section 2. Special Meetings.** Special meetings may be called by the Captain or upon the written request of any Member, on not less than seven (7) days' written notice stating the purpose of the meeting. No business other than that stated in the notice may be transacted at a special meeting.
+
+**Section 3. Electronic Participation.** Members may participate in any meeting by telephone, video conference, or other means by which all participating Members may concurrently hear one another, and such participation shall constitute presence in person at the meeting.
+
+**Section 4. Quorum.** A quorum for the transaction of business shall consist of all Charter Members then living. No business may be transacted in the absence of a quorum.
+
+### Article VI — Parliamentary Authority
+
+The rules contained in the current edition of _Robert's Rules of Order Newly Revised_ shall govern the Club in all cases to which they are applicable and in which they are not inconsistent with these Bylaws or any Standing Rules the Club may adopt.
+
+### Article VII — Standing Rules
+
+**Section 1. Authority.** The Club may adopt Standing Rules to govern the conduct of play, course etiquette, scoring, dues, and other administrative and operational matters. The Club's Standing Rules are maintained in the document titled [Standing Rules](STANDING-RULES.md).
+
+**Section 2. Adoption and Amendment.** Standing Rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting.
+
+**Section 3. Limitation.** No Standing Rule may conflict with these Bylaws. In any conflict, these Bylaws shall control.
+
+### Article VIII — Amendment of Bylaws
+
+**Section 1. Notice.** Any proposed amendment to these Bylaws shall be submitted in writing to all Members not less than thirty (30) days before the meeting at which it is to be considered. The notice shall identify the article and section affected and shall set forth both the current text and the proposed text.
+
+**Section 2. Vote Required.** An amendment shall be adopted upon the affirmative vote of two-thirds of all Members in Good Standing.
+
+**Section 3. Scope of Amendment.** No amendment offered from the floor may exceed the scope of the notice given under Section 1.
+
+**Section 4. Record.** The vote on any proposed amendment shall be recorded in the minutes by the name of each Member voting and the manner of such vote.
+
+### Adoption
+
+These Bylaws were adopted by the Charter Members on **May 25, 2026**, and supersede all prior bylaws of the Club.
 
 ---
 
