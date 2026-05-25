@@ -9,9 +9,6 @@ weight = 1
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term", "rss"]
 
-[markup.goldmark.renderer]
-unsafe = true
-
 [markup.tableOfContents]
 startLevel = 2
 endLevel = 3

@@ -38,6 +38,9 @@ jobs:
       - name: Build
         run: hugo --minify --gc
 
+      - name: Copy CNAME into artifact
+        run: cp CNAME public/CNAME
+
       - name: Upload artifact
         if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
