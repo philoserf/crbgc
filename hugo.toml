@@ -7,8 +7,13 @@ label = "English"
 weight = 1
 
 enableRobotsTXT = true
-disableKinds = ["taxonomy", "term", "rss"]
+disableKinds = ["taxonomy", "term"]
 
 [markup.tableOfContents]
 startLevel = 2
 endLevel = 3
+
+[permalinks]
+notices = "/notices/:slug/"
+minutes = "/minutes/:slug/"
+news = "/news/:slug/"
