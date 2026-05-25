@@ -2,4 +2,34 @@
   <article>
     {{ .Content }}
   </article>
+
+  <section>
+    <h2>Latest notices</h2>
+    {{ partial "latest.html" (dict "section" "notices" "limit" 3) }}
+    <p><a href="{{ "/notices/" | relURL }}">All notices &rarr;</a></p>
+  </section>
+
+  <section>
+    <h2>Latest news</h2>
+    {{ partial "latest.html" (dict "section" "news" "limit" 5) }}
+    <p><a href="{{ "/news/" | relURL }}">All news &rarr;</a></p>
+  </section>
+
+  <section>
+    <h2>Governance</h2>
+    <ul class="doc-list">
+      <li><a href="{{ "/governance/bylaws/" | relURL }}">Bylaws</a></li>
+      <li>
+        <a href="{{ "/governance/standing-rules/" | relURL }}"
+          >Standing Rules</a
+        >
+      </li>
+      <li><a href="{{ "/governance/officers/" | relURL }}">Officers</a></li>
+      <li>
+        <a href="{{ "/governance/special-rules-of-order/" | relURL }}"
+          >Special Rules of Order</a
+        >
+      </li>
+    </ul>
+  </section>
 {{ end }}

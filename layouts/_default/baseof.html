@@ -24,6 +24,12 @@
   <body>
     <header>
       <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+      <nav class="site-nav">
+        <a href="{{ "/notices/" | relURL }}">Notices</a>
+        <a href="{{ "/minutes/" | relURL }}">Minutes</a>
+        <a href="{{ "/news/" | relURL }}">News</a>
+        <a href="{{ "/governance/" | relURL }}">Governance</a>
+      </nav>
     </header>
     <main>
       {{ block "main" . }}{{ end }}
