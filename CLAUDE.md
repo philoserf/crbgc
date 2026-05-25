@@ -12,11 +12,15 @@ The current next step for this repo is tracked in the workspace backlog at `../N
 
 Task runner (`Taskfile.yml`) with Bun:
 
-- `task format` — Format markdown with Prettier (`bunx prettier --write "**/*.md"`)
-- `task check` — Check formatting without writing (`bunx prettier --check "**/*.md"`)
+- `task format` — Prettier (md, html/Hugo, yaml, toml) + Biome (css), write
+- `task check` — same coverage, read-only check
+- `task serve` — Hugo dev server with drafts
+- `task build` — Hugo production build to `./public`
+
+Prettier uses `prettier-plugin-go-template` for Hugo templates; CSS is delegated to Biome (which also lints). `task prettier` runs the formatter twice because the go-template plugin can need a second pass to converge.
 
 ## Conventions
 
-- Run `task format` before committing markdown changes.
-- `<abbr>` HTML tags in `README.md` (e.g., C&RBGC tooltips) are intentional — allowed in `.markdownlint.json` via the `MD033` allowlist.
+- Run `task format` before committing.
+- `<abbr>` HTML tags in `README.md` (e.g., C&RBGC tooltips) are intentional.
 - Keep the copyright year range in the `README.md` footer current.

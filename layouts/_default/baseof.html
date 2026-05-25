@@ -1,14 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ .Site.Language.Lang }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-      {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}
+      {{ if .IsHome }}
+        {{ .Site.Title }}
+      {{ else }}
+        {{ .Title }} &middot;
+        {{ .Site.Title }}
+      {{ end }}
     </title>
-    {{ with .Description }}<meta name="description" content="{{ . }}" />{{ end }}
+    {{ with .Description }}
+      <meta name="description" content="{{ . }}" />
+    {{ end }}
     {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
+    <link
+      rel="stylesheet"
+      href="{{ $style.RelPermalink }}"
+      integrity="{{ $style.Data.Integrity }}"
+    />
   </head>
   <body>
     <header>
@@ -18,7 +29,11 @@
       {{ block "main" . }}{{ end }}
     </main>
     <footer>
-      <p>&copy; 2022&ndash;{{ now.Year }} <a href="https://philoserf.com/">Mark Ayers</a>. All rights reserved.</p>
+      <p>
+        &copy;
+        2022&ndash;{{ now.Year }}
+        <a href="https://philoserf.com/">Mark Ayers</a>. All rights reserved.
+      </p>
     </footer>
   </body>
 </html>

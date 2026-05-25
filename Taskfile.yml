@@ -2,24 +2,38 @@ version: "3"
 
 tasks:
   prettier:
-    desc: Format markdown files with Prettier
+    desc: Format markdown, HTML/Hugo, YAML, TOML, and JSON with Prettier
     cmds:
-      - bunx prettier --write "**/*.md"
+      # Run twice: prettier-plugin-go-template can need a second pass to converge.
+      - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
+      - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
 
   prettier:check:
-    desc: Check markdown formatting with Prettier (without changing files)
+    desc: Check Prettier-managed files without writing
     cmds:
-      - bunx prettier --check "**/*.md"
+      - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
+
+  biome:
+    desc: Format and lint CSS with Biome
+    cmds:
+      - bunx biome check --write assets
+
+  biome:check:
+    desc: Check CSS with Biome without writing
+    cmds:
+      - bunx biome check assets
 
   format:
     desc: Format and fix all files
     cmds:
       - task: prettier
+      - task: biome
 
   check:
     desc: Check all files without changing them
     cmds:
       - task: prettier:check
+      - task: biome:check
 
   serve:
     desc: Run Hugo dev server with drafts
