@@ -1,6 +1,6 @@
 # Standing Rules
 
-Adopted under [Article VII](README.md#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogey Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in good standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
+Adopted under [Article VII](README.md#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogey Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
 
 ## Table of Contents
 

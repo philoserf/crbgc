@@ -40,11 +40,11 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 3. Admission of Members.** A person may be admitted as a Member only upon the unanimous affirmative vote of all then-living Charter Members.
 
-**Section 4. Member in Good Standing.** A Member is in good standing if such Member (a) has not resigned, (b) has not been expelled under Section 6, and (c) is current in any dues established by Standing Rule.
+**Section 4. Member in Good Standing.** A Member is a "Member in Good Standing" if such Member (a) has not resigned, (b) has not been expelled under Section 6, and (c) is current in any dues established by Standing Rule.
 
 **Section 5. Resignation.** A Member may resign by written notice to the Secretary-Treasurer. Resignation is effective upon receipt of such notice.
 
-**Section 6. Discipline.** A Member other than a Charter Member may be suspended or expelled for conduct prejudicial to the Object of the Club upon the affirmative vote of two-thirds of the Members in good standing, following written notice of the charges and an opportunity to be heard.
+**Section 6. Discipline.** A Member other than a Charter Member may be suspended or expelled for conduct prejudicial to the Object of the Club upon the affirmative vote of two-thirds of the Members in Good Standing, following written notice of the charges and an opportunity to be heard.
 
 **Section 7. Dues.** Dues, if any, shall be established and altered by Standing Rule. No dues are required as of the date of these Bylaws.
 
@@ -52,7 +52,7 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 1. Officers.** The officers of the Club shall be a **Captain** and a **Secretary-Treasurer**.
 
-**Section 2. Qualifications.** Each officer shall be a Member in good standing.
+**Section 2. Qualifications.** Each officer shall be a Member in Good Standing.
 
 **Section 3. Election and Term.** Officers shall be elected annually at the Annual Meeting and shall serve until their successors are elected. There shall be no limit on the number of terms an officer may serve.
 
@@ -72,7 +72,7 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 3. Electronic Participation.** Members may participate in any meeting by telephone, video conference, or other means by which all participating Members may concurrently hear one another, and such participation shall constitute presence in person at the meeting.
 
-**Section 4. Quorum.** A quorum for the transaction of business shall consist of both Charter Members then living. No business may be transacted in the absence of a quorum.
+**Section 4. Quorum.** A quorum for the transaction of business shall consist of all Charter Members then living. No business may be transacted in the absence of a quorum.
 
 ### Article VI — Parliamentary Authority
 
@@ -82,7 +82,7 @@ The rules contained in the current edition of _Robert's Rules of Order Newly Rev
 
 **Section 1. Authority.** The Club may adopt Standing Rules to govern the conduct of play, course etiquette, scoring, dues, and other administrative and operational matters. The Club's Standing Rules are maintained in the document titled [Standing Rules](STANDING-RULES.md).
 
-**Section 2. Adoption and Amendment.** Standing Rules may be adopted, amended, or rescinded by a majority vote of the Members in good standing at any meeting.
+**Section 2. Adoption and Amendment.** Standing Rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting.
 
 **Section 3. Limitation.** No Standing Rule may conflict with these Bylaws. In any conflict, these Bylaws shall control.
 
@@ -90,7 +90,7 @@ The rules contained in the current edition of _Robert's Rules of Order Newly Rev
 
 **Section 1. Notice.** Any proposed amendment to these Bylaws shall be submitted in writing to all Members not less than thirty (30) days before the meeting at which it is to be considered. The notice shall identify the article and section affected and shall set forth both the current text and the proposed text.
 
-**Section 2. Vote Required.** An amendment shall be adopted upon the affirmative vote of two-thirds of all Members in good standing.
+**Section 2. Vote Required.** An amendment shall be adopted upon the affirmative vote of two-thirds of all Members in Good Standing.
 
 **Section 3. Scope of Amendment.** No amendment offered from the floor may exceed the scope of the notice given under Section 1.
 
