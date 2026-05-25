@@ -1,0 +1,34 @@
+<dl class="meta">
+  <dt>Meeting date</dt>
+  <dd>{{ .Date.Format "January 2, 2006" }}</dd>
+  {{ with .Params.meeting_type }}
+    <dt>Type</dt>
+    <dd>{{ title . }}</dd>
+  {{ end }}
+  <dt>Status</dt>
+  <dd>
+    {{ if .Params.approved }}
+      Approved{{ with .Params.approved_on }}
+        {{ (time .).Format "January 2, 2006" }}
+      {{ end }}
+    {{ else }}
+      Draft
+    {{ end }}
+  </dd>
+  {{ with .Params.presiding }}
+    <dt>Presiding</dt>
+    <dd>{{ . }}</dd>
+  {{ end }}
+  {{ with .Params.secretary }}
+    <dt>Secretary</dt>
+    <dd>{{ . }}</dd>
+  {{ end }}
+  {{ with .Params.present }}
+    <dt>Present</dt>
+    <dd>{{ delimit . ", " }}</dd>
+  {{ end }}
+  {{ with .Params.absent }}
+    <dt>Absent</dt>
+    <dd>{{ delimit . ", " }}</dd>
+  {{ end }}
+</dl>

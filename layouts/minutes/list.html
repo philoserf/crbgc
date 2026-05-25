@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    {{ range (.Pages.GroupByDate "2006").Reverse }}
+      <h2>{{ .Key }}</h2>
+      <ul class="item-list">
+        {{ range .Pages.ByDate.Reverse }}
+          <li>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ if .Params.approved }}
+              <span class="badge approved">Approved</span>
+            {{ else }}
+              <span class="badge draft">Draft</span>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </article>
+{{ end }}

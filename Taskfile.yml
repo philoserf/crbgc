@@ -36,9 +36,9 @@ tasks:
       - task: biome:check
 
   serve:
-    desc: Run Hugo dev server with drafts
+    desc: Run Hugo dev server with drafts and future-dated content
     cmds:
-      - hugo server -D
+      - hugo server -D --buildFuture
 
   build:
     desc: Build the site to ./public
