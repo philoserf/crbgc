@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    # Daily at 06:07 UTC (~02:00 ET) so future-dated content rolls in
+    # after local midnight. Offset from the hour to avoid the cron surge.
+    - cron: "7 6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -32,20 +36,20 @@ jobs:
           extended: true
 
       - name: Configure Pages
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
 
       - name: Build
         run: hugo --minify --gc
 
       - name: Upload artifact
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
