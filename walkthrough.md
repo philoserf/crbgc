@@ -1,6 +1,7 @@
 # C&RBGC Site Walkthrough
 
-*2026-05-26T14:58:11Z by Showboat 0.6.1*
+_2026-05-26T14:58:11Z by Showboat 0.6.1_
+
 <!-- showboat-id: 33289786-2edd-4983-a2cb-2d839099940d -->
 
 ## What this is
@@ -897,4 +898,3 @@ For local development, `task serve` runs `hugo server -D --buildFuture` so draft
 - **Adding content** — `README.md` documents each section's required frontmatter with copy-paste templates.
 - **Open improvements** — issues #16–#24 on GitHub track the tech-debt audit findings; #17 (explicit `slug:`) is the highest-leverage one.
 - **Project conventions** — `CLAUDE.md` summarizes structure and commands for collaborators (human or AI).
-
