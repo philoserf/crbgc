@@ -2,7 +2,7 @@
 
 Hugo site for **The Common & Recent Bogey Golf Club** (C&RBGC), a small parliamentary golf society governed by _Robert's Rules of Order Newly Revised_. The published site lives at [crbgc.org](https://crbgc.org/) — read the bylaws, standing rules, and notices there, not here.
 
-For a linear tour of the code — configuration, content model, templates, build, and deploy — see [walkthrough.md](./walkthrough.md).
+For a linear tour of the code — configuration, content model, templates, build, and deploy — see [walkthrough.md](./walkthrough.md). For a theory of the codebase in Peter Naur's sense — the domain model, the load-bearing abstractions, the seams, and what kinds of change the system is shaped to accommodate — see [theory.md](./theory.md).
 
 ## Site structure
 
