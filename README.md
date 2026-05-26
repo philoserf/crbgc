@@ -2,6 +2,8 @@
 
 Hugo site for **The Common & Recent Bogey Golf Club** (C&RBGC), a small parliamentary golf society governed by _Robert's Rules of Order Newly Revised_. The published site lives at [crbgc.org](https://crbgc.org/) — read the bylaws, standing rules, and notices there, not here.
 
+This repo holds Hugo source for the site. It is **not** the authoritative copy of the bylaws or rules — the governance documents render here, but their adoption history lives in [minutes](https://crbgc.org/minutes/). Amendments are recorded by editing the document and noting the vote in the meeting minutes.
+
 For a linear tour of the code — configuration, content model, templates, build, and deploy — see [walkthrough.md](./walkthrough.md). For a theory of the codebase in Peter Naur's sense — the domain model, the load-bearing abstractions, the seams, and what kinds of change the system is shaped to accommodate — see [theory.md](./theory.md).
 
 ## Site structure
@@ -19,6 +21,14 @@ hugo.toml                         # config: permalinks, disabled kinds, locale
 ```
 
 Each section under `content/` has an `_index.md` (the list page) and dated posts. Hugo emits `/<section>/index.xml` RSS feeds automatically.
+
+## Conventions
+
+- **YAML frontmatter** across all content. TOML is only used in `hugo.toml`.
+- **Prettier** formats Markdown, HTML/Hugo templates, YAML, TOML, and JSON. **Biome** formats and lints CSS. Run `task format` before committing.
+- **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor; URLs derive from the title.
+- **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
+- **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
 ## Adding content
 
@@ -76,18 +86,10 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
 task serve   # hugo server -D --buildFuture (drafts + future posts visible)
 task build   # hugo --minify --gc (production)
 task format  # prettier (md/html/yaml/toml/json) + biome (css)
-task check   # read-only equivalents of format
+task check   # verify formatters would make no changes — run before opening a PR
 ```
 
 Deployment is automated by `.github/workflows/pages.yml`: pushes to `main` build with Hugo and publish to GitHub Pages. The site serves from the custom domain via `CNAME`.
-
-## Conventions
-
-- **YAML frontmatter** across all content. TOML is only used in `hugo.toml`.
-- **Prettier** formats Markdown, HTML/Hugo templates, YAML, TOML, and JSON. **Biome** formats and lints CSS. Run `task format` before committing.
-- **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor; URLs derive from the title.
-- **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
-- **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
 ## License
 
