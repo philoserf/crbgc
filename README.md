@@ -2,6 +2,8 @@
 
 Hugo site for **The Common & Recent Bogey Golf Club** (C&RBGC), a small parliamentary golf society governed by _Robert's Rules of Order Newly Revised_. The published site lives at [crbgc.org](https://crbgc.org/) — read the bylaws, standing rules, and notices there, not here.
 
+For a linear tour of the code — configuration, content model, templates, build, and deploy — see [walkthrough.md](./walkthrough.md).
+
 ## Site structure
 
 ```
