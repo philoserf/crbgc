@@ -8,6 +8,10 @@ Hugo-built static site for the Common & Recent Bogey Golf Club (C&RBGC), hosted 
 
 The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
 
+## Related: the notes site
+
+The club's informal notes (essays, history surveys, course architecture writing) live in the sibling repo `../T01/` ([philoserf/T01](https://github.com/philoserf/T01)) and publish via Flowershow at <https://crbgc-philoserf.flowershow.me>. This repo (`crbgc/`) is the formal/governance side — bylaws, minutes, notices, news; the T01 site is the personal/editorial side. Keep the split clean: governance and official records here, prose and notes there.
+
 ## Content structure
 
 Four sections under `content/`, each with an `_index.md` and (where applicable) dated posts:
