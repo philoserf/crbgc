@@ -10,7 +10,7 @@ The current next step for this repo is tracked in the workspace backlog at `../N
 
 ## Related: the notes site
 
-The club's informal notes (essays, history surveys, course architecture writing) live in the sibling repo `../T01/` ([philoserf/T01](https://github.com/philoserf/T01)) and publish via Flowershow at <https://crbgc-philoserf.flowershow.me>. This repo (`crbgc/`) is the formal/governance side — bylaws, minutes, notices, news; the T01 site is the personal/editorial side. Keep the split clean: governance and official records here, prose and notes there.
+The club's informal notes (essays, history surveys, course architecture writing) live in the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)) and publish via Flowershow at <https://crbgc-philoserf.flowershow.me>. This repo (`crbgc/`) is the formal/governance side — bylaws, minutes, notices, news; the notes site is the personal/editorial side. Keep the split clean: governance and official records here, prose and notes there.
 
 ## Content structure
 
