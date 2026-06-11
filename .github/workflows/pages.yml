@@ -5,8 +5,9 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    # Daily at 06:07 UTC (~02:00 ET) so future-dated content rolls in
-    # after local midnight. Offset from the hour to avoid the cron surge.
+    # Daily at 06:07 UTC — 02:07 EDT in summer, 01:07 EST in winter (UTC has
+    # no DST). Either way it's after local midnight, so future-dated content
+    # rolls in same-day. Offset from the hour to avoid the cron surge.
     - cron: "7 6 * * *"
   workflow_dispatch:
 
@@ -26,8 +27,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v3
