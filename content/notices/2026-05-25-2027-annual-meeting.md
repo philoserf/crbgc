@@ -1,5 +1,6 @@
 ---
 title: "Notice of 2027 Annual Meeting"
+slug: notice-of-2027-annual-meeting
 description: "The 2027 Annual Meeting will be held on the Summer Solstice, Monday, June 21, 2027."
 date: 2026-05-25T19:10:00-04:00
 meeting_date: 2027-06-21

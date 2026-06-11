@@ -26,7 +26,8 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
 
 - **YAML frontmatter** across all content. TOML is only used in `hugo.toml`.
 - **Prettier** formats Markdown, HTML/Hugo templates, YAML, TOML, and JSON. **Biome** formats and lints CSS. Run `task format` before committing.
-- **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor; URLs derive from the title.
+- **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor.
+- **Explicit `slug:`** in every dated post's frontmatter pins its URL. Without it, Hugo falls back to a title-derived value, and retitling a post would silently change its URL and break inter-content links.
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
 - **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
@@ -39,6 +40,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
    ```yaml
    ---
    title: "Notice of …"
+   slug: notice-of-… # pins the URL; never change after publishing
    description: "…"
    date: 2026-06-01T09:00:00-05:00 # when posted
    meeting_date: 2026-06-15
@@ -56,6 +58,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
    ```yaml
    ---
    title: "Minutes — …"
+   slug: minutes-… # pins the URL; never change after publishing
    description: "…"
    date: 2026-06-15T19:00:00-05:00 # the meeting datetime
    meeting_type: annual # annual | special | regular
@@ -72,7 +75,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
 ### A news post
 
 1. Create `content/news/YYYY-MM-DD-slug.md`.
-2. Minimal frontmatter: `title`, `description`, `date`. That's it.
+2. Minimal frontmatter: `title`, `slug`, `description`, `date`. That's it.
 
 ### Amending bylaws or standing rules
 

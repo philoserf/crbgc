@@ -1,5 +1,6 @@
 ---
 title: "Club Website Launches"
+slug: club-website-launches
 description: "The C&RBGC now has a proper home on the web."
 date: 2026-05-25T12:00:00-04:00
 ---

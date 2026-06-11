@@ -1,5 +1,6 @@
 ---
 title: "Minutes — 2026 Annual Meeting"
+slug: minutes-2026-annual-meeting
 description: "Minutes of the 2026 Annual Meeting, May 25, 2026."
 date: 2026-05-25T19:00:00-04:00
 meeting_type: annual

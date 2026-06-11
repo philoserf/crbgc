@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Hugo-built static site for the Common & Recent Bogey Golf Club (C&RBGC), hosted via GitHub Pages at crbgc.org. `CNAME` maps the custom domain; `.github/workflows/pages.yml` builds and deploys on push to `main`.
 
+This repo is not the authoritative copy of the governance documents — they render here, but adoption history lives in the meeting minutes. Amending bylaws or standing rules means editing the document, bumping `last_amended` in its frontmatter, and recording the vote in the minutes.
+
+Two onboarding docs at the repo root: `walkthrough.md` (linear code tour) and `theory.md` (domain model and load-bearing abstractions). Keep them current when structure changes.
+
 The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
 
 ## Related: the notes site
@@ -39,7 +43,11 @@ Prettier uses `prettier-plugin-go-template` for Hugo templates; CSS is delegated
 
 - Run `task format` before committing.
 - YAML frontmatter across all content; TOML only in `hugo.toml`.
-- Dated filenames (`YYYY-MM-DD-slug.md`) for notices, minutes, and news. URLs use the title slug, not the date.
+- Dated filenames (`YYYY-MM-DD-slug.md`) for notices, minutes, and news. Every dated post sets an explicit `slug:` in frontmatter to pin its URL — never change a published slug, and never rely on the title-derived fallback.
+- Scaffold new posts with the project skills `/new-notice`, `/new-minutes`, `/new-news` (user-invoked; they compute the Eastern offset) rather than hand-writing frontmatter.
+- Content `date` fields use US Eastern offsets (`-04:00` in summer, `-05:00` in winter). A wrong offset can hide a post from production builds.
 - No taxonomies. `notice_type` and `meeting_type` are frontmatter fields, queried directly in templates.
 - `<abbr>` HTML tags in content (e.g., C&RBGC tooltips) are intentional.
 - Keep the copyright year range in `layouts/_default/baseof.html` current.
+- The homepage intentionally has no `h1` — a design choice, reaffirmed 2026-05-26. Do not flag it as an accessibility or SEO issue or try to restore one.
+- CI (`pages.yml`) is the build verifier — push and watch it rather than running routine local production builds. When a local build is needed, run `rm -rf public && task build`; Hugo does not prune stale artifacts from `public/`.

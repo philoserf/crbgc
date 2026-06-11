@@ -1,5 +1,6 @@
 ---
 title: "2026 Annual Meeting Held"
+slug: 2026-annual-meeting-held
 description: "The Club held its 2026 Annual Meeting on May 25, adopting bylaws and standing rules."
 date: 2026-05-25T19:05:00-04:00
 ---

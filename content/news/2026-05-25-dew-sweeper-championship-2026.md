@@ -1,5 +1,6 @@
 ---
 title: "Dew Sweeper Championship 2026"
+slug: dew-sweeper-championship-2026
 description: "The 2026 Dew Sweeper Championship will be contested at sunrise on Friday, August 7, 2026."
 date: 2026-05-25T19:25:00-04:00
 ---
