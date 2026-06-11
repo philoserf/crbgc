@@ -1,0 +1,10 @@
+{{ with .Params.adopted }}
+  <dl class="meta">
+    <dt>Adopted</dt>
+    <dd>{{ (time .).Format "January 2, 2006" }}</dd>
+    {{ with $.Params.last_amended }}
+      <dt>Last amended</dt>
+      <dd>{{ (time .).Format "January 2, 2006" }}</dd>
+    {{ end }}
+  </dl>
+{{ end }}

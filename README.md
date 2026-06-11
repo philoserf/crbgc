@@ -94,6 +94,8 @@ task check   # verify formatters would make no changes — run before opening a 
 
 Deployment is automated by `.github/workflows/pages.yml`: pushes to `main` build with Hugo and publish to GitHub Pages. The site serves from the custom domain via `CNAME`.
 
+Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, bump `HUGO_VERSION` in `pages.yml`, and verify the deploy. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
+
 ## License
 
 See [LICENSE](./LICENSE).
