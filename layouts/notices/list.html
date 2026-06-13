@@ -1,9 +1,13 @@
 {{ define "main" }}
   {{ $now := now }}
   {{ $current := slice }}
-  {{ $expired := slice }}
+  {{ $expired :=
+    slice
+  }}
   {{ range .Pages.ByDate.Reverse }}
-    {{ if and .Params.expires (lt (time .Params.expires) $now) }}
+    {{ if and .Params.expires (lt (time
+      .Params.expires) $now)
+    }}
       {{ $expired = $expired | append . }}
     {{ else }}
       {{ $current = $current | append . }}

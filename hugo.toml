@@ -9,6 +9,15 @@ weight = 1
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
+# 2026 Reformation Year: the whole site is provisional — nothing is instituted
+# yet, dates and records are in flux. This cascades draft:true to every page so
+# production builds (hugo --minify, no --buildDrafts) exclude them, except the
+# home page, which sets draft:false in its own front matter to stay a live
+# landing page. `task serve` still shows everything via -D. Delete this block to
+# publish the rest.
+[[cascade]]
+draft = true
+
 [markup.tableOfContents]
 startLevel = 2
 endLevel = 3

@@ -1,12 +1,14 @@
 {{ $section := .section }}
 {{ $limit := .limit }}
-{{ $items := where site.RegularPages "Section" $section }}
-{{ $items = first $limit $items.ByDate.Reverse }}
+{{ $items := where
+  site.RegularPages "Section" $section
+}}
+{{ $items = first $limit
+  $items.ByDate.Reverse
+}}
 {{ if $items }}
   <ul class="item-list">
-    {{ range $items }}
-      {{ partial "item-row.html" . }}
-    {{ end }}
+    {{ range $items }}{{ partial "item-row.html" . }}{{ end }}
   </ul>
 {{ else }}
   <p class="muted">Nothing yet.</p>

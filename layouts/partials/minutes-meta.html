@@ -9,7 +9,9 @@
   <dd>
     {{ if .Params.approved }}
       Approved{{ with .Params.approved_on }}
-        {{ (time .).Format "January 2, 2006" }}
+        {{ (time
+          .).Format "January 2, 2006"
+        }}
       {{ end }}
     {{ else }}
       Draft

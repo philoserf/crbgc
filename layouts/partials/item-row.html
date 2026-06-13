@@ -1,5 +1,7 @@
 <li>
   <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   <span class="item-date">{{ .Date.Format "January 2, 2006" }}</span>
-  {{ with .Description }}<p class="item-desc">{{ . }}</p>{{ end }}
+  {{ with .Description }}
+    <p class="item-desc">{{ . }}</p>
+  {{ end }}
 </li>

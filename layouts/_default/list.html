@@ -1,3 +1,7 @@
+{{/* Fallback for sections without a custom list.html. Currently unreached —
+  every section ships its own — but kept deliberately so a future section
+  renders sensibly before it gets a bespoke template.
+*/}}
 {{ define "main" }}
   <article>
     <h1>{{ .Title }}</h1>
