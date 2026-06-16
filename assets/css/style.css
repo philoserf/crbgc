@@ -1,10 +1,49 @@
+/* Matches the stock Flowershow "letterpress" theme used by the notes site
+   (crbgc-philoserf.flowershow.me): Nata Sans body, Fraunces serif headings at
+   normal weight, a white / near-black palette with oklch-derived grays, and the
+   theme's link / blockquote / rule / code treatments. Tokens mirror the theme's
+   light-mode values so the two sites read as one. */
+
 :root {
-  --fg: #1a1a1a;
-  --muted: #595959;
-  --bg: #fafaf7;
-  --accent: #006747;
-  --rule: #d8d4c7;
-  --measure: 38rem;
+  /* Letterpress palette — light mode */
+  --color-foreground: #09090b;
+  --color-background: #ffffff;
+  --color-accent: #09090b;
+
+  --fg-100: oklch(from var(--color-foreground) 0.925 c h);
+  --fg-400: oklch(from var(--color-foreground) 0.625 c h);
+  --fg-600: oklch(from var(--color-foreground) 0.425 c h);
+  --fg-700: oklch(from var(--color-foreground) 0.325 c h);
+  --fg-900: oklch(from var(--color-foreground) 0.125 c h);
+  --surface: oklch(from var(--color-background) calc(l - 0.03) c h);
+  --accent-lighter: oklch(from var(--color-accent) calc(l + 0.15) c h);
+
+  /* Aliases for component rules below */
+  --fg: var(--color-foreground);
+  --bg: var(--color-background);
+  --accent: var(--color-accent);
+  --muted: var(--fg-600);
+  --rule: var(--fg-100);
+
+  --font-body:
+    "Nata Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+  --font-heading:
+    "Fraunces", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, sfmono-regular, Menlo, Consolas, monospace;
+
+  /* Modular scale: base 1.125rem, minor third (1.2) */
+  --font-size-base: 1.125rem;
+  --size-h1: 2.799rem;
+  --size-h2: 2.333rem;
+  --size-h3: 1.944rem;
+  --size-h4: 1.62rem;
+  --size-h5: 1.35rem;
+  --size-h6: 1.125rem;
+
+  --lh-body: 1.6;
+  --lh-heading: 1.2;
+  --measure: 45rem;
 }
 
 * {
@@ -18,11 +57,15 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: var(--lh-body);
   color: var(--fg);
   background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
 }
 
 header,
@@ -37,15 +80,14 @@ header {
   padding-top: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .site-title {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-family: var(--font-heading);
+  font-size: var(--size-h5);
+  font-weight: 400;
+  color: var(--fg);
   text-decoration: none;
 }
 
@@ -54,35 +96,51 @@ header {
 }
 
 main {
-  padding-bottom: 3rem;
+  padding-bottom: 4rem;
 }
 
 h1,
 h2,
-h3 {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  line-height: 1.25;
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: var(--lh-heading);
   color: var(--fg);
 }
 
 h1 {
-  font-size: 1.875rem;
-  margin: 0 0 1rem;
+  font-size: var(--size-h1);
+  margin: 0 0 0.5em;
 }
 h2 {
-  font-size: 1.375rem;
-  margin: 2.25rem 0 0.75rem;
+  font-size: var(--size-h2);
+  margin: 1.8em 0 0.6em;
 }
 h3 {
-  font-size: 1.0625rem;
-  margin: 1.75rem 0 0.5rem;
+  font-size: var(--size-h3);
+  margin: 1.6em 0 0.5em;
+}
+h4 {
+  font-size: var(--size-h4);
+  margin: 1.4em 0 0.4em;
+}
+h5 {
+  font-size: var(--size-h5);
+  margin: 1.3em 0 0.4em;
+}
+h6 {
+  font-size: var(--size-h6);
+  margin: 1.2em 0 0.4em;
 }
 
 p,
 ul,
 ol,
 blockquote {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25em;
 }
 
 ul,
@@ -91,32 +149,60 @@ ol {
 }
 
 blockquote {
-  margin: 1.25rem 0;
-  padding: 0.25rem 0 0.25rem 1rem;
-  border-left: 3px solid var(--accent);
-  color: var(--muted);
+  margin: 1.2em 0;
+  padding-left: 1em;
+  border-left: 0.25rem solid var(--accent-lighter);
+  color: var(--fg-900);
   font-style: italic;
 }
 
 a {
-  color: var(--accent);
+  color: var(--fg-700);
   text-decoration: underline;
   text-underline-offset: 2px;
+  transition: color 0.3s;
 }
 a:hover {
+  color: var(--accent);
   text-decoration: none;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  font-size: 0.875em;
+  color: var(--fg-900);
+  background: var(--surface);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+pre {
+  background: var(--surface);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background: none;
 }
 
 hr {
   border: 0;
   border-top: 1px solid var(--rule);
-  margin: 2rem 0;
+  margin: 2em 0;
 }
 
 footer {
   border-top: 1px solid var(--rule);
   padding-top: 1rem;
   padding-bottom: 2rem;
+  margin-top: 3rem;
   font-size: 0.875rem;
   color: var(--muted);
 }
@@ -127,8 +213,7 @@ footer a {
 
 nav.site-nav {
   margin-top: 0.75rem;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
 }
 
 nav.site-nav a {
@@ -191,13 +276,12 @@ dl.meta {
   font-size: 0.9375rem;
   margin: 0 0 1.5rem;
   padding: 0.75rem 1rem;
-  background: rgba(216, 212, 199, 0.25);
-  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-left: 0.25rem solid var(--accent-lighter);
 }
 
 dl.meta dt {
   color: var(--muted);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 0.8125rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -211,7 +295,6 @@ dl.meta dd {
   display: inline-block;
   margin-left: 0.5rem;
   padding: 0.125rem 0.5rem;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
