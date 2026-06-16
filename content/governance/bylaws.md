@@ -1,9 +1,9 @@
 ---
 title: "Bylaws"
-description: "Bylaws of the Common & Recent Bogey Golf Club, adopted May 25, 2026."
+description: "Bylaws of the Common & Recent Bogey Golf Club, adopted June 21, 2026."
 weight: 10
-adopted: 2026-05-25
-last_amended: 2026-05-25
+adopted: 2026-06-21
+last_amended: 2026-06-21
 ---
 
 ## Bylaws
@@ -82,4 +82,4 @@ The rules contained in the current edition of _Robert's Rules of Order Newly Rev
 
 ### Adoption
 
-These Bylaws were adopted by the Charter Members on **May 25, 2026**, and supersede all prior bylaws of the Club.
+These Bylaws were adopted by the Charter Members on **June 21, 2026**, and supersede all prior bylaws of the Club.

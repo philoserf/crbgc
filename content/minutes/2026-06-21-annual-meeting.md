@@ -1,8 +1,8 @@
 ---
 title: "Minutes — 2026 Annual Meeting"
 slug: minutes-2026-annual-meeting
-description: "Minutes of the 2026 Annual Meeting, May 25, 2026."
-date: 2026-05-25T19:00:00-04:00
+description: "Minutes of the 2026 Annual Meeting, June 21, 2026."
+date: 2026-06-21T19:00:00-04:00
 meeting_type: annual
 approved: false
 approved_on:
@@ -14,7 +14,7 @@ absent: []
 
 ## Call to Order
 
-The 2026 Annual Meeting of **The Common & Recent Bogey Golf Club** was called to order at 7:00 PM on Monday, May 25, 2026. All Charter Members were present, constituting a quorum.
+The 2026 Annual Meeting of **The Common & Recent Bogey Golf Club** was called to order at 7:00 PM on the Summer Solstice, Sunday, June 21, 2026. All Charter Members were present, constituting a quorum.
 
 ## Approval of Prior Minutes
 
@@ -37,9 +37,7 @@ By unanimous voice vote, the following officers were elected for the 2026 term:
 
 ## New Business
 
-**Club website.** The Club's website at [crbgc.org](https://crbgc.org/) was noted as launched.
-
-**Next Annual Meeting.** The 2027 Annual Meeting was scheduled for the **Summer Solstice, Monday, June 21, 2027**.
+**Next Annual Meeting.** The 2027 Annual Meeting was scheduled for the **Summer Solstice, Monday, June 21, 2027**, to be held at **Forest Dunes Golf Club, Roscommon, Michigan**.
 
 ## Approval of These Minutes
 

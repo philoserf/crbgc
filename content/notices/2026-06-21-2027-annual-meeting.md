@@ -1,15 +1,15 @@
 ---
 title: "Notice of 2027 Annual Meeting"
 slug: notice-of-2027-annual-meeting
-description: "The 2027 Annual Meeting will be held on the Summer Solstice, Monday, June 21, 2027."
-date: 2026-05-25T19:10:00-04:00
+description: "The 2027 Annual Meeting will be held on the Summer Solstice, Monday, June 21, 2027, at Forest Dunes Golf Club, Roscommon, Michigan."
+date: 2026-06-21T19:10:00-04:00
 meeting_date: 2027-06-21
 expires: 2027-06-22
 notice_type: annual-meeting
 authority: "Article V, Section 1"
 ---
 
-Notice is hereby given that the **2027 Annual Meeting** of the Common & Recent Bogey Golf Club will be held on the **Summer Solstice — Monday, June 21, 2027**. Time and place will be confirmed by the Captain in advance of the meeting.
+Notice is hereby given that the **2027 Annual Meeting** of the Common & Recent Bogey Golf Club will be held on the **Summer Solstice — Monday, June 21, 2027**, at **Forest Dunes Golf Club, Roscommon, Michigan**. Time will be confirmed by the Captain in advance of the meeting.
 
 ## Anticipated Agenda
 
