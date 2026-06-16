@@ -1,6 +1,9 @@
 # C&RBGC Site Walkthrough
 
-*2026-06-16T21:35:28Z by Showboat 0.6.1*
+**
+
+_2026-06-16T21:35:28Z by Showboat 0.6.1_
+
 <!-- showboat-id: 849b6646-ec31-4c73-bdf8-bee4fba48cb0 -->
 
 ## What this is
@@ -785,8 +788,8 @@ cat package.json
   "name": "crbgc",
   "private": true,
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "prettier": "^3.8.3",
+    "@biomejs/biome": "^2.5.0",
+    "prettier": "^3.8.4",
     "prettier-plugin-go-template": "^0.0.15",
     "prettier-plugin-toml": "^2.0.6"
   }
@@ -916,4 +919,3 @@ For local development, `task serve` runs `hugo server -D --buildFuture` so draft
 
 - **Adding content** — `README.md` documents each section's required frontmatter with copy-paste templates, including the explicit `slug:` every dated post pins.
 - **Project conventions** — `CLAUDE.md` summarizes structure and commands for collaborators (human or AI).
-
