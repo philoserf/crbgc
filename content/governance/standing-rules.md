@@ -3,8 +3,8 @@ title: Standing Rules
 description: Standing Rules of the Common & Recent Bogey Golf Club, adopted under Article VII of the Bylaws.
 created: 2026-05-25
 lastmod: 2026-06-16
-adopted: 2026-05-25
-last_amended: 2026-06-16
+adopted: 2026-06-21
+last_amended: 2026-06-21
 weight: 20
 ---
 
@@ -56,7 +56,7 @@ These rules describe the older orientation of the game in working form: a walk o
 2. **Dew Sweeper Championship.** Annual tournament for the truly dedicated, contested at sunrise near the summer solstice.
 3. **Zen Juice Appreciation Day.** Annual celebration of the medicinal properties of course-side scotch.
 4. **The Colonel's Cup.** Annual bogey championship, awarded to the Member with the best aggregate margin against Colonel Bogey for the season.
-5. **Muni Day.** Annual round contested on a public course, in tribute to the municipal inheritance—Van Cortlandt, Bethpage, Cobbs Creek—that gave the game to anyone who wanted it.
+5. **Commons Day.** Annual round contested on common or public ground, in tribute to the game's birthright—the links of St Andrews and Leith, the heathland off the open commons, the American munis from Van Cortlandt and Bethpage to Doak's aptly named CommonGround—land that gave the game to anyone who wanted it.
 
 ---
 
@@ -65,15 +65,15 @@ These rules describe the older orientation of the game in working form: a walk o
 
 ## Glossary
 
-_Bogey_: one over par on any hole; the target of all Club play and the Colonel's score on every hole.  
-_Club Bogey Handicap_: a Member's average margin against Colonel Bogey over their last ten rounds, self-maintained on the honor system.  
-_Colonel Bogey_: the Member's eternal opponent, who scores bogey on every hole of every course, in all conditions, without effort or joy.  
-_Dew Sweeper_: one who enjoys an earlier morning round of golf, generally first off the tee.  
-_Foursomes_: an alternate-shot format for testing friendships.  
-_Gallery_: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
-_Golf_: a walk on a nice lawn with friends.  
-_Ground Game_: the run-up, the bump, and the use of slope and firm turf to move the ball along the ground rather than only through the air.  
-_Half-Set_: a carried bag of seven or eight clubs, chosen so that invention supplies what the missing clubs would have.  
-_The Older Orientation_: golf as a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball.  
-_Reasonable Search_: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
-_Zen Juice_: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
+**Bogey**: one over par on any hole; the target of all Club play and the Colonel's score on every hole.  
+**Club Bogey Handicap**: a Member's average margin against Colonel Bogey over their last ten rounds, self-maintained on the honor system.  
+**Colonel Bogey**: the Member's eternal opponent, who scores bogey on every hole of every course, in all conditions, without effort or joy.  
+**Dew Sweeper**: one who enjoys an earlier morning round of golf, generally first off the tee.  
+**Foursomes**: an alternate-shot format for testing friendships.  
+**Gallery**: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
+**Golf**: a walk on a nice lawn with friends.  
+**Ground Game**: the run-up, the bump, and the use of slope and firm turf to move the ball along the ground rather than only through the air.  
+**Half-Set**: a carried bag of seven or eight clubs, chosen so that invention supplies what the missing clubs would have.  
+**The Older Orientation**: golf as a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball.  
+**Reasonable Search**: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
+**Zen Juice**: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.

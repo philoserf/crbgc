@@ -1,7 +1,6 @@
 ---
 title: "The Common & Recent Bogey Golf Club"
 description: "A small parliamentary golf society informally formed in 2000 and officially established in 2026."
-draft: false # exempt from the Reformation-Year draft cascade (see hugo.toml); keeps a live landing page
 ---
 
 # The Common & Recent Bogey Golf Club
