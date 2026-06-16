@@ -65,15 +65,15 @@ These rules describe the older orientation of the game in working form: a walk o
 
 ## Glossary
 
-_Bogey_: one over par on any hole; the target of all Club play and the Colonel's score on every hole.  
-_Club Bogey Handicap_: a Member's average margin against Colonel Bogey over their last ten rounds, self-maintained on the honor system.  
-_Colonel Bogey_: the Member's eternal opponent, who scores bogey on every hole of every course, in all conditions, without effort or joy.  
-_Dew Sweeper_: one who enjoys an earlier morning round of golf, generally first off the tee.  
-_Foursomes_: an alternate-shot format for testing friendships.  
-_Gallery_: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
-_Golf_: a walk on a nice lawn with friends.  
-_Ground Game_: the run-up, the bump, and the use of slope and firm turf to move the ball along the ground rather than only through the air.  
-_Half-Set_: a carried bag of seven or eight clubs, chosen so that invention supplies what the missing clubs would have.  
-_The Older Orientation_: golf as a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball.  
-_Reasonable Search_: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
-_Zen Juice_: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
+**Bogey**: one over par on any hole; the target of all Club play and the Colonel's score on every hole.  
+**Club Bogey Handicap**: a Member's average margin against Colonel Bogey over their last ten rounds, self-maintained on the honor system.  
+**Colonel Bogey**: the Member's eternal opponent, who scores bogey on every hole of every course, in all conditions, without effort or joy.  
+**Dew Sweeper**: one who enjoys an earlier morning round of golf, generally first off the tee.  
+**Foursomes**: an alternate-shot format for testing friendships.  
+**Gallery**: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
+**Golf**: a walk on a nice lawn with friends.  
+**Ground Game**: the run-up, the bump, and the use of slope and firm turf to move the ball along the ground rather than only through the air.  
+**Half-Set**: a carried bag of seven or eight clubs, chosen so that invention supplies what the missing clubs would have.  
+**The Older Orientation**: golf as a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball.  
+**Reasonable Search**: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
+**Zen Juice**: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
