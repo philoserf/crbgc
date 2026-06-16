@@ -1,8 +1,10 @@
 # C&RBGC Site Walkthrough
 
-_2026-05-26T14:58:11Z by Showboat 0.6.1_
+**
 
-<!-- showboat-id: 33289786-2edd-4983-a2cb-2d839099940d -->
+_2026-06-16T21:35:28Z by Showboat 0.6.1_
+
+<!-- showboat-id: 849b6646-ec31-4c73-bdf8-bee4fba48cb0 -->
 
 ## What this is
 
@@ -32,7 +34,10 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ```
 
 ```output
-./.github/settings.yml
+./.claude/settings.json
+./.claude/skills/new-minutes/SKILL.md
+./.claude/skills/new-news/SKILL.md
+./.claude/skills/new-notice/SKILL.md
 ./.github/workflows/claude.yml
 ./.github/workflows/pages.yml
 ./.gitignore
@@ -47,26 +52,25 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ./content/governance/special-rules-of-order.md
 ./content/governance/standing-rules.md
 ./content/minutes/_index.md
-./content/minutes/2026-05-25-annual-meeting.md
+./content/minutes/2026-06-21-annual-meeting.md
 ./content/news/_index.md
-./content/news/2026-05-25-annual-meeting-held.md
-./content/news/2026-05-25-dew-sweeper-championship-2026.md
-./content/news/2026-05-25-website-launch.md
-./content/news/2026-05-25-zen-juice-appreciation-day-2026.md
+./content/news/2026-06-21-club-formally-established.md
 ./content/notices/_index.md
-./content/notices/2026-05-25-2027-annual-meeting.md
+./content/notices/2026-06-21-2027-annual-meeting.md
 ./hugo.toml
 ./layouts/_default/baseof.html
 ./layouts/_default/list.html
 ./layouts/_default/single.html
 ./layouts/404.html
 ./layouts/governance/list.html
+./layouts/governance/single.html
 ./layouts/index.html
 ./layouts/minutes/list.html
 ./layouts/minutes/single.html
 ./layouts/news/list.html
 ./layouts/notices/list.html
 ./layouts/notices/single.html
+./layouts/partials/governance-meta.html
 ./layouts/partials/item-row.html
 ./layouts/partials/latest.html
 ./layouts/partials/minutes-meta.html
@@ -76,6 +80,7 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ./README.md
 ./static/CNAME
 ./Taskfile.yml
+./theory.md
 ```
 
 Five directories carry meaning:
@@ -119,7 +124,7 @@ news = "/news/:slug/"
 Two non-obvious choices in this file:
 
 - **`disableKinds = ["taxonomy", "term"]`** — Hugo's tag/category system is turned off. The site uses frontmatter fields like `notice_type` and `meeting_type` directly in templates instead. No `/tags/` or `/categories/` pages will be generated.
-- **`[permalinks]`** — Three sections get an explicit `:slug` permalink so their URLs look like `/notices/foo/` instead of `/notices/2026-05-25-foo/`. Hugo strips the `YYYY-MM-DD-` filename prefix and falls back to a title-derived slug. `governance` is intentionally omitted because those pages aren't dated.
+- **`[permalinks]`** — Three sections get an explicit `:slug` permalink so their URLs look like `/notices/foo/` instead of `/notices/2026-06-21-foo/`. The `:slug` is the explicit `slug:` field that every dated post pins in its frontmatter (the dated filename is only for editor sort order); a post that omits `slug:` falls back to a title-derived slug. `governance` is intentionally omitted because those pages aren't dated.
 
 ## Content model
 
@@ -130,35 +135,35 @@ Each section under `content/` follows the same pattern: an `_index.md` for the s
 Weight-ordered, undated, with constitutional metadata:
 
 ```bash
-sed -n '1,8p' content/governance/bylaws.md
+awk 'f<2{print} /^---$/{f++}' content/governance/bylaws.md
 ```
 
 ```output
 ---
 title: "Bylaws"
-description: "Bylaws of the Common & Recent Bogey Golf Club, adopted May 25, 2026."
+description: "Bylaws of the Common & Recent Bogey Golf Club, adopted June 21, 2026."
 weight: 10
-adopted: 2026-05-25
-last_amended: 2026-05-25
+adopted: 2026-06-21
+last_amended: 2026-06-21
 ---
-
 ```
 
 `weight` orders the governance list (lower first); `adopted` and `last_amended` are currently captured but unrendered ([issue #16](https://github.com/philoserf/crbgc/issues/16) tracks the fix).
 
 ### Notices — RONR-required notifications
 
-Date-driven with an expiration window and a constitutional authority reference:
+Date-driven with an explicit slug, an expiration window, and a constitutional authority reference:
 
 ```bash
-sed -n '1,9p' content/notices/2026-05-25-2027-annual-meeting.md
+awk 'f<2{print} /^---$/{f++}' content/notices/2026-06-21-2027-annual-meeting.md
 ```
 
 ```output
 ---
 title: "Notice of 2027 Annual Meeting"
-description: "The 2027 Annual Meeting will be held on the Summer Solstice, Monday, June 21, 2027."
-date: 2026-05-25T19:10:00-04:00
+slug: notice-of-2027-annual-meeting
+description: "The 2027 Annual Meeting will be held on the Summer Solstice, Monday, June 21, 2027, at Forest Dunes Golf Club, Roscommon, Michigan."
+date: 2026-06-21T19:10:00-04:00
 meeting_date: 2027-06-21
 expires: 2027-06-22
 notice_type: annual-meeting
@@ -168,6 +173,7 @@ authority: "Article V, Section 1"
 
 Notice files use these fields:
 
+- `slug` — the pinned URL segment; never change it on a published notice or inbound links break.
 - `date` — when the notice was posted (the byline date).
 - `meeting_date` — the date of the meeting being noticed.
 - `expires` — after this date, the list template moves the notice into a collapsed "Expired" section.
@@ -179,14 +185,15 @@ Notice files use these fields:
 Frontmatter records the parliamentary essentials; the badge on the list page comes from `approved`:
 
 ```bash
-sed -n '1,12p' content/minutes/2026-05-25-annual-meeting.md
+awk 'f<2{print} /^---$/{f++}' content/minutes/2026-06-21-annual-meeting.md
 ```
 
 ```output
 ---
 title: "Minutes — 2026 Annual Meeting"
-description: "Minutes of the 2026 Annual Meeting, May 25, 2026."
-date: 2026-05-25T19:00:00-04:00
+slug: minutes-2026-annual-meeting
+description: "Minutes of the 2026 Annual Meeting, June 21, 2026."
+date: 2026-06-21T19:00:00-04:00
 meeting_type: annual
 approved: false
 approved_on:
@@ -201,17 +208,18 @@ absent: []
 
 ### News — casual posts
 
-Minimal frontmatter — just `title`, `description`, `date`:
+Minimal frontmatter — `title`, `slug`, `description`, `date`:
 
 ```bash
-sed -n '1,5p' content/news/2026-05-25-website-launch.md
+awk 'f<2{print} /^---$/{f++}' content/news/2026-06-21-club-formally-established.md
 ```
 
 ```output
 ---
-title: "Club Website Launches"
-description: "The C&RBGC now has a proper home on the web."
-date: 2026-05-25T12:00:00-04:00
+title: "From a Standing Game to a Standing Club"
+slug: club-formally-established
+description: "On the Summer Solstice, the C&RBGC adopted its Bylaws and Standing Rules, elected officers, and took its place on the web."
+date: 2026-06-21T20:00:00-04:00
 ---
 ```
 
@@ -242,6 +250,12 @@ cat layouts/_default/baseof.html
     {{ with .Description }}
       <meta name="description" content="{{ . }}" />
     {{ end }}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Nata+Sans:wght@400;500;700&display=swap"
+    />
     {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
     <link
       rel="stylesheet"
@@ -338,13 +352,15 @@ cat layouts/partials/latest.html
 ```output
 {{ $section := .section }}
 {{ $limit := .limit }}
-{{ $items := where site.RegularPages "Section" $section }}
-{{ $items = first $limit $items.ByDate.Reverse }}
+{{ $items := where
+  site.RegularPages "Section" $section
+}}
+{{ $items = first $limit
+  $items.ByDate.Reverse
+}}
 {{ if $items }}
   <ul class="item-list">
-    {{ range $items }}
-      {{ partial "item-row.html" . }}
-    {{ end }}
+    {{ range $items }}{{ partial "item-row.html" . }}{{ end }}
   </ul>
 {{ else }}
   <p class="muted">Nothing yet.</p>
@@ -361,7 +377,9 @@ cat layouts/partials/item-row.html
 <li>
   <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   <span class="item-date">{{ .Date.Format "January 2, 2006" }}</span>
-  {{ with .Description }}<p class="item-desc">{{ . }}</p>{{ end }}
+  {{ with .Description }}
+    <p class="item-desc">{{ . }}</p>
+  {{ end }}
 </li>
 ```
 
@@ -379,9 +397,13 @@ cat layouts/notices/list.html
 {{ define "main" }}
   {{ $now := now }}
   {{ $current := slice }}
-  {{ $expired := slice }}
+  {{ $expired :=
+    slice
+  }}
   {{ range .Pages.ByDate.Reverse }}
-    {{ if and .Params.expires (lt (time .Params.expires) $now) }}
+    {{ if and .Params.expires (lt (time
+      .Params.expires) $now)
+    }}
       {{ $expired = $expired | append . }}
     {{ else }}
       {{ $current = $current | append . }}
@@ -478,9 +500,7 @@ cat layouts/news/list.html
     <h1>{{ .Title }}</h1>
     {{ .Content }}
     <ul class="item-list">
-      {{ range .Pages.ByDate.Reverse }}
-        {{ partial "item-row.html" . }}
-      {{ end }}
+      {{ range .Pages.ByDate.Reverse }}{{ partial "item-row.html" . }}{{ end }}
     </ul>
   </article>
 {{ end }}
@@ -550,7 +570,9 @@ cat layouts/partials/minutes-meta.html
   <dd>
     {{ if .Params.approved }}
       Approved{{ with .Params.approved_on }}
-        {{ (time .).Format "January 2, 2006" }}
+        {{ (time
+          .).Format "January 2, 2006"
+        }}
       {{ end }}
     {{ else }}
       Draft
@@ -604,14 +626,14 @@ sed -n '1,8p' assets/css/style.css
 ```
 
 ```output
+/* Matches the stock Flowershow "letterpress" theme used by the notes site
+   (crbgc-philoserf.flowershow.me): Nata Sans body, Fraunces serif headings at
+   normal weight, a white / near-black palette with oklch-derived grays, and the
+   theme's link / blockquote / rule / code treatments. Tokens mirror the theme's
+   light-mode values so the two sites read as one. */
+
 :root {
-  --fg: #1a1a1a;
-  --muted: #595959;
-  --bg: #fafaf7;
-  --accent: #2f5d3a;
-  --rule: #d8d4c7;
-  --measure: 38rem;
-}
+  /* Letterpress palette — light mode */
 ```
 
 Green accent for a golf club. `--measure: 38rem` constrains the readable column width and is applied to `header`, `main`, and `footer`.
@@ -623,26 +645,27 @@ sed -n '210,230p' assets/css/style.css
 ```
 
 ```output
-.badge {
-  display: inline-block;
-  margin-left: 0.5rem;
-  padding: 0.125rem 0.5rem;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-radius: 2px;
-}
-
-.badge.approved {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.badge.draft {
-  background: var(--rule);
+footer a {
   color: var(--muted);
 }
+
+nav.site-nav {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+}
+
+nav.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-right: 1.25rem;
+}
+
+nav.site-nav a:hover {
+  color: var(--accent);
+}
+
+ul.item-list,
+ul.doc-list {
 ```
 
 ## Build pipeline
@@ -713,7 +736,7 @@ cat biome.json
 
 ```output
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
   "files": {
     "includes": ["assets/**/*.css"]
   },
@@ -765,8 +788,8 @@ cat package.json
   "name": "crbgc",
   "private": true,
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "prettier": "^3.8.3",
+    "@biomejs/biome": "^2.5.0",
+    "prettier": "^3.8.4",
     "prettier-plugin-go-template": "^0.0.15",
     "prettier-plugin-toml": "^2.0.6"
   }
@@ -789,8 +812,9 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    # Daily at 06:07 UTC (~02:00 ET) so future-dated content rolls in
-    # after local midnight. Offset from the hour to avoid the cron surge.
+    # Daily at 06:07 UTC — 02:07 EDT in summer, 01:07 EST in winter (UTC has
+    # no DST). Either way it's after local midnight, so future-dated content
+    # rolls in same-day. Offset from the hour to avoid the cron surge.
     - cron: "7 6 * * *"
   workflow_dispatch:
 
@@ -806,7 +830,6 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
 ```
 
 Four triggers — push to main, pull requests (build-only, no deploy), a daily cron, and manual dispatch. The cron exists so that future-dated content (events announced with a `date:` in the future) rolls into production after that date passes. The Hugo version is pinned via `HUGO_VERSION`.
@@ -818,13 +841,12 @@ sed -n '24,49p' .github/workflows/pages.yml
 ```
 
 ```output
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v3
@@ -844,6 +866,7 @@ sed -n '24,49p' .github/workflows/pages.yml
         uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
+
 ```
 
 The Hugo build runs the same `hugo --minify --gc` that `task build` runs locally. The artifact is only uploaded when it's not a pull-request event — PRs validate the build without producing a deployable artifact. The deploy job:
@@ -853,7 +876,6 @@ sed -n '51,65p' .github/workflows/pages.yml
 ```
 
 ```output
-  deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
@@ -895,6 +917,5 @@ For local development, `task serve` runs `hugo server -D --buildFuture` so draft
 
 ## Where to look next
 
-- **Adding content** — `README.md` documents each section's required frontmatter with copy-paste templates.
-- **Open improvements** — issues #16–#24 on GitHub track the tech-debt audit findings; #17 (explicit `slug:`) is the highest-leverage one.
+- **Adding content** — `README.md` documents each section's required frontmatter with copy-paste templates, including the explicit `slug:` every dated post pins.
 - **Project conventions** — `CLAUDE.md` summarizes structure and commands for collaborators (human or AI).
