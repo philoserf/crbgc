@@ -20,7 +20,7 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 1. Classes.** The Club shall have two classes of members: Charter Members and Members. Each is a "Member" for purposes of these Bylaws.
 
-**Section 2. Charter Members.** The Charter Members of the Club are **Mark Ayers** and **Dean Chase**, who founded the Club circa 2000. Charter membership is for life and may not be revoked.
+**Section 2. Charter Members.** The Charter Members of the Club are **Mark Ayers** and **Dean Chase**, who informally formed the Club in the summer of 2000; the Club was officially established in the summer of 2026. Charter membership is for life and may not be revoked.
 
 **Section 3. Admission of Members.** A person may be admitted as a Member only upon the unanimous affirmative vote of all then-living Charter Members.
 
