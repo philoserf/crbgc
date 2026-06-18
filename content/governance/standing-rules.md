@@ -2,7 +2,7 @@
 title: Standing Rules
 description: Standing Rules of the Common & Recent Bogey Golf Club, adopted under Article VII of the Bylaws.
 created: 2026-05-25
-lastmod: 2026-06-16
+lastmod: 2026-06-18
 adopted: 2026-06-21
 last_amended: 2026-06-21
 weight: 20
@@ -30,9 +30,10 @@ These rules describe the older orientation of the game in working form: a walk o
 ## Course Etiquette
 
 1. **Pace of Play.** Slow play is acceptable with good conversation, provided faster groups are waved through. Conversation justifies the Member's pace, never the pace of the group behind. A round should feel like a long conversation, not a traffic jam.
-2. **Lost Ball Protocol.** After a Reasonable Search, a Member shall drop a ball and play on, without penalty in Club play.
-3. **Foursomes Provision.** Alternate shot is recognized as an honored format of the Club and may be invoked by any two Members to halve the time and double the blame.
-4. **Vote with the Greens Fee.** Where a Member may choose, prefer courses read into the land—firm, walkable, thoughtful—over those imposed upon it. Architects build what gets paid for; spend the greens fee where the ground was respected.
+2. **Ready Play.** Play when you are ready and it is safe to do so, rather than standing on the honor of who lies away. Readiness, not ceremony, sets the order of play. This is courtesy, not haste—it never overrides safety, and a Member may always cede the shot to a partner who wants it.
+3. **Lost Ball Protocol.** After a Reasonable Search, a Member shall drop a ball and play on, without penalty in Club play.
+4. **Foursomes Provision.** Alternate shot is recognized as an honored format of the Club and may be invoked by any two Members to halve the time and double the blame.
+5. **Vote with the Greens Fee.** Where a Member may choose, prefer courses read into the land—firm, walkable, thoughtful—over those imposed upon it. Architects build what gets paid for; spend the greens fee where the ground was respected.
 
 ## The Solitary Round
 
@@ -75,5 +76,6 @@ These rules describe the older orientation of the game in working form: a walk o
 **Ground Game**: the run-up, the bump, and the use of slope and firm turf to move the ball along the ground rather than only through the air.  
 **Half-Set**: a carried bag of seven or eight clubs, chosen so that invention supplies what the missing clubs would have.  
 **The Older Orientation**: golf as a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball.  
+**Ready Play**: playing when ready and safe rather than by the honor of who lies away; courtesy, not haste.  
 **Reasonable Search**: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
 **Zen Juice**: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
