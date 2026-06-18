@@ -1,0 +1,23 @@
+{{- define "llms-section" -}}
+{{- with .pages }}
+## {{ $.heading }}
+{{ range . }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ else }}{{ with .Date }} — {{ .Format "2006-01-02" }}{{ end }}{{ end }}
+{{- end }}
+{{ end -}}
+{{- end -}}
+# {{ .Site.Title }}
+
+> {{ .Description }}
+
+The formal governance site of the Common & Recent Bogey Golf Club — bylaws, official notices, meeting minutes, and news. The club's informal notes (history, course architecture, courses to play) live separately at https://crbgc-philoserf.flowershow.me.
+
+Base URL: {{ .Site.BaseURL }}
+{{ with (.Site.GetPage "/governance") }}{{ template "llms-section" (dict "heading" "Governance" "pages" .Pages.ByWeight) }}{{ end -}}
+{{- with (.Site.GetPage "/notices") }}{{ template "llms-section" (dict "heading" "Notices" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end -}}
+{{- with (.Site.GetPage "/minutes") }}{{ template "llms-section" (dict "heading" "Minutes" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end -}}
+{{- with (.Site.GetPage "/news") }}{{ template "llms-section" (dict "heading" "News" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end }}
+## Feeds
+
+- [RSS]({{ "index.xml" | absURL }})
+- [Sitemap]({{ "sitemap.xml" | absURL }})
