@@ -17,3 +17,12 @@ endLevel = 3
 notices = "/notices/:slug/"
 minutes = "/minutes/:slug/"
 news = "/news/:slug/"
+
+[outputFormats.llms]
+mediaType = "text/plain"
+baseName = "llms"
+isPlainText = true
+notAlternative = true
+
+[outputs]
+home = ["html", "rss", "llms"]
