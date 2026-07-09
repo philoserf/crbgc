@@ -1,6 +1,12 @@
 version: "3"
 
 tasks:
+  setup:
+    desc: Install the toolchain (Brewfile) and JS dependencies
+    cmds:
+      - brew bundle --file=Brewfile
+      - bun install
+
   prettier:
     desc: Format markdown, HTML/Hugo, YAML, TOML, and JSON with Prettier
     cmds:
