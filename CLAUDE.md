@@ -28,17 +28,6 @@ Four sections under `content/`, each with an `_index.md` and (where applicable) 
 
 Templates live under `layouts/` with section-specific list/single pairs and shared partials (`notice-meta`, `minutes-meta`, `item-row`, `latest`). Frontmatter conventions for each type are documented in the project README.
 
-## Development Commands
-
-Task runner (`Taskfile.yml`) with Bun:
-
-- `task serve` — `hugo server -D --buildFuture` (drafts and future-dated content visible)
-- `task build` — `hugo --minify --gc` (production)
-- `task format` — Prettier (md, html/Hugo, yaml, toml, json) + Biome (css), write
-- `task check` — same coverage, read-only
-
-Prettier uses `prettier-plugin-go-template` for Hugo templates; CSS is delegated to Biome (which also lints). `task prettier` runs the formatter twice because the go-template plugin can need a second pass to converge.
-
 ## Conventions
 
 - Run `task format` before committing.
