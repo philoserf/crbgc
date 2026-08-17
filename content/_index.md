@@ -1,9 +1,9 @@
 ---
-title: "The Common & Recent Bogey Golf Club"
+title: "The Common & Recent Bogeymens Golf Club"
 description: "A small parliamentary golf society informally formed in 2000 and officially established in 2026."
 ---
 
-# The Common & Recent Bogey Golf Club
+# The Common & Recent Bogeymens Golf Club
 
 For about twenty-five years, on the courses we walked together and with friends, we settled between us what golf is: the common game, played honestly, where a bogey is a good score and no disgrace. The game that has grown up around us—royal, ancient, scratch or nothing, motorized carts, and noise—has forgotten that. We have not. Now formally established, we put the case to anyone who has felt the same on the tee.
 

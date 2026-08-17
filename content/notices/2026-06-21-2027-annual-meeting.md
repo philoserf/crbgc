@@ -9,7 +9,7 @@ notice_type: annual-meeting
 authority: "Article V, Section 1"
 ---
 
-Notice is hereby given that the **2027 Annual Meeting** of the Common & Recent Bogey Golf Club will be held on the **Summer Solstice — Monday, June 21, 2027**, at **Forest Dunes Golf Club, Roscommon, Michigan**. Time will be confirmed by the Captain in advance of the meeting.
+Notice is hereby given that the **2027 Annual Meeting** of the Common & Recent Bogeymens Golf Club will be held on the **Summer Solstice — Monday, June 21, 2027**, at **Forest Dunes Golf Club, Roscommon, Michigan**. Time will be confirmed by the Captain in advance of the meeting.
 
 ## Anticipated Agenda
 

@@ -14,7 +14,7 @@ absent: []
 
 ## Call to Order
 
-The 2026 Annual Meeting of **The Common & Recent Bogey Golf Club** was called to order at 7:00 PM on the Summer Solstice, Sunday, June 21, 2026. All Charter Members were present, constituting a quorum.
+The 2026 Annual Meeting of **The Common & Recent Bogeymens Golf Club** was called to order at 7:00 PM on the Summer Solstice, Sunday, June 21, 2026. All Charter Members were present, constituting a quorum.
 
 ## Approval of Prior Minutes
 

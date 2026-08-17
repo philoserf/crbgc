@@ -1,6 +1,6 @@
 ---
 title: "Officers"
-description: "Current officers of the Common & Recent Bogey Golf Club."
+description: "Current officers of the Common & Recent Bogeymens Golf Club."
 weight: 40
 ---
 

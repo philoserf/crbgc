@@ -2,7 +2,7 @@
 
 ## What this system is for
 
-This is the public-record website of a two-person parliamentary society — The Common & Recent Bogey Golf Club — that has bound itself, with a straight face, to _Robert's Rules of Order Newly Revised_. The site is not a blog about golf and not a marketing page for a club. It is the publication channel through which a deliberative body satisfies its own constitutional notice requirements and preserves its own minutes. The seriousness is genuine on the procedural side and entirely tongue-in-cheek on the subject matter; both registers have to coexist in the output, and the templates are calibrated to that. If you read only the bylaws you would think this is a small nonprofit; if you read only the news posts you would think it is a joke. The codebase treats both as load-bearing.
+This is the public-record website of a two-person parliamentary society — The Common & Recent Bogeymens Golf Club — that has bound itself, with a straight face, to _Robert's Rules of Order Newly Revised_. The site is not a blog about golf and not a marketing page for a club. It is the publication channel through which a deliberative body satisfies its own constitutional notice requirements and preserves its own minutes. The seriousness is genuine on the procedural side and entirely tongue-in-cheek on the subject matter; both registers have to coexist in the output, and the templates are calibrated to that. If you read only the bylaws you would think this is a small nonprofit; if you read only the news posts you would think it is a joke. The codebase treats both as load-bearing.
 
 The domain entities are:
 

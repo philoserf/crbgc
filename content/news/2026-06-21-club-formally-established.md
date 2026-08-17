@@ -5,7 +5,7 @@ description: "On the Summer Solstice, the C&RBGC adopted its Bylaws and Standing
 date: 2026-06-21T20:00:00-04:00
 ---
 
-For some twenty-five years the Common & Recent Bogey Golf Club existed the way most good things among friends do — by habit and affection, with no charter and no minutes. On the Summer Solstice, **Sunday, June 21, 2026**, the Charter Members made it official.
+For some twenty-five years the Common & Recent Bogeymens Golf Club existed the way most good things among friends do — by habit and affection, with no charter and no minutes. On the Summer Solstice, **Sunday, June 21, 2026**, the Charter Members made it official.
 
 At the [2026 Annual Meeting](/minutes/minutes-2026-annual-meeting/) the Members adopted the [Bylaws](/governance/bylaws/) and [Standing Rules](/governance/standing-rules/), and elected the Club's first officers — Mark Ayers as Captain and Dean Chase as Secretary-Treasurer. The Club that had run on custom since around 2000 now runs on a constitution, with the customs written down where everyone can find them.
 

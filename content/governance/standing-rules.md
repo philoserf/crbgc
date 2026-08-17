@@ -1,6 +1,6 @@
 ---
 title: Standing Rules
-description: Standing Rules of the Common & Recent Bogey Golf Club, adopted under Article VII of the Bylaws.
+description: Standing Rules of the Common & Recent Bogeymens Golf Club, adopted under Article VII of the Bylaws.
 created: 2026-05-25
 lastmod: 2026-06-18
 adopted: 2026-06-21
@@ -10,7 +10,7 @@ weight: 20
 
 ---
 
-Adopted under [Article VII](https://crbgc.org/governance/bylaws/#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogey Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
+Adopted under [Article VII](https://crbgc.org/governance/bylaws/#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogeymens Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
 
 These rules describe the older orientation of the game in working form: a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball. Everything that thickens the Member's relationship to the ground and the company belongs; everything that thins it does not.
 

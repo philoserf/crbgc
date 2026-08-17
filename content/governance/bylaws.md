@@ -1,6 +1,6 @@
 ---
 title: "Bylaws"
-description: "Bylaws of the Common & Recent Bogey Golf Club, adopted June 21, 2026."
+description: "Bylaws of the Common & Recent Bogeymens Golf Club, adopted June 21, 2026."
 weight: 10
 adopted: 2026-06-21
 last_amended: 2026-06-21
@@ -10,7 +10,7 @@ last_amended: 2026-06-21
 
 ### Article I — Name
 
-The name of this organization shall be **The Common & Recent Bogey Golf Club** (the "Club"), which may also be referred to as the "C&RBGC" or the "C&R."
+The name of this organization shall be **The Common & Recent Bogeymens Golf Club** (the "Club"), which may also be referred to as the "C&RBGC" or the "C&R."
 
 ### Article II — Object
 

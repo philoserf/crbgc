@@ -8,7 +8,7 @@ _2026-06-16T21:35:28Z by Showboat 0.6.1_
 
 ## What this is
 
-A Hugo-built static site for **The Common & Recent Bogey Golf Club** (C&RBGC), a small parliamentary golf society that governs itself by _Robert's Rules of Order Newly Revised_. The site publishes the bylaws, standing rules, official notices, meeting minutes, and casual news at [crbgc.org](https://crbgc.org/).
+A Hugo-built static site for **The Common & Recent Bogeymens Golf Club** (C&RBGC), a small parliamentary golf society that governs itself by _Robert's Rules of Order Newly Revised_. The site publishes the bylaws, standing rules, official notices, meeting minutes, and casual news at [crbgc.org](https://crbgc.org/).
 
 The whole codebase is small — under a thousand lines of source — and the moving parts are:
 
@@ -101,7 +101,7 @@ cat hugo.toml
 
 ```output
 baseURL = "https://crbgc.org/"
-title = "The Common & Recent Bogey Golf Club"
+title = "The Common & Recent Bogeymens Golf Club"
 
 [languages.en]
 locale = "en_US"
@@ -141,7 +141,7 @@ awk 'f<2{print} /^---$/{f++}' content/governance/bylaws.md
 ```output
 ---
 title: "Bylaws"
-description: "Bylaws of the Common & Recent Bogey Golf Club, adopted June 21, 2026."
+description: "Bylaws of the Common & Recent Bogeymens Golf Club, adopted June 21, 2026."
 weight: 10
 adopted: 2026-06-21
 last_amended: 2026-06-21

@@ -1,6 +1,6 @@
 ---
 title: "Special Rules of Order"
-description: "Special rules of order adopted by the Common & Recent Bogey Golf Club."
+description: "Special rules of order adopted by the Common & Recent Bogeymens Golf Club."
 weight: 30
 ---
 
