@@ -16,18 +16,6 @@ The current next step for this repo is tracked in the workspace backlog at `../N
 
 The club's informal notes (essays, history surveys, course architecture writing) live in the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)) and publish via Flowershow at <https://crbgc-philoserf.flowershow.me>. This repo (`crbgc/`) is the formal/governance side — bylaws, minutes, notices, news; the notes site is the personal/editorial side. Keep the split clean: governance and official records here, prose and notes there.
 
-## Content structure
-
-Four sections under `content/`, each with an `_index.md` and (where applicable) dated posts:
-
-- `content/_index.md` — homepage intro (identity only; the layout adds latest-notices, latest-news, and governance links).
-- `content/governance/` — bylaws, standing rules, special rules of order, officers. Ordered by `weight` in frontmatter.
-- `content/notices/` — RONR-required notices (meetings, motions requiring previous notice, bylaw amendments). Date-driven; the list page splits current vs. expired by the `expires` frontmatter field.
-- `content/minutes/` — meeting minutes archive. Grouped by year on the list page; each shows an Approved/Draft badge driven by `approved`.
-- `content/news/` — event recaps, announcements, casual updates.
-
-Templates live under `layouts/` with section-specific list/single pairs and shared partials (`notice-meta`, `minutes-meta`, `item-row`, `latest`). Frontmatter conventions for each type are documented in the project README.
-
 ## Conventions
 
 - Run `task format` before committing.
@@ -35,8 +23,10 @@ Templates live under `layouts/` with section-specific list/single pairs and shar
 - Dated filenames (`YYYY-MM-DD-slug.md`) for notices, minutes, and news. Every dated post sets an explicit `slug:` in frontmatter to pin its URL — never change a published slug, and never rely on the title-derived fallback.
 - Scaffold new posts with the project skills `/new-notice`, `/new-minutes`, `/new-news` (user-invoked; they compute the Eastern offset) rather than hand-writing frontmatter.
 - Content `date` fields use US Eastern offsets (`-04:00` in summer, `-05:00` in winter). A wrong offset can hide a post from production builds.
+- Anything that lists notices goes through `layouts/partials/notices-by-status.html`, which returns the section split into `current` and `expired`. Never query the notices section directly for a listing — a naive "most recent N" silently shows expired notices, which is how issues #36 and #38 arose.
 - No taxonomies. `notice_type` and `meeting_type` are frontmatter fields, queried directly in templates.
 - `<abbr>` HTML tags in content (e.g., C&RBGC tooltips) are intentional.
+- Frontmatter conventions for each content type are documented in the project README.
 - Keep the copyright year range in `layouts/_default/baseof.html` current.
 - The homepage intentionally has no `h1` — a design choice, reaffirmed 2026-05-26. Do not flag it as an accessibility or SEO issue or try to restore one.
 - CI (`pages.yml`) is the build verifier — push and watch it rather than running routine local production builds. When a local build is needed, run `rm -rf public && task build`; Hugo does not prune stale artifacts from `public/`.
