@@ -1,14 +1,13 @@
 baseURL = "https://crbgc.org/"
 title = "The Common & Recent Bogeymens Golf Club"
 timeZone = "America/New_York"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
 
 [languages.en]
 locale = "en_US"
 label = "English"
 weight = 1
-
-enableRobotsTXT = true
-disableKinds = ["taxonomy", "term"]
 
 [markup.tableOfContents]
 startLevel = 2

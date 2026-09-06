@@ -1,8 +1,10 @@
-{{ with .Params.adopted }}
+{{ if or .Params.adopted .Params.last_amended }}
   <dl class="meta">
-    <dt>Adopted</dt>
-    <dd>{{ (time .).Format "January 2, 2006" }}</dd>
-    {{ with $.Params.last_amended }}
+    {{ with .Params.adopted }}
+      <dt>Adopted</dt>
+      <dd>{{ (time .).Format "January 2, 2006" }}</dd>
+    {{ end }}
+    {{ with .Params.last_amended }}
       <dt>Last amended</dt>
       <dd>{{ (time .).Format "January 2, 2006" }}</dd>
     {{ end }}
