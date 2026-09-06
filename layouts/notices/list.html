@@ -18,7 +18,9 @@
     {{ .Content }}
     {{ if $current }}
       <ul class="item-list">
-        {{ range $current }}{{ partial "item-row.html" . }}{{ end }}
+        {{ range $current }}
+          {{ partial "item-row.html" (dict "page" .) }}
+        {{ end }}
       </ul>
     {{ else }}
       <p class="muted">No current notices.</p>
@@ -26,7 +28,9 @@
     {{ if $expired }}
       <h2>Expired</h2>
       <ul class="item-list expired">
-        {{ range $expired }}{{ partial "item-row.html" . }}{{ end }}
+        {{ range $expired }}
+          {{ partial "item-row.html" (dict "page" .) }}
+        {{ end }}
       </ul>
     {{ end }}
   </article>

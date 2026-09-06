@@ -1,7 +1,15 @@
+{{ $p := .page }}
 <li>
-  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-  <span class="item-date">{{ .Date.Format "January 2, 2006" }}</span>
-  {{ with .Description }}
+  <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+  {{ if .badge }}
+    {{ if $p.Params.approved }}
+      <span class="badge approved">Approved</span>
+    {{ else }}
+      <span class="badge draft">Draft</span>
+    {{ end }}
+  {{ end }}
+  <span class="item-date">{{ $p.Date.Format "January 2, 2006" }}</span>
+  {{ with $p.Description }}
     <p class="item-desc">{{ . }}</p>
   {{ end }}
 </li>
