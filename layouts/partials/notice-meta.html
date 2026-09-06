@@ -1,6 +1,10 @@
 <dl class="meta">
   <dt>Posted</dt>
   <dd>{{ .Date.Format "January 2, 2006" }}</dd>
+  {{ with .Params.notice_type }}
+    <dt>Type</dt>
+    <dd>{{ title (replace . "-" " ") }}</dd>
+  {{ end }}
   {{ with .Params.meeting_date }}
     <dt>Meeting</dt>
     <dd>{{ (time .).Format "January 2, 2006" }}</dd>
@@ -8,5 +12,9 @@
   {{ with .Params.authority }}
     <dt>Required by</dt>
     <dd>{{ . }}</dd>
+  {{ end }}
+  {{ with .Params.expires }}
+    <dt>Expires</dt>
+    <dd>{{ (time .).Format "January 2, 2006" }}</dd>
   {{ end }}
 </dl>
