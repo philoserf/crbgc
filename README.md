@@ -49,7 +49,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
    authority: "Article V, Section 1" # the bylaw provision requiring this notice
    ---
    ```
-3. Notices listed past their `expires` date move under the "Expired" heading on the section page.
+3. Notices listed past their `expires` date move under the "Expired" heading on the section page, and drop off the homepage and `llms.txt`. The split is computed once in `layouts/partials/notices-by-status.html`; anything that lists notices must read from it rather than querying the section directly.
 
 ### Meeting minutes
 
