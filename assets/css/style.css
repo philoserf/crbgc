@@ -226,6 +226,12 @@ nav.site-nav a:hover {
   color: var(--accent);
 }
 
+nav.site-nav a[aria-current="page"] {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
 ul.item-list,
 ul.doc-list {
   list-style: none;

@@ -30,11 +30,28 @@
   <body>
     <header>
       <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+      {{ $section := .Section }}
       <nav class="site-nav">
-        <a href="{{ "/notices/" | relURL }}">Notices</a>
-        <a href="{{ "/minutes/" | relURL }}">Minutes</a>
-        <a href="{{ "/news/" | relURL }}">News</a>
-        <a href="{{ "/governance/" | relURL }}">Governance</a>
+        <a
+          href="{{ "/notices/" | relURL }}"
+          {{ if eq $section "notices" }}aria-current="page"{{ end }}
+          >Notices</a
+        >
+        <a
+          href="{{ "/minutes/" | relURL }}"
+          {{ if eq $section "minutes" }}aria-current="page"{{ end }}
+          >Minutes</a
+        >
+        <a
+          href="{{ "/news/" | relURL }}"
+          {{ if eq $section "news" }}aria-current="page"{{ end }}
+          >News</a
+        >
+        <a
+          href="{{ "/governance/" | relURL }}"
+          {{ if eq $section "governance" }}aria-current="page"{{ end }}
+          >Governance</a
+        >
       </nav>
     </header>
     <main>
