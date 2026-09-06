@@ -81,6 +81,7 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ./layouts/partials/latest.html
 ./layouts/partials/minutes-meta.html
 ./layouts/partials/notice-meta.html
+./layouts/partials/notices-by-status.html
 ./LICENSE
 ./package.json
 ./README.md
@@ -312,7 +313,7 @@ Three details worth pointing at:
 
 ### Homepage
 
-`layouts/index.html` overrides only the `main` block. It renders the intro from `content/_index.md` plus three section previews:
+`layouts/index.html` overrides only the `main` block. It renders the intro from `content/_index.md` plus three section previews. Every one of the three is derived from content — the governance list ranges `.Pages.ByWeight` rather than naming the four documents by hand, so adding or reordering a governance document updates the homepage automatically (issue #35):
 
 ```bash
 cat layouts/index.html
@@ -338,20 +339,13 @@ cat layouts/index.html
 
   <section>
     <h2>Governance</h2>
-    <ul class="doc-list">
-      <li><a href="{{ "/governance/bylaws/" | relURL }}">Bylaws</a></li>
-      <li>
-        <a href="{{ "/governance/standing-rules/" | relURL }}"
-          >Standing Rules</a
-        >
-      </li>
-      <li><a href="{{ "/governance/officers/" | relURL }}">Officers</a></li>
-      <li>
-        <a href="{{ "/governance/special-rules-of-order/" | relURL }}"
-          >Special Rules of Order</a
-        >
-      </li>
-    </ul>
+    {{ with site.GetPage "/governance" }}
+      <ul class="doc-list">
+        {{ range .Pages.ByWeight }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    {{ end }}
   </section>
 {{ end }}
 ```
@@ -367,14 +361,20 @@ cat layouts/partials/latest.html
 ```
 
 ```output
+{{/* Notices are filtered through notices-by-status.html rather than queried
+  directly. Unlike item-row's badge — a presentation choice the caller makes —
+  hiding expired notices is a correctness invariant that no caller should be
+  able to forget (issue #36).
+*/}}
 {{ $section := .section }}
 {{ $limit := .limit }}
-{{ $items := where
-  site.RegularPages "Section" $section
-}}
-{{ $items = first $limit
-  $items.ByDate.Reverse
-}}
+{{ $items := "" }}
+{{ if eq $section "notices" }}
+  {{ $items = (partial "notices-by-status.html").current }}
+{{ else }}
+  {{ $items = (where site.RegularPages "Section" $section).ByDate.Reverse }}
+{{ end }}
+{{ $items = first $limit $items }}
 {{ if $items }}
   <ul class="item-list">
     {{ range $items }}{{ partial "item-row.html" (dict "page" .) }}{{ end }}
@@ -384,7 +384,7 @@ cat layouts/partials/latest.html
 {{ end }}
 ```
 
-The partial accepts a dict `(dict "section" "notices" "limit" 3)`, filters `site.RegularPages` by the named section, reverses by date, and takes the first N. Each item rows through `item-row.html`:
+The partial accepts a dict `(dict "section" "notices" "limit" 3)` and takes the first N items of that section, newest first. Notices are the exception: rather than querying `site.RegularPages`, it reads the current half of `notices-by-status.html`, so an expired notice can never surface as "latest" (issue #36). That asymmetry is deliberate — where `item-row.html` takes an explicit `badge` parameter because a badge is a presentation choice the caller makes, hiding expired notices is a correctness invariant no caller should be able to forget. Each item rows through `item-row.html`:
 
 ```bash
 cat layouts/partials/item-row.html
@@ -420,36 +420,23 @@ cat layouts/notices/list.html
 
 ```output
 {{ define "main" }}
-  {{ $now := now }}
-  {{ $current := slice }}
-  {{ $expired :=
-    slice
-  }}
-  {{ range .Pages.ByDate.Reverse }}
-    {{ if and .Params.expires (lt (time
-      .Params.expires) $now)
-    }}
-      {{ $expired = $expired | append . }}
-    {{ else }}
-      {{ $current = $current | append . }}
-    {{ end }}
-  {{ end }}
+  {{ $n := partial "notices-by-status.html" }}
   <article>
     <h1>{{ .Title }}</h1>
     {{ .Content }}
-    {{ if $current }}
+    {{ if $n.current }}
       <ul class="item-list">
-        {{ range $current }}
+        {{ range $n.current }}
           {{ partial "item-row.html" (dict "page" .) }}
         {{ end }}
       </ul>
     {{ else }}
       <p class="muted">No current notices.</p>
     {{ end }}
-    {{ if $expired }}
+    {{ if $n.expired }}
       <h2>Expired</h2>
       <ul class="item-list expired">
-        {{ range $expired }}
+        {{ range $n.expired }}
           {{ partial "item-row.html" (dict "page" .) }}
         {{ end }}
       </ul>
@@ -458,7 +445,34 @@ cat layouts/notices/list.html
 {{ end }}
 ```
 
-Two slices (`$current`, `$expired`) are built by comparing each notice's `expires` field to `now`. The template handles three states: only current, both, and only expired (the empty-current case shows a "No current notices" message).
+The two slices come from `notices-by-status.html`, a returning partial that compares each notice's `expires` field to `now` and hands back `(dict "current" ... "expired" ...)`. Unlike every other partial in the tree, it renders nothing:
+
+```bash
+cat layouts/partials/notices-by-status.html
+```
+
+```output
+{{/* Returns (dict "current" ... "expired" ...) — the notices section split on
+  `expires` against now. Renders nothing. Every surface that lists notices must
+  go through this; a listing that re-derives "recent notices" on its own will
+  silently drift back into showing expired ones (issues #36, #38).
+*/}}
+{{- $now := now -}}
+{{- $current := slice -}}
+{{- $expired := slice -}}
+{{- with site.GetPage "/notices" -}}
+  {{- range .RegularPages.ByDate.Reverse -}}
+    {{- if and .Params.expires (lt (time .Params.expires) $now) -}}
+      {{- $expired = $expired | append . -}}
+    {{- else -}}
+      {{- $current = $current | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "current" $current "expired" $expired -}}
+```
+
+It takes no context — it always operates on the whole notices section via `site.GetPage`, and returns both halves already sorted newest-first, so callers only need `first N`. The list template handles three states: only current, both, and only expired (the empty-current case shows a "No current notices" message). Keeping the split in one partial is what stops the homepage and `llms.txt` from drifting into their own naive "recent notices" queries, which is exactly how issues #36 and #38 arose.
 
 The **minutes** list groups by year and badges each entry as Approved or Draft:
 

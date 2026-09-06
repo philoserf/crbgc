@@ -1,11 +1,17 @@
+{{/* Notices are filtered through notices-by-status.html rather than queried
+  directly. Unlike item-row's badge — a presentation choice the caller makes —
+  hiding expired notices is a correctness invariant that no caller should be
+  able to forget (issue #36).
+*/}}
 {{ $section := .section }}
 {{ $limit := .limit }}
-{{ $items := where
-  site.RegularPages "Section" $section
-}}
-{{ $items = first $limit
-  $items.ByDate.Reverse
-}}
+{{ $items := "" }}
+{{ if eq $section "notices" }}
+  {{ $items = (partial "notices-by-status.html").current }}
+{{ else }}
+  {{ $items = (where site.RegularPages "Section" $section).ByDate.Reverse }}
+{{ end }}
+{{ $items = first $limit $items }}
 {{ if $items }}
   <ul class="item-list">
     {{ range $items }}{{ partial "item-row.html" (dict "page" .) }}{{ end }}

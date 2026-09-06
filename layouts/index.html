@@ -17,19 +17,12 @@
 
   <section>
     <h2>Governance</h2>
-    <ul class="doc-list">
-      <li><a href="{{ "/governance/bylaws/" | relURL }}">Bylaws</a></li>
-      <li>
-        <a href="{{ "/governance/standing-rules/" | relURL }}"
-          >Standing Rules</a
-        >
-      </li>
-      <li><a href="{{ "/governance/officers/" | relURL }}">Officers</a></li>
-      <li>
-        <a href="{{ "/governance/special-rules-of-order/" | relURL }}"
-          >Special Rules of Order</a
-        >
-      </li>
-    </ul>
+    {{ with site.GetPage "/governance" }}
+      <ul class="doc-list">
+        {{ range .Pages.ByWeight }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    {{ end }}
   </section>
 {{ end }}

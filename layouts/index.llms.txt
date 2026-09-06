@@ -14,7 +14,8 @@ The formal governance site of the Common & Recent Bogey Golf Club — bylaws, of
 
 Base URL: {{ .Site.BaseURL }}
 {{ with (.Site.GetPage "/governance") }}{{ template "llms-section" (dict "heading" "Governance" "pages" .Pages.ByWeight) }}{{ end -}}
-{{- with (.Site.GetPage "/notices") }}{{ template "llms-section" (dict "heading" "Notices" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end -}}
+{{- $n := partial "notices-by-status.html" -}}
+{{- template "llms-section" (dict "heading" "Notices" "pages" (first 15 $n.current)) -}}
 {{- with (.Site.GetPage "/minutes") }}{{ template "llms-section" (dict "heading" "Minutes" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end -}}
 {{- with (.Site.GetPage "/news") }}{{ template "llms-section" (dict "heading" "News" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end }}
 ## Feeds
