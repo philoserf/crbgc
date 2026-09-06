@@ -256,6 +256,12 @@ ul.doc-list > li:last-child {
   font-size: 0.9375rem;
 }
 
+.post-date {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: -0.5rem 0 1.5rem;
+}
+
 .doc-desc {
   color: var(--muted);
 }
