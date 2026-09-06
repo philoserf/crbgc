@@ -1,5 +1,6 @@
 baseURL = "https://crbgc.org/"
 title = "The Common & Recent Bogeymens Golf Club"
+timeZone = "America/New_York"
 
 [languages.en]
 locale = "en_US"

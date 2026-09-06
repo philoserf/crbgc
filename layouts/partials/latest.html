@@ -8,7 +8,7 @@
 }}
 {{ if $items }}
   <ul class="item-list">
-    {{ range $items }}{{ partial "item-row.html" . }}{{ end }}
+    {{ range $items }}{{ partial "item-row.html" (dict "page" .) }}{{ end }}
   </ul>
 {{ else }}
   <p class="muted">Nothing yet.</p>
