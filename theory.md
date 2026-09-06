@@ -37,7 +37,7 @@ The templates honor these distinctions. There is no shared list logic that gets 
 
 **Repository to GitHub Pages.** The deploy seam is `pages.yml`. It is one workflow with two jobs (build, deploy); PRs build but do not upload; only `main` deploys. `static/CNAME` carries the domain binding. Hugo is pinned via `HUGO_VERSION`. This is the most opinionated boundary in the system, and it is intentionally rigid: the only way to publish is to push to `main`, and the only way to dry-run is a PR.
 
-**Frontmatter to template.** The seam most likely to leak. The templates use `with .Params.X` blocks so missing fields silently disappear, which is the right behavior for optional fields (`description`, `meeting_date`, `authority`) but masks typos for required fields. Notably, `notice_type` is collected on every notice and is _not currently rendered anywhere_. It looks like a field that was provisioned for future filtering (different notice types having different treatment) that hasn't been used yet. Either it should start being used or it should be removed; it currently has the shape of an unfinished thought.
+**Frontmatter to template.** The seam most likely to leak. The templates use `with .Params.X` blocks so missing fields silently disappear, which is the right behavior for optional fields (`description`, `meeting_date`, `authority`) but masks typos for required fields. `notice_type` was for a long time the exception — collected on every notice, rendered nowhere, with the shape of an unfinished thought. It is now rendered in `notice-meta.html` (issue #42), which settles the question in favor of the field being real: a notice's type is part of the constitutional record a reader is entitled to see, not internal bookkeeping. The vocabulary lives in `.claude/skills/new-notice/SKILL.md` and the README, and the values are hyphenated, so the template un-hyphenates before title-casing.
 
 **Filename to URL.** The dated-filename convention (`YYYY-MM-DD-slug.md`) is for editor sort order only; the URL comes from an explicit `slug:` in frontmatter via `[permalinks]` in `hugo.toml`. Every dated post pins its own `slug:` (the resolution of the former issue #17), so a title can be reworded without moving the page — the URL is decoupled from the title. The fragility has shifted accordingly: the rule is now _never change a published `slug:`_, since the cross-references in `bylaws.md` and the minutes assume the pinned slug forms. A post that omits `slug:` silently falls back to the title-derived slug, which reintroduces the old coupling.
 
@@ -57,7 +57,7 @@ Easily:
 With moderate work:
 
 - A new section. You add the directory under `content/`, an `_index.md`, a `list.html` in `layouts/<section>/`, optionally a `single.html`, and a permalink rule in `hugo.toml` if the URL shape should drop the date prefix.
-- A new notice type. The `notice_type` value is free-form today; if you wanted to render notices differently by type, the natural place is `notice-meta.html` (currently doesn't use the field) and the notices list template (currently doesn't either).
+- A new notice type. Add it to the vocabulary in `.claude/skills/new-notice/SKILL.md` and the README; `notice-meta.html` renders whatever it is given, so a new value needs no template change. Only treating types _differently_ — distinct styling or filtering per type — would need template work, in `notice-meta.html` and the notices list.
 
 Hard, in a way that would require rethinking:
 
@@ -69,14 +69,12 @@ If a new requirement arrived tomorrow, the right first stop depends on shape: sc
 
 ## Where I am inferring
 
-I am inferring that `notice_type` is provisioned-but-unused rather than load-bearing for something I haven't found; a `grep` over `layouts/` doesn't show it being read, and the notice-meta partial pointedly omits it. It could be intentional reserve metadata, or it could be drift from an earlier template that did use it.
-
 I am inferring that `adopted` and `last_amended` on governance documents are likewise provisioned-but-unused; the README claims governance pages don't render those fields, and the codebase confirms it (issue #16 reportedly tracks this).
 
 I am inferring that the default `_default/list.html` is essentially dead code — every existing section provides its own `list.html`, and the default template's flat `<ul>` would mismatch the site's visual conventions. It survives as a fallback for a hypothetical new section, not as something currently exercised.
 
 I am inferring that the daily cron and the timezone-offset discipline together constitute a single design decision (time-correctness at the build) that is partly procedural — the wrong offset can hide a notice — and partly documentary; the project conventions make that more legible than the code itself does.
 
-I am noting one place where the theory feels slightly under-specified: the notice `expires` field is compared with `lt (time .Params.expires) $now`, where `time` on a YYYY-MM-DD string yields midnight UTC, not midnight local. For a notice that expires the morning after a meeting, this is harmless. For a notice with a tight expiration boundary it would mean the notice rolls into "Expired" several hours before the local end of the day. This may be deliberate; it may be an artifact. I cannot tell from the code alone.
+This used to be under-specified in one place: `expires` is compared with `lt (time .Params.expires) $now`, and `time` on a bare `YYYY-MM-DD` string yielded midnight **UTC**, not midnight Eastern — so a notice rolled into "Expired" four or five hours before the local end of the day, and the boundary depended on nothing the repo stated. That was an artifact, not a decision, and it is resolved: `hugo.toml` now sets `timeZone = "America/New_York"` (issue #33), which is the config-level expression of the same invariant the `date:` offset convention expresses at the content level. Bare dates and offset-bearing dates now agree on what a day is.
 
 Finally: there is no test suite, and the system does not need one in the conventional sense. Correctness is verified by Hugo's parser failing loudly on broken templates, by Prettier/Biome on style, and by human review on prose. The closest thing to a regression check is the PR build in `pages.yml` (build-only, no upload). If you find yourself wanting tests, that is a signal that the system has grown past its current theory — most likely because the schema implicit in the frontmatter conventions has become something that needs to be enforced, not just observed.

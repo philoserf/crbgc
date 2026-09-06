@@ -44,6 +44,7 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ./.prettierrc.json
 ./assets/css/style.css
 ./biome.json
+./Brewfile
 ./CLAUDE.md
 ./content/_index.md
 ./content/governance/_index.md
@@ -55,6 +56,9 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ./content/minutes/2026-06-21-annual-meeting.md
 ./content/news/_index.md
 ./content/news/2026-06-21-club-formally-established.md
+./content/news/2026-08-17-commons-day.md
+./content/news/2026-08-17-dew-sweeper-championship.md
+./content/news/2026-08-17-zen-juice-appreciation-day.md
 ./content/notices/_index.md
 ./content/notices/2026-06-21-2027-annual-meeting.md
 ./hugo.toml
@@ -65,9 +69,11 @@ find . -type f -not -path './node_modules/*' -not -path './public/*' -not -path 
 ./layouts/governance/list.html
 ./layouts/governance/single.html
 ./layouts/index.html
+./layouts/index.llms.txt
 ./layouts/minutes/list.html
 ./layouts/minutes/single.html
 ./layouts/news/list.html
+./layouts/news/single.html
 ./layouts/notices/list.html
 ./layouts/notices/single.html
 ./layouts/partials/governance-meta.html
@@ -102,6 +108,7 @@ cat hugo.toml
 ```output
 baseURL = "https://crbgc.org/"
 title = "The Common & Recent Bogeymens Golf Club"
+timeZone = "America/New_York"
 
 [languages.en]
 locale = "en_US"
@@ -119,11 +126,21 @@ endLevel = 3
 notices = "/notices/:slug/"
 minutes = "/minutes/:slug/"
 news = "/news/:slug/"
+
+[outputFormats.llms]
+mediaType = "text/plain"
+baseName = "llms"
+isPlainText = true
+notAlternative = true
+
+[outputs]
+home = ["html", "rss", "llms"]
 ```
 
-Two non-obvious choices in this file:
+Three non-obvious choices in this file:
 
 - **`disableKinds = ["taxonomy", "term"]`** — Hugo's tag/category system is turned off. The site uses frontmatter fields like `notice_type` and `meeting_type` directly in templates instead. No `/tags/` or `/categories/` pages will be generated.
+- **`timeZone = "America/New_York"`** — Bare dates in frontmatter (`expires`, `meeting_date`, `adopted`, `last_amended`) carry no offset, so without this they would parse as UTC midnight while the rest of the content model assumes US Eastern. The notices list compares `expires` against `now`, so this pins that boundary to Eastern midnight and makes the current/expired split identical locally and in CI.
 - **`[permalinks]`** — Three sections get an explicit `:slug` permalink so their URLs look like `/notices/foo/` instead of `/notices/2026-06-21-foo/`. The `:slug` is the explicit `slug:` field that every dated post pins in its frontmatter (the dated filename is only for editor sort order); a post that omits `slug:` falls back to a title-derived slug. `governance` is intentionally omitted because those pages aren't dated.
 
 ## Content model
@@ -360,7 +377,7 @@ cat layouts/partials/latest.html
 }}
 {{ if $items }}
   <ul class="item-list">
-    {{ range $items }}{{ partial "item-row.html" . }}{{ end }}
+    {{ range $items }}{{ partial "item-row.html" (dict "page" .) }}{{ end }}
   </ul>
 {{ else }}
   <p class="muted">Nothing yet.</p>
@@ -374,16 +391,24 @@ cat layouts/partials/item-row.html
 ```
 
 ```output
+{{ $p := .page }}
 <li>
-  <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-  <span class="item-date">{{ .Date.Format "January 2, 2006" }}</span>
-  {{ with .Description }}
+  <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+  {{ if .badge }}
+    {{ if $p.Params.approved }}
+      <span class="badge approved">Approved</span>
+    {{ else }}
+      <span class="badge draft">Draft</span>
+    {{ end }}
+  {{ end }}
+  <span class="item-date">{{ $p.Date.Format "January 2, 2006" }}</span>
+  {{ with $p.Description }}
     <p class="item-desc">{{ . }}</p>
   {{ end }}
 </li>
 ```
 
-`item-row.html` is reused by every list page so the styling stays consistent: title link, formatted date, optional description. The `with` block silently elides the `<p>` if no description is set.
+`item-row.html` is reused by every list page so the styling stays consistent: title link, optional badge, formatted date, optional description. It takes a dict rather than a page — `(dict "page" .)` from the notices, news, and homepage lists, and `(dict "page" . "badge" true)` from the minutes list, which is the only caller that wants the Approved/Draft badge. The `with` block silently elides the `<p>` if no description is set.
 
 ### Section list templates
 
@@ -414,7 +439,9 @@ cat layouts/notices/list.html
     {{ .Content }}
     {{ if $current }}
       <ul class="item-list">
-        {{ range $current }}{{ partial "item-row.html" . }}{{ end }}
+        {{ range $current }}
+          {{ partial "item-row.html" (dict "page" .) }}
+        {{ end }}
       </ul>
     {{ else }}
       <p class="muted">No current notices.</p>
@@ -422,7 +449,9 @@ cat layouts/notices/list.html
     {{ if $expired }}
       <h2>Expired</h2>
       <ul class="item-list expired">
-        {{ range $expired }}{{ partial "item-row.html" . }}{{ end }}
+        {{ range $expired }}
+          {{ partial "item-row.html" (dict "page" .) }}
+        {{ end }}
       </ul>
     {{ end }}
   </article>
@@ -446,14 +475,7 @@ cat layouts/minutes/list.html
       <h2>{{ .Key }}</h2>
       <ul class="item-list">
         {{ range .Pages.ByDate.Reverse }}
-          <li>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            {{ if .Params.approved }}
-              <span class="badge approved">Approved</span>
-            {{ else }}
-              <span class="badge draft">Draft</span>
-            {{ end }}
-          </li>
+          {{ partial "item-row.html" (dict "page" . "badge" true) }}
         {{ end }}
       </ul>
     {{ end }}
@@ -461,7 +483,7 @@ cat layouts/minutes/list.html
 {{ end }}
 ```
 
-The `(.Pages.GroupByDate "2006").Reverse` chain yields year-grouped slices in descending order, and within each year the posts are again date-reversed. The Approved/Draft badge uses CSS classes defined in the stylesheet.
+The `(.Pages.GroupByDate "2006").Reverse` chain yields year-grouped slices in descending order, and within each year the posts are again date-reversed. Rows go through the shared `item-row.html` with `"badge" true`, so minutes entries show the meeting date and description like every other list, plus the Approved/Draft badge whose CSS classes are defined in the stylesheet.
 
 The **governance** list orders by `weight` and shows the description inline:
 
@@ -500,7 +522,9 @@ cat layouts/news/list.html
     <h1>{{ .Title }}</h1>
     {{ .Content }}
     <ul class="item-list">
-      {{ range .Pages.ByDate.Reverse }}{{ partial "item-row.html" . }}{{ end }}
+      {{ range .Pages.ByDate.Reverse }}
+        {{ partial "item-row.html" (dict "page" .) }}
+      {{ end }}
     </ul>
   </article>
 {{ end }}
@@ -531,7 +555,7 @@ cat layouts/notices/single.html layouts/minutes/single.html
 {{ end }}
 ```
 
-`notice-meta.html` renders the constitutional context — posted date, meeting date, and the bylaw authority:
+`notice-meta.html` renders the constitutional context — posted date, notice type, meeting date, the bylaw authority, and the expiration date that drives the current/expired split on the list page. The type is stored hyphenated (`annual-meeting`), so it is un-hyphenated before `title`-casing:
 
 ```bash
 cat layouts/partials/notice-meta.html
@@ -541,6 +565,10 @@ cat layouts/partials/notice-meta.html
 <dl class="meta">
   <dt>Posted</dt>
   <dd>{{ .Date.Format "January 2, 2006" }}</dd>
+  {{ with .Params.notice_type }}
+    <dt>Type</dt>
+    <dd>{{ title (replace . "-" " ") }}</dd>
+  {{ end }}
   {{ with .Params.meeting_date }}
     <dt>Meeting</dt>
     <dd>{{ (time .).Format "January 2, 2006" }}</dd>
@@ -548,6 +576,10 @@ cat layouts/partials/notice-meta.html
   {{ with .Params.authority }}
     <dt>Required by</dt>
     <dd>{{ . }}</dd>
+  {{ end }}
+  {{ with .Params.expires }}
+    <dt>Expires</dt>
+    <dd>{{ (time .).Format "January 2, 2006" }}</dd>
   {{ end }}
 </dl>
 ```
@@ -599,7 +631,7 @@ cat layouts/partials/minutes-meta.html
 
 Both partials wrap their fields in `with` blocks so missing values silently disappear — there's no "Presiding: " with a blank value. The `delimit` builtin turns YAML lists into comma-separated strings.
 
-News and governance posts use `layouts/_default/single.html` (just `<h1>` + content). And there's a custom 404:
+Every section now ships its own single template — governance and news included, the latter being a plain `<h1>`, a `<time>` line, and the body. `layouts/_default/single.html` is therefore an unreached fallback, kept (and commented as such, like its `list.html` sibling) so a future section renders sensibly before it gets a bespoke template. And there's a custom 404:
 
 ```bash
 cat layouts/404.html
@@ -619,7 +651,7 @@ cat layouts/404.html
 
 ## Styles
 
-A single ~230-line stylesheet defines the whole look. Custom properties drive the palette and measure:
+A single ~320-line stylesheet defines the whole look. Custom properties drive the palette and measure:
 
 ```bash
 sed -n '1,8p' assets/css/style.css
@@ -680,6 +712,12 @@ cat Taskfile.yml
 version: "3"
 
 tasks:
+  setup:
+    desc: Install the toolchain (Brewfile) and JS dependencies
+    cmds:
+      - brew bundle --file=Brewfile
+      - bun install
+
   prettier:
     desc: Format markdown, HTML/Hugo, YAML, TOML, and JSON with Prettier
     cmds:
@@ -736,7 +774,7 @@ cat biome.json
 
 ```output
 {
-  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.8/schema.json",
   "files": {
     "includes": ["assets/**/*.css"]
   },
@@ -748,7 +786,7 @@ cat biome.json
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     }
   }
 }
@@ -788,8 +826,8 @@ cat package.json
   "name": "crbgc",
   "private": true,
   "devDependencies": {
-    "@biomejs/biome": "^2.5.0",
-    "prettier": "^3.8.4",
+    "@biomejs/biome": "^2.5.11",
+    "prettier": "^3.9.6",
     "prettier-plugin-go-template": "^0.0.15",
     "prettier-plugin-toml": "^2.0.6"
   }
@@ -908,7 +946,7 @@ crbgc.org
 Putting it together, here's what happens when you push a new news post to `main`:
 
 1. `pages.yml` triggers on push, checks out the repo, installs the pinned Hugo, runs `hugo --minify --gc`.
-2. Hugo reads `hugo.toml`, walks `content/`, and for each `.md` file picks the section's `single.html` template (or `_default/single.html` for sections without one). Lists use the section's `list.html`; the homepage uses `layouts/index.html`.
+2. Hugo reads `hugo.toml`, walks `content/`, and for each `.md` file picks the section's `single.html` template — every section has one, so the `_default/` pair is a fallback for sections that don't exist yet. Lists use the section's `list.html`; the homepage uses `layouts/index.html`.
 3. Every page renders inside `_default/baseof.html`, which pipes `assets/css/style.css` through `minify | fingerprint` and emits the SRI-protected link.
 4. Markdown content becomes the `.Content` interior; frontmatter populates the meta partials and the badge classes.
 5. The built `public/` is uploaded as a Pages artifact; the deploy job hands it to GitHub Pages, which serves it from `crbgc.org` (via the `CNAME`).
