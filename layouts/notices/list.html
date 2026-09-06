@@ -1,34 +1,21 @@
 {{ define "main" }}
-  {{ $now := now }}
-  {{ $current := slice }}
-  {{ $expired :=
-    slice
-  }}
-  {{ range .Pages.ByDate.Reverse }}
-    {{ if and .Params.expires (lt (time
-      .Params.expires) $now)
-    }}
-      {{ $expired = $expired | append . }}
-    {{ else }}
-      {{ $current = $current | append . }}
-    {{ end }}
-  {{ end }}
+  {{ $n := partial "notices-by-status.html" }}
   <article>
     <h1>{{ .Title }}</h1>
     {{ .Content }}
-    {{ if $current }}
+    {{ if $n.current }}
       <ul class="item-list">
-        {{ range $current }}
+        {{ range $n.current }}
           {{ partial "item-row.html" (dict "page" .) }}
         {{ end }}
       </ul>
     {{ else }}
       <p class="muted">No current notices.</p>
     {{ end }}
-    {{ if $expired }}
+    {{ if $n.expired }}
       <h2>Expired</h2>
       <ul class="item-list expired">
-        {{ range $expired }}
+        {{ range $n.expired }}
           {{ partial "item-row.html" (dict "page" .) }}
         {{ end }}
       </ul>

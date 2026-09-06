@@ -1,0 +1,18 @@
+{{/* Returns (dict "current" ... "expired" ...) — the notices section split on
+  `expires` against now. Renders nothing. Every surface that lists notices must
+  go through this; a listing that re-derives "recent notices" on its own will
+  silently drift back into showing expired ones (issues #36, #38).
+*/}}
+{{- $now := now -}}
+{{- $current := slice -}}
+{{- $expired := slice -}}
+{{- with site.GetPage "/notices" -}}
+  {{- range .RegularPages.ByDate.Reverse -}}
+    {{- if and .Params.expires (lt (time .Params.expires) $now) -}}
+      {{- $expired = $expired | append . -}}
+    {{- else -}}
+      {{- $current = $current | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "current" $current "expired" $expired -}}
