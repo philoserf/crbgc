@@ -19,6 +19,7 @@ The club's informal notes (essays, history surveys, course architecture writing)
 ## Conventions
 
 - Run `task format` before committing.
+- `layouts/index.llms.txt` is excluded from Prettier on purpose — it is plain text where whitespace is the output, and the `go-template` parser mangles it into a broken feed. Do not add it to the formatter globs; edit it by hand and check the rendered `/llms.txt`.
 - YAML frontmatter across all content; TOML only in `hugo.toml`.
 - Dated filenames (`YYYY-MM-DD-slug.md`) for notices, minutes, and news. Every dated post sets an explicit `slug:` in frontmatter to pin its URL — never change a published slug, and never rely on the title-derived fallback.
 - Scaffold new posts with the project skills `/new-notice`, `/new-minutes`, `/new-news` (user-invoked; they compute the Eastern offset) rather than hand-writing frontmatter.
