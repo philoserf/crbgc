@@ -110,14 +110,13 @@ cat hugo.toml
 baseURL = "https://crbgc.org/"
 title = "The Common & Recent Bogeymens Golf Club"
 timeZone = "America/New_York"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
 
 [languages.en]
 locale = "en_US"
 label = "English"
 weight = 1
-
-enableRobotsTXT = true
-disableKinds = ["taxonomy", "term"]
 
 [markup.tableOfContents]
 startLevel = 2
@@ -138,8 +137,9 @@ notAlternative = true
 home = ["html", "rss", "llms"]
 ```
 
-Three non-obvious choices in this file:
+Four non-obvious choices in this file:
 
+- **Key placement** — `enableRobotsTXT`, `disableKinds`, and `timeZone` all sit in the root block, above `[languages.en]`. This is load-bearing, not cosmetic: keys written below a table header belong to that table in TOML, and while `hugo config` reports language-scoped keys at root for a single-language site, `enableRobotsTXT` was silently inert there — the site built no `robots.txt` at all until the key was moved (issue #49).
 - **`disableKinds = ["taxonomy", "term"]`** — Hugo's tag/category system is turned off. The site uses frontmatter fields like `notice_type` and `meeting_type` directly in templates instead. No `/tags/` or `/categories/` pages will be generated.
 - **`timeZone = "America/New_York"`** — Bare dates in frontmatter (`expires`, `meeting_date`, `adopted`, `last_amended`) carry no offset, so without this they would parse as UTC midnight while the rest of the content model assumes US Eastern. The notices list compares `expires` against `now`, so this pins that boundary to Eastern midnight and makes the current/expired split identical locally and in CI.
 - **`[permalinks]`** — Three sections get an explicit `:slug` permalink so their URLs look like `/notices/foo/` instead of `/notices/2026-06-21-foo/`. The `:slug` is the explicit `slug:` field that every dated post pins in its frontmatter (the dated filename is only for editor sort order); a post that omits `slug:` falls back to a title-derived slug. `governance` is intentionally omitted because those pages aren't dated.
@@ -284,11 +284,28 @@ cat layouts/_default/baseof.html
   <body>
     <header>
       <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+      {{ $section := .Section }}
       <nav class="site-nav">
-        <a href="{{ "/notices/" | relURL }}">Notices</a>
-        <a href="{{ "/minutes/" | relURL }}">Minutes</a>
-        <a href="{{ "/news/" | relURL }}">News</a>
-        <a href="{{ "/governance/" | relURL }}">Governance</a>
+        <a
+          href="{{ "/notices/" | relURL }}"
+          {{ if eq $section "notices" }}aria-current="page"{{ end }}
+          >Notices</a
+        >
+        <a
+          href="{{ "/minutes/" | relURL }}"
+          {{ if eq $section "minutes" }}aria-current="page"{{ end }}
+          >Minutes</a
+        >
+        <a
+          href="{{ "/news/" | relURL }}"
+          {{ if eq $section "news" }}aria-current="page"{{ end }}
+          >News</a
+        >
+        <a
+          href="{{ "/governance/" | relURL }}"
+          {{ if eq $section "governance" }}aria-current="page"{{ end }}
+          >Governance</a
+        >
       </nav>
     </header>
     <main>
@@ -309,7 +326,8 @@ Three details worth pointing at:
 
 - **Title strategy** — the homepage gets just the site title; every other page is `<page title> · <site title>`.
 - **CSS pipeline** — `resources.Get "css/style.css" | minify | fingerprint` reads the file from `assets/`, minifies it, and renames it with a content hash. The `integrity` attribute uses the same hash for SRI. New CSS = new URL = cache bust.
-- **Navigation** — four fixed links in the header. There's no h1 in the chrome; the homepage renders no h1 at all by design (the section pages emit their own from the template).
+- **Navigation** — four fixed links in the header, each carrying `aria-current="page"` when `.Section` matches it, so the current section is announced to screen readers and underlined for everyone else (issue #40). `.Section` covers a section's single pages too, so `/governance/bylaws/` marks Governance; it is empty on the homepage and 404, which correctly marks nothing. The four links stay hand-written — their order is editorial, and Hugo sections carry no ordering metadata to derive it from.
+- **No h1 in the chrome** — the homepage renders no h1 at all by design (the section pages emit their own from the template).
 
 ### Homepage
 
