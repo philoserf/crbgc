@@ -753,7 +753,10 @@ tasks:
   prettier:
     desc: Format markdown, HTML/Hugo, YAML, TOML, and JSON with Prettier
     cmds:
-      # Run twice: prettier-plugin-go-template can need a second pass to converge.
+      # Run twice: prettier-plugin-go-template is non-idempotent and can need a
+      # second pass to converge. Upstream is abandoned (no commit since 2023-07-26,
+      # no 1.0 coming), so the version is pinned exact and this pass is permanent.
+      # Prettier 4 breaks the plugin outright — see issue #52.
       - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
       - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
 
@@ -797,7 +800,7 @@ tasks:
 
 Two things stand out:
 
-- **Prettier runs twice.** `prettier-plugin-go-template` (still at `0.0.x`) sometimes needs a second pass to converge on the Hugo template files. [Issue #18](https://github.com/philoserf/crbgc/issues/18) tracks the upstream watch.
+- **Prettier runs twice.** `prettier-plugin-go-template` is non-idempotent and sometimes needs a second pass to converge on the Hugo template files. Upstream was abandoned at `0.0.15`, so the dependency is pinned exact and the second pass is permanent rather than a stopgap. [Issue #52](https://github.com/philoserf/crbgc/issues/52) records what to do when Prettier 4 forces the question.
 - **Format/lint split.** Prettier handles Markdown, HTML/Hugo, YAML, TOML, and JSON. CSS goes to Biome instead — both formats and lints in one call. The split is in `biome.json`:
 
 ```bash
@@ -860,7 +863,7 @@ cat package.json
   "devDependencies": {
     "@biomejs/biome": "^2.5.11",
     "prettier": "^3.9.6",
-    "prettier-plugin-go-template": "^0.0.15",
+    "prettier-plugin-go-template": "0.0.15",
     "prettier-plugin-toml": "^2.0.6"
   }
 }

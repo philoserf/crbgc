@@ -19,6 +19,7 @@ The club's informal notes (essays, history surveys, course architecture writing)
 ## Conventions
 
 - Run `task format` before committing.
+- **Do not bump Prettier past 3.x.** `prettier-plugin-go-template` is pinned exact at `0.0.15` (upstream abandoned 2023). Under Prettier 4 the plugin's printer breaks and Prettier silently falls back to the HTML parser, which mangles every template in `layouts/`. See issue #52. The duplicated `prettier --write` in `Taskfile.yml` is deliberate and permanent — the plugin is non-idempotent.
 - `layouts/index.llms.txt` is excluded from Prettier on purpose — it is plain text where whitespace is the output, and the `go-template` parser mangles it into a broken feed. It is excluded only by the `task prettier` glob (`.{md,html,yml,yaml,toml,json}`); do not widen it. Note `.prettierignore` is a **symlink to `.gitignore`**, so anything added there is also gitignored — never put a formatter-only exclusion in it.
 - YAML frontmatter across all content; TOML only in `hugo.toml`.
 - Dated filenames (`YYYY-MM-DD-slug.md`) for notices, minutes, and news. Every dated post sets an explicit `slug:` in frontmatter to pin its URL — never change a published slug, and never rely on the title-derived fallback.
