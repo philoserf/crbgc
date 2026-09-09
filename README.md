@@ -4,7 +4,7 @@ Hugo site for **The Common & Recent Bogeymens Golf Club** (C&RBGC), a small parl
 
 This repo holds Hugo source for the site. It is **not** the authoritative copy of the bylaws or rules — the governance documents render here, but their adoption history lives in [minutes](https://crbgc.org/minutes/). Amendments are recorded by editing the document and noting the vote in the meeting minutes.
 
-For a linear tour of the code — configuration, content model, templates, build, and deploy — see [walkthrough.md](./walkthrough.md). For a theory of the codebase in Peter Naur's sense — the domain model, the load-bearing abstractions, the seams, and what kinds of change the system is shaped to accommodate — see [theory.md](./theory.md).
+For a linear tour of the code — configuration, content model, templates, build, and deploy — see [WALKTHROUGH.md](./WALKTHROUGH.md). For a theory of the codebase in Peter Naur's sense — the domain model, the load-bearing abstractions, the seams, and what kinds of change the system is shaped to accommodate — see [THEORY.md](./THEORY.md).
 
 ## Site structure
 

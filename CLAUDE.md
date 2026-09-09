@@ -8,7 +8,7 @@ Hugo-built static site for the Common & Recent Bogeymens Golf Club (C&RBGC), hos
 
 This repo is not the authoritative copy of the governance documents — they render here, but adoption history lives in the meeting minutes. Amending bylaws or standing rules means editing the document, bumping `last_amended` in its frontmatter, and recording the vote in the minutes.
 
-Two onboarding docs at the repo root: `walkthrough.md` (linear code tour) and `theory.md` (domain model and load-bearing abstractions). Keep them current when structure changes.
+Two onboarding docs at the repo root: `WALKTHROUGH.md` (linear code tour) and `THEORY.md` (domain model and load-bearing abstractions). Keep them current when structure changes.
 
 The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
 
