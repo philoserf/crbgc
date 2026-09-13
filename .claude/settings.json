@@ -2,7 +2,6 @@
   "permissions": {
     "allow": [
       "Bash(git fetch)",
-      "Bash(git fetch *)",
       "Bash(gh search *)",
       "Bash(defuddle parse *)",
       "Bash(task check)",
