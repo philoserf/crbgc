@@ -702,7 +702,7 @@ sed -n '1,8p' assets/css/style.css
   /* Letterpress palette — light mode */
 ```
 
-Green accent for a golf club. `--measure: 38rem` constrains the readable column width and is applied to `header`, `main`, and `footer`.
+Near-black on white, not a club colour — `--color-accent` holds the same `#09090b` as the foreground, so there is no accent hue to speak of; the greys are derived from the two base tokens with `oklch(from …)`. `--measure: 45rem` constrains the readable column width and is applied to `header`, `main`, and `footer`.
 
 The badge classes that the minutes list uses:
 
