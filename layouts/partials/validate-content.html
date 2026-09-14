@@ -1,0 +1,30 @@
+{{/* Fails the build on a dated post that breaks a URL or expiry invariant.
+  Renders nothing. Called once per build via partialCached from baseof.html.
+  These rules were previously enforced only by the new-* skills at creation
+  time, which cannot catch a hand-written file or an edit made in review
+  (issues #56, #61).
+*/}}
+{{- range $section := slice "notices" "minutes" "news" -}}
+  {{- $seen := dict -}}
+  {{- with site.GetPage (printf "/%s" $section) -}}
+    {{- range .RegularPages -}}
+      {{- $file := .File.Path -}}
+      {{/* #56: an explicit slug pins the URL against a retitle. */}}
+      {{- if not .Params.slug -}}
+        {{- errorf "%s: dated post has no slug: — its URL would follow its title" $file -}}
+      {{- else -}}
+        {{- $slug := .Params.slug -}}
+        {{- with index $seen $slug -}}
+          {{- errorf "%s: slug %q is already pinned by %s" $file $slug . -}}
+        {{- end -}}
+        {{- $seen = merge $seen (dict $slug $file) -}}
+      {{- end -}}
+      {{/* #61: expires is the first day hidden, so it must clear the meeting. */}}
+      {{- if and .Params.expires .Params.meeting_date -}}
+        {{- if not (gt (time .Params.expires) (time .Params.meeting_date)) -}}
+          {{- errorf "%s: expires %s is not after meeting_date %s — expires is the first day the notice is hidden" $file .Params.expires .Params.meeting_date -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

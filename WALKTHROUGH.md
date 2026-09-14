@@ -255,6 +255,7 @@ cat layouts/_default/baseof.html
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}">
   <head>
+    {{- partialCached "validate-content.html" . -}}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
@@ -322,11 +323,12 @@ cat layouts/_default/baseof.html
 </html>
 ```
 
-Three details worth pointing at:
+Five details worth pointing at:
 
 - **Title strategy** — the homepage gets just the site title; every other page is `<page title> · <site title>`.
 - **CSS pipeline** — `resources.Get "css/style.css" | minify | fingerprint` reads the file from `assets/`, minifies it, and renames it with a content hash. The `integrity` attribute uses the same hash for SRI. New CSS = new URL = cache bust.
 - **Navigation** — four fixed links in the header, each carrying `aria-current="page"` when `.Section` matches it, so the current section is announced to screen readers and underlined for everyone else (issue #40). `.Section` covers a section's single pages too, so `/governance/bylaws/` marks Governance; it is empty on the homepage and 404, which correctly marks nothing. The four links stay hand-written — their order is editorial, and Hugo sections carry no ordering metadata to derive it from.
+- **Build-time validation** — the first thing in `<head>` is `partialCached "validate-content.html"`, which renders nothing and runs once per build. It errors if a dated post is missing a `slug:`, if two posts in one section pin the same one, or if a notice's `expires` is not after its `meeting_date` (issues #56, #61). `errorf` fails the build, so the PR build in `pages.yml` is the gate.
 - **No h1 in the chrome** — the homepage renders no h1 at all by design (the section pages emit their own from the template).
 
 ### Homepage

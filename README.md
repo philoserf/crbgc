@@ -28,7 +28,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
 - **Prettier** formats Markdown, HTML/Hugo templates, YAML, TOML, and JSON. **Biome** formats and lints CSS. Run `task format` before committing.
 - **`layouts/index.llms.txt` is deliberately unformatted.** It is a plain-text template where whitespace is the output, and Prettier's `go-template` parser treats it as HTML — it splits Markdown headings from their text and collapses list items into a broken feed. It is excluded because the `task prettier` glob covers only `.{md,html,yml,yaml,toml,json}`; the exclusion cannot go in `.prettierignore`, which is a symlink to `.gitignore`, so an entry there would also stop git tracking the file. **Do not widen the glob.** Edit it by hand and check the rendered `/llms.txt`.
 - **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor.
-- **Explicit `slug:`** in every dated post's frontmatter pins its URL. Without it, Hugo falls back to a title-derived value, and retitling a post would silently change its URL and break inter-content links.
+- **Explicit `slug:`** in every dated post's frontmatter pins its URL, and must be unique within its section. Without it, Hugo falls back to a title-derived value, and retitling a post would silently change its URL and break inter-content links. Both rules are checked in `layouts/partials/validate-content.html` and fail the build.
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
 - **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
@@ -36,7 +36,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
 
 ### A meeting notice
 
-1. Create `content/notices/YYYY-MM-DD-slug.md` (date prefix is for editor sort order; the URL uses the title slug).
+1. Create `content/notices/YYYY-MM-DD-slug.md` (date prefix is for editor sort order; the URL comes from the `slug:` field).
 2. Required frontmatter:
    ```yaml
    ---
@@ -45,12 +45,13 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
    description: "…"
    date: 2026-06-01T09:00:00-05:00 # when posted
    meeting_date: 2026-06-15
-   expires: 2026-06-16
+   expires: 2026-06-16 # first day hidden — the day after meeting_date
    notice_type: annual-meeting # or special-meeting | previous-notice | bylaw-amendment
    authority: "Article V, Section 1" # the bylaw provision requiring this notice
    ---
    ```
-3. Notices listed past their `expires` date move under the "Expired" heading on the section page, and drop off the homepage and `llms.txt`. The split is computed once in `layouts/partials/notices-by-status.html`; anything that lists notices must read from it rather than querying the section directly.
+3. **`expires` is the first day the notice is hidden**, not the last day it is shown. Set it to the day after `meeting_date` so the notice stays up through the meeting it announces; the build fails if `expires` does not fall after `meeting_date`.
+4. On and after `expires`, the notice moves under the "Expired" heading on the section page and drops off the homepage and `llms.txt`. The split is computed once in `layouts/partials/notices-by-status.html`; anything that lists notices must read from it rather than querying the section directly.
 
 ### Meeting minutes
 
