@@ -1,8 +1,6 @@
 ---
 title: Standing Rules
 description: Standing Rules of the Common & Recent Bogeymens Golf Club, adopted under Article VII of the Bylaws.
-created: 2026-05-25
-lastmod: 2026-06-18
 adopted: 2026-06-21
 last_amended: 2026-06-21
 weight: 20
