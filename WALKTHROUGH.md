@@ -901,13 +901,13 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  HUGO_VERSION: 0.161.1
+  HUGO_VERSION: latest
 
 jobs:
   build:
 ```
 
-Four triggers — push to main, pull requests (build-only, no deploy), a daily cron, and manual dispatch. The cron exists so that future-dated content (events announced with a `date:` in the future) rolls into production after that date passes. The Hugo version is pinned via `HUGO_VERSION`.
+Four triggers — push to main, pull requests (build-only, no deploy), a daily cron, and manual dispatch. The cron exists so that future-dated content (events announced with a `date:` in the future) rolls into production after that date passes. Hugo deliberately floats: `HUGO_VERSION: latest` tracks upstream releases, matching the unpinned `brew "hugo"` in the `Brewfile`.
 
 The build job:
 
@@ -921,7 +921,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v3
@@ -947,7 +947,7 @@ jobs:
 The Hugo build runs the same `hugo --minify --gc` that `task build` runs locally. The artifact is only uploaded when it's not a pull-request event — PRs validate the build without producing a deployable artifact. The deploy job:
 
 ```bash
-sed -n '51,65p' .github/workflows/pages.yml
+sed -n '51,63p' .github/workflows/pages.yml
 ```
 
 ```output
@@ -963,7 +963,7 @@ sed -n '51,65p' .github/workflows/pages.yml
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 ```
 
 Deploy only runs from `main`, never from PRs or other branches. The `github-pages` environment with `pages: write` and `id-token: write` permissions is what GitHub Pages requires for the OIDC-based artifact handoff.
@@ -982,7 +982,7 @@ crbgc.org
 
 Putting it together, here's what happens when you push a new news post to `main`:
 
-1. `pages.yml` triggers on push, checks out the repo, installs the pinned Hugo, runs `hugo --minify --gc`.
+1. `pages.yml` triggers on push, checks out the repo, installs the current Hugo, runs `hugo --minify --gc`.
 2. Hugo reads `hugo.toml`, walks `content/`, and for each `.md` file picks the section's `single.html` template — every section has one, so the `_default/` pair is a fallback for sections that don't exist yet. Lists use the section's `list.html`; the homepage uses `layouts/index.html`.
 3. Every page renders inside `_default/baseof.html`, which pipes `assets/css/style.css` through `minify | fingerprint` and emits the SRI-protected link.
 4. Markdown content becomes the `.Content` interior; frontmatter populates the meta partials and the badge classes.
