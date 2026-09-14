@@ -20,7 +20,7 @@ assets/css/style.css              # site styles (Biome-managed)
 hugo.toml                         # config: permalinks, disabled kinds, locale
 ```
 
-Each section under `content/` has an `_index.md` (the list page) and dated posts. Hugo emits `/<section>/index.xml` RSS feeds automatically.
+Each section under `content/` has an `_index.md` (the list page) and dated posts. Feeds: `/index.xml` is the site feed, rendered by `layouts/home.rss.xml` — every dated post, newest first, and nothing atemporal. `news` and `minutes` keep Hugo's built-in section feed. `governance` emits no feed (the documents carry no dates) and neither does `notices` (a feed cannot both be an archive and hide expired notices, so the surface was dropped rather than made wrong); both set `outputs: ["html"]` in their `_index.md`. A feed is an archive — items are never removed from one.
 
 ## Conventions
 
