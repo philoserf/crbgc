@@ -1,9 +1,26 @@
-{{/* Fails the build on a dated post that breaks a URL or expiry invariant.
+{{/* Fails the build on content that breaks a URL, expiry, or link invariant.
   Renders nothing. Called once per build via partialCached from baseof.html.
   These rules were previously enforced only by the new-* skills at creation
   time, which cannot catch a hand-written file or an edit made in review
   (issues #56, #61).
 */}}
+{{/* Obsidian wikilinks do not fail — Goldmark renders [[Target]] as literal
+  brackets, so the build exits 0 and the page publishes with visible markup.
+  The notes arrived from an Obsidian vault and 227 wikilinks were converted on
+  import; anything editing this content in Obsidian will offer to put them
+  back, and neither of Obsidian's link modes can produce a working link here,
+  because URLs come from `slug:` rather than from filenames. Checked across
+  every page with a file, not just the dated sections, so it also covers
+  governance documents and section _index.md files. Frontmatter is out of
+  scope: RawContent excludes it.
+*/}}
+{{- range site.Pages -}}
+  {{- if .File -}}
+    {{- if strings.Contains .RawContent "[[" -}}
+      {{- errorf "%s: contains an Obsidian wikilink ([[...]]) — Hugo publishes these as literal brackets. Write a root-relative link instead, e.g. [Label](/notes/some-slug/)." .File.Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- range $section := slice "notices" "minutes" "news" "notes" -}}
   {{- $seen := dict -}}
   {{- with site.GetPage (printf "/%s" $section) -}}
