@@ -6,17 +6,15 @@ adopted: 2026-06-21
 last_amended: 2026-06-21
 ---
 
-## Bylaws
-
-### Article I — Name
+## Article I — Name
 
 The name of this organization shall be **The Common & Recent Bogeymens Golf Club** (the "Club"), which may also be referred to as the "C&RBGC" or the "C&R."
 
-### Article II — Object
+## Article II — Object
 
 The Object of the Club shall be to promote the ancient art of taking a pleasant walk on agreeable lawns in the company of friends, occasionally interrupted by the striking of small white balls toward distant holes.
 
-### Article III — Members
+## Article III — Members
 
 **Section 1. Classes.** The Club shall have two classes of members: Charter Members and Members. Each is a "Member" for purposes of these Bylaws.
 
@@ -32,7 +30,7 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 7. Dues.** Dues, if any, shall be established and altered by Standing Rule. No dues are required as of the date of these Bylaws.
 
-### Article IV — Officers
+## Article IV — Officers
 
 **Section 1. Officers.** The officers of the Club shall be a **Captain** and a **Secretary-Treasurer**.
 
@@ -48,7 +46,7 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 7. Removal.** An officer may be removed from office, with or without cause, by the vote required for amendment of these Bylaws.
 
-### Article V — Meetings
+## Article V — Meetings
 
 **Section 1. Annual Meeting.** The Club shall hold one regular meeting in each calendar year, designated the **Annual Meeting**, at such time and place as the Captain may determine, on not less than fourteen (14) days' written notice to all Members.
 
@@ -58,11 +56,11 @@ The Object of the Club shall be to promote the ancient art of taking a pleasant 
 
 **Section 4. Quorum.** A quorum for the transaction of business shall consist of all Charter Members then living. No business may be transacted in the absence of a quorum.
 
-### Article VI — Parliamentary Authority
+## Article VI — Parliamentary Authority
 
 The rules contained in the current edition of _Robert's Rules of Order Newly Revised_ shall govern the Club in all cases to which they are applicable and in which they are not inconsistent with these Bylaws or any Standing Rules the Club may adopt.
 
-### Article VII — Standing Rules
+## Article VII — Standing Rules
 
 **Section 1. Authority.** The Club may adopt Standing Rules to govern the conduct of play, course etiquette, scoring, dues, and other administrative and operational matters. The Club's Standing Rules are maintained in the document titled [Standing Rules](/governance/standing-rules/).
 
@@ -70,7 +68,7 @@ The rules contained in the current edition of _Robert's Rules of Order Newly Rev
 
 **Section 3. Limitation.** No Standing Rule may conflict with these Bylaws. In any conflict, these Bylaws shall control.
 
-### Article VIII — Amendment of Bylaws
+## Article VIII — Amendment of Bylaws
 
 **Section 1. Notice.** Any proposed amendment to these Bylaws shall be submitted in writing to all Members not less than thirty (30) days before the meeting at which it is to be considered. The notice shall identify the article and section affected and shall set forth both the current text and the proposed text.
 
@@ -80,6 +78,6 @@ The rules contained in the current edition of _Robert's Rules of Order Newly Rev
 
 **Section 4. Record.** The vote on any proposed amendment shall be recorded in the minutes by the name of each Member voting and the manner of the vote.
 
-### Adoption
+## Adoption
 
 These Bylaws were adopted by the Charter Members on **June 21, 2026**, and supersede all prior bylaws of the Club.
