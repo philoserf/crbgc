@@ -38,6 +38,15 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
 
+      # Runs on pull requests too, and before the real build, so a content
+      # invariant break fails the PR rather than the unattended cron deploy.
+      # --buildFuture is load-bearing: validate-content.html iterates
+      # .RegularPages, which excludes future-dated posts from a default build,
+      # so without it a notice or minutes drafted ahead of time is unchecked
+      # until the day it publishes.
+      - name: Validate content
+        run: hugo --buildFuture --renderToMemory --gc
+
       - name: Build
         run: hugo --minify --gc
 
