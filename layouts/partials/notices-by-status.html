@@ -1,7 +1,11 @@
 {{/* Returns (dict "current" ... "expired" ...) — the notices section split on
-  `expires` against now. Renders nothing. Every surface that lists notices must
-  go through this; a listing that re-derives "recent notices" on its own will
-  silently drift back into showing expired ones (issues #36, #38).
+  `expires` against now. Renders nothing. Every *listing* must go through this;
+  a listing that re-derives "recent notices" on its own will silently drift back
+  into showing expired ones (issues #36, #38).
+  Feeds are the exception: a feed is an archive and items are never removed from
+  one, which is why the notices section feed was dropped (#55) rather than
+  filtered, and why `home.rss.xml` selects dated pages directly and keeps
+  expired notices. See the Feeds note in README.md, which is the authority (#80).
 */}}
 {{- $now := now -}}
 {{- $current := slice -}}

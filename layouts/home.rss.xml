@@ -13,6 +13,13 @@ Two changes from the embedded template, and no others:
      is set, so this emits the same channel the embedded template does. Set
      either one and this template must grow the branch back.
 
+Notices appear here with no expiry test, and that is deliberate. The listing rule
+— every notices listing goes through notices-by-status.html — does not reach a
+feed: a feed is an archive and items are never removed from one, which is why the
+notices *section* feed was dropped (#55) rather than filtered. README's Feeds note
+is the authority; this paragraph exists so a reader arriving here from the rule
+does not read it as a bug (#80).
+
 `[services.rss] limit` still applies. RSS is not a plain-text output format, so
 this runs through html/template: the prolog needs `safeHTML` and the summary
 needs `transform.XMLEscape | safeHTML`, or the feed is mangled. This file is

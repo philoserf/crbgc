@@ -43,7 +43,7 @@ One open editorial question, recorded so it is not mistaken for an oversight: `c
 - Dated filenames (`YYYY-MM-DD-slug.md`) for notices, minutes, and news. Every dated post sets an explicit `slug:` in frontmatter to pin its URL — never change a published slug, and never rely on the title-derived fallback.
 - Scaffold new posts with the project skills `/new-notice`, `/new-minutes`, `/new-news` (user-invoked; they compute the Eastern offset) rather than hand-writing frontmatter.
 - Content `date` fields use US Eastern offsets (`-04:00` in summer, `-05:00` in winter). A wrong offset can hide a post from production builds.
-- Anything that lists notices goes through `layouts/partials/notices-by-status.html`, which returns the section split into `current` and `expired`. Never query the notices section directly for a listing — a naive "most recent N" silently shows expired notices, which is how issues #36 and #38 arose.
+- Anything that _lists_ notices goes through `layouts/partials/notices-by-status.html`, which returns the section split into `current` and `expired`. Never query the notices section directly for a listing — a naive "most recent N" silently shows expired notices, which is how issues #36 and #38 arose. The site feed is the documented exception: it is an archive rather than a listing, so `home.rss.xml` queries the section directly and keeps expired notices. See the Feeds note in README.
 - No taxonomies. `notice_type` and `meeting_type` are frontmatter fields, queried directly in templates.
 - `<abbr>` HTML tags in content (e.g., C&RBGC tooltips) are intentional.
 - Frontmatter conventions for each content type are documented in the project README.
