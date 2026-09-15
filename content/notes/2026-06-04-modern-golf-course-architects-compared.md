@@ -2,7 +2,7 @@
 title: "Modern Golf Course Architects Compared"
 slug: modern-golf-course-architects-compared
 description: "Contrasts Dye, Fazio, Nicklaus, and Palmer with Coore-Crenshaw and Doak across earthmoving, strategy, and design philosophy."
-date: 2026-06-04T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

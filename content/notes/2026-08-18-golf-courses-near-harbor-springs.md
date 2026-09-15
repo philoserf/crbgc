@@ -2,7 +2,7 @@
 title: "Golf Courses Near Harbor Springs"
 slug: golf-courses-near-harbor-springs
 description: "A ranked comparison of the Harbor Springs–area courses in Michigan's northwest Lower Peninsula."
-date: 2026-08-18T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

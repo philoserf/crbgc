@@ -2,9 +2,8 @@
 title: "Hickory Golf Starter Guide"
 slug: hickory-golf-starter-guide
 description: "Step-by-step guide to buying first hickory clubs, balls, and joining play organizations with a minimal viable setup."
-date: 2026-05-23T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-04
-draft: true
 tags:
   - beginner-guide
   - golf-equipment

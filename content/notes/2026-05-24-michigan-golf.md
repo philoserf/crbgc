@@ -2,7 +2,7 @@
 title: "Michigan Golf"
 slug: michigan-golf
 description: "Why Michigan's glacial landforms make it an underrated golf destination, with Golfweek's top-20 ranking as the evidence."
-date: 2026-05-24T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

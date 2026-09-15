@@ -2,7 +2,7 @@
 title: "The Backup Club Effect"
 slug: the-backup-club-effect
 description: "How golfers cycle between clubs via selective memory, and what that reveals about a general bias toward the absent tool over the present one."
-date: 2026-08-03T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

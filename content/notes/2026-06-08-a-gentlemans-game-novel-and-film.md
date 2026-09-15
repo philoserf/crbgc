@@ -2,7 +2,7 @@
 title: "A Gentleman's Game Novel and Film"
 slug: a-gentlemans-game-novel-and-film
 description: "Tom Coyne's 2001 novel and its little-seen film adaptation dissect country-club hypocrisy through a caddie's coming-of-age."
-date: 2026-06-08T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

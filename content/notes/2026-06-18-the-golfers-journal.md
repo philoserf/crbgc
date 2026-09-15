@@ -2,9 +2,8 @@
 title: "The Golfer's Journal"
 slug: the-golfers-journal
 description: "Note on The Golfer's Journal — the member-supported quarterly of long-form golf writing and photography, and its Broken Tee Society community."
-date: 2026-06-18T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - golf-media
   - golf-writing

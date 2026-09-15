@@ -2,7 +2,7 @@
 title: "Hickory Era Golf Writing Survey"
 slug: hickory-era-golf-writing-survey
 description: "Survey of literary golf writing from the hickory shaft era, covering key journalists, instructional authors, and essayists across Britain and America."
-date: 2026-05-26T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

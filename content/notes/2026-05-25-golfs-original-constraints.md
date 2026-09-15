@@ -2,9 +2,8 @@
 title: "Golf's Original Constraints"
 slug: golfs-original-constraints
 description: "Early golf's rules and tools created difficulty and richness, while modern innovations erode the game's vernacular origins."
-date: 2026-05-25T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - constraints
   - game-design

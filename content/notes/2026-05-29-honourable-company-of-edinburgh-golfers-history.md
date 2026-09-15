@@ -2,9 +2,8 @@
 title: "Honourable Company of Edinburgh Golfers History"
 slug: honourable-company-of-edinburgh-golfers-history
 description: "Traces the governance evolution of the world's oldest golf club from its 1744 founding at Leith to Muirfield."
-date: 2026-05-29T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - edinburgh
   - golf-history

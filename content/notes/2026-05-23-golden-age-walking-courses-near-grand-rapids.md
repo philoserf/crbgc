@@ -2,7 +2,7 @@
 title: "Golden Age Walking Courses Near Grand Rapids"
 slug: golden-age-walking-courses-near-grand-rapids
 description: "Force-ranked list of minimalist/Golden Age walking courses within ~6 hours of Grand Rapids, with drive times and ferry logistics."
-date: 2026-05-23T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

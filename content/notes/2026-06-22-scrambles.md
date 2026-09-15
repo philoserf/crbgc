@@ -2,7 +2,7 @@
 title: "Scrambles"
 slug: scrambles
 description: "The Club's position on the scramble—affectionate disdain for the format, genuine respect for its everyman social availability."
-date: 2026-06-22T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-04
 draft: true
 tags:

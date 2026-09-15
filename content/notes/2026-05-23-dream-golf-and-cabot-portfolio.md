@@ -2,9 +2,8 @@
 title: "Dream Golf & Cabot Portfolio"
 slug: dream-golf-and-cabot-portfolio
 description: "Complete property listing for Mike Keiser's Dream Golf and Cabot Collection, including courses, architects, and dates."
-date: 2026-05-23T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-04
-draft: true
 tags:
   - cabot-collection
   - dream-golf
