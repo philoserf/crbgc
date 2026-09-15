@@ -9,6 +9,7 @@ disableKinds = ["taxonomy", "term"]
 notices = "/notices/:slug/"
 minutes = "/minutes/:slug/"
 news = "/news/:slug/"
+notes = "/notes/:slug/"
 
 [outputFormats.llms]
 mediaType = "text/plain"
