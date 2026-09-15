@@ -15,6 +15,26 @@
     {{ with .Description }}
       <meta name="description" content="{{ . }}" />
     {{ end }}
+    {{/* Canonical and Open Graph (#66). The site exists to be cited — bylaws
+      and notices linked from minutes and from the notes, and pasted into chat
+      — so a link preview should come from the page rather than from whatever
+      the client scrapes. Every content file already carries a description, so
+      the data was already here; only the tags were missing. No og:image: no
+      image asset exists, and adding one was out of scope.
+      Both values are computed into variables first. Prettier's go-template
+      plugin reflows an inline if/else onto its own lines, which is harmless in
+      <title> but would put newlines inside a content="…" attribute.
+    */}}
+    {{ $ogType := cond .IsHome "website" "article" }}
+    {{ $ogTitle := cond .IsHome .Site.Title .Title }}
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <meta property="og:type" content="{{ $ogType }}" />
+    <meta property="og:title" content="{{ $ogTitle }}" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    {{ with .Description }}
+      <meta property="og:description" content="{{ . }}" />
+    {{ end }}
     {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
     <link
       rel="stylesheet"

@@ -32,6 +32,7 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
   from the heading text, so retitling a heading would silently send them to the top of the
   page. The build fails when a `](/path#fragment)` link names an anchor the target page does
   not have.
+- **`description:` feeds the link preview.** It renders as both `meta name="description"` and `og:description`. Every content file carries one; a page without one still builds, and simply publishes with no preview text. Nothing enforces it.
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
 - **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
