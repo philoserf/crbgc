@@ -4,7 +4,6 @@ slug: society-of-hickory-golfers
 description: "Kindred-club note on the Society of Hickory Golfers — the take-the-bit-seriously society closest to the C&RBGC's own register."
 date: 2026-06-18T09:00:00-04:00
 lastmod: 2026-08-04
-draft: true
 tags:
   - golf-organizations
   - hickory-golf

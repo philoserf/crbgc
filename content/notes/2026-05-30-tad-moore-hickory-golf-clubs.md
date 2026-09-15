@@ -4,7 +4,6 @@ slug: tad-moore-hickory-golf-clubs
 description: "Overview of Tad Moore Golf's hickory-shafted club reproductions, their craft, niche market, and role in competitive hickory golf."
 date: 2026-05-30T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - club-making
   - golf-equipment

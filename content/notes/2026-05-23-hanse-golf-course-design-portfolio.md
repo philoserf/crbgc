@@ -4,7 +4,6 @@ slug: hanse-golf-course-design-portfolio
 description: "Comprehensive catalog of Gil Hanse's original designs, restorations, and renovations from 1992 to present."
 date: 2026-05-23T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - architecture
   - gil-hanse

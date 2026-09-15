@@ -4,7 +4,6 @@ slug: society-of-hickory-golfers-overview
 description: "Overview of the Society of Hickory Golfers: its origins, equipment guidelines, replica club debate, and U.S. Hickory Open."
 date: 2026-05-30T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - equipment-standards
   - golf-history

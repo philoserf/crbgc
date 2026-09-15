@@ -4,7 +4,6 @@ slug: scottish-golf-in-the-regency-era
 description: "Overview of Scottish golf clubs, course layouts, social culture, and institutional decline during the Regency period (c. 1811–1820)."
 date: 2026-05-24T09:00:00-04:00
 lastmod: 2026-08-07
-draft: true
 tags:
   - golf-clubs
   - golf-history
