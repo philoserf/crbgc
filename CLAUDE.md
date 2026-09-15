@@ -49,4 +49,4 @@ One open editorial question, recorded so it is not mistaken for an oversight: `c
 - Frontmatter conventions for each content type are documented in the project README.
 - Keep the copyright year range in `layouts/_default/baseof.html` current.
 - The homepage intentionally has no `h1` — a design choice, reaffirmed 2026-05-26. Do not flag it as an accessibility or SEO issue or try to restore one.
-- CI (`pages.yml`) is the build verifier — push and watch it rather than running routine local production builds. When a local build is needed, run `rm -rf public && task build`; Hugo does not prune stale artifacts from `public/`.
+- CI (`pages.yml`) is the build and formatter verifier — it runs the two `task check` commands and both Hugo passes on every push and pull request. Push and watch it rather than running routine local production builds. When a local build is needed, run `rm -rf public && task build`; Hugo does not prune stale artifacts from `public/`.

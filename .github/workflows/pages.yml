@@ -38,17 +38,39 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
 
+      # README names `task check` as the thing to run before opening a PR, and
+      # until now nothing ran it — which made Biome advisory. It is not
+      # redundant with Prettier: Prettier's CSS output is byte-identical to
+      # Biome's here, but Biome also lints, and on a hand-written stylesheet
+      # using relative oklch() that lint is the point (#87).
+      # The two commands are the two `task check` runs, verbatim, rather than
+      # installing go-task in CI for two lines. First step in the job: failing
+      # on whitespace should not cost a Hugo build.
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Check formatting and lint
+        run: |
+          bun install --frozen-lockfile
+          bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
+          bunx biome check assets
+
       # Runs on pull requests too, and before the real build, so a content
       # invariant break fails the PR rather than the unattended cron deploy.
       # Both flags are load-bearing: validate-content.html iterates
       # .RegularPages, which excludes future-dated posts (--buildFuture) and
       # drafts (-D) from a default build, so without them a post written ahead
       # of time is unchecked until the day it publishes.
+      # --panicOnWarning on both: Hugo warnings are advisory by default, so a
+      # template lookup failure publishes a broken section and still exits 0.
+      # It is on Validate too because that step is the one that sees drafts and
+      # future-dated posts, where a warning should fail the PR rather than the
+      # day the post publishes.
       - name: Validate content
-        run: hugo --buildFuture -D --renderToMemory --gc
+        run: hugo --buildFuture -D --renderToMemory --gc --panicOnWarning
 
       - name: Build
-        run: hugo --minify --gc
+        run: hugo --minify --gc --panicOnWarning
 
       - name: Upload artifact
         if: github.event_name != 'pull_request'
