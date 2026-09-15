@@ -43,6 +43,11 @@
           >News</a
         >
         <a
+          href="{{ "/notes/" | relURL }}"
+          {{ if eq $section "notes" }}aria-current="page"{{ end }}
+          >Notes</a
+        >
+        <a
           href="{{ "/governance/" | relURL }}"
           {{ if eq $section "governance" }}aria-current="page"{{ end }}
           >Governance</a
