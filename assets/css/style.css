@@ -1,8 +1,16 @@
-/* Matches the stock Flowershow "letterpress" theme used by the notes site
-   (crbgc-philoserf.flowershow.me): Nata Sans body, Fraunces serif headings at
-   normal weight, a white / near-black palette with oklch-derived grays, and the
+/* Palette and treatments mirror the stock Flowershow "letterpress" theme used
+   by the notes site (crbgc-philoserf.flowershow.me): a white / near-black
+   palette with oklch-derived grays, serif headings at normal weight, and the
    theme's link / blockquote / rule / code treatments. Tokens mirror the theme's
-   light-mode values so the two sites read as one. */
+   light-mode values.
+
+   Typefaces deliberately do NOT match. The theme's Nata Sans and Fraunces were
+   served from Google Fonts — the site's only third-party runtime dependency and
+   the only asset without subresource integrity (issue #62). They were dropped
+   for the system stack, so the two sites no longer share a typeface; everything
+   else about the palette still lines up. A side benefit: the system stack has
+   real italics, where Nata Sans has none published and blockquote / .muted /
+   <em> were being synthesized by the browser. */
 
 :root {
   /* Letterpress palette — light mode */
@@ -26,10 +34,9 @@
   --rule: var(--fg-100);
 
   --font-body:
-    "Nata Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    "Helvetica Neue", Arial, sans-serif;
-  --font-heading:
-    "Fraunces", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-heading: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, sfmono-regular, Menlo, Consolas, monospace;
 
   /* Modular scale: base 1.125rem, minor third (1.2) */

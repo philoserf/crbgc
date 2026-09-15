@@ -15,12 +15,6 @@
     {{ with .Description }}
       <meta name="description" content="{{ . }}" />
     {{ end }}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Nata+Sans:wght@400;700&display=swap"
-    />
     {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
     <link
       rel="stylesheet"
