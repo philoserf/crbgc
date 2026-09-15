@@ -12,6 +12,6 @@ At the [2026 Annual Meeting](/minutes/minutes-2026-annual-meeting/) the Members 
 The Club keeps two homes online, and the line between them is deliberate:
 
 - **[crbgc.org](https://crbgc.org/)** — this site — is the formal record: bylaws, standing rules, notices, and minutes.
-- **The notes** are the informal side: essays, course writing, and history, where the Club thinks out loud.
+- **[The notes](/notes/)** are the informal side: essays, course writing, and history, where the Club thinks out loud.
 
 The [2027 Annual Meeting](/notices/notice-of-2027-annual-meeting/) is set for the next Summer Solstice — Monday, June 21, 2027 — at Forest Dunes Golf Club in Roscommon, Michigan.
