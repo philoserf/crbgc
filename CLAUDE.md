@@ -12,9 +12,15 @@ This repo is not the authoritative copy of the governance documents — they ren
 
 The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
 
-## Related: the notes site
+## Related: the notes
 
-The club's informal notes (essays, history surveys, course architecture writing) live in the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)) and publish via Flowershow at <https://crbgc-philoserf.flowershow.me>. This repo (`crbgc/`) is the formal/governance side — bylaws, minutes, notices, news; the notes site is the personal/editorial side. Keep the split clean: governance and official records here, prose and notes there.
+The club's informal notes (essays, history surveys, course architecture writing) currently live in the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)).
+
+**They are being brought into this repo, and Flowershow — the service that published them — is being retired.** Do not add references to it or to `crbgc-philoserf.flowershow.me`; the remaining one is in a dated news post and is dealt with separately (see below).
+
+Until the notes land, this repo is still governance-only: bylaws, minutes, notices, news. The old rule was "keep the split clean — governance here, prose there"; that split is ending, so do not enforce it against work that is preparing for the move.
+
+One reference is deliberately left in place: `content/news/2026-06-21-club-formally-established.md` tells the reader the Club keeps two homes online and links to the notes site. That was true the day it was published and it is the Club's record of its own founding, so it is not edited to match the present. Revisit it when the notes actually arrive and there is a live URL to point at.
 
 ## Conventions
 

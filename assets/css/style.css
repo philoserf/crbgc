@@ -1,16 +1,16 @@
-/* Palette and treatments mirror the stock Flowershow "letterpress" theme used
-   by the notes site (crbgc-philoserf.flowershow.me): a white / near-black
-   palette with oklch-derived grays, serif headings at normal weight, and the
-   theme's link / blockquote / rule / code treatments. Tokens mirror the theme's
-   light-mode values.
+/* A letterpress-style light theme: near-black text on white, grays derived
+   from the foreground with oklch(from ...), serif headings at normal weight,
+   and restrained link / blockquote / rule / code treatments.
 
-   Typefaces deliberately do NOT match. The theme's Nata Sans and Fraunces were
-   served from Google Fonts — the site's only third-party runtime dependency and
-   the only asset without subresource integrity (issue #62). They were dropped
-   for the system stack, so the two sites no longer share a typeface; everything
-   else about the palette still lines up. A side benefit: the system stack has
-   real italics, where Nata Sans has none published and blockquote / .muted /
-   <em> were being synthesized by the browser. */
+   The palette began as a copy of another site's theme, which is why the gray
+   ramp is complete rather than minimal — --fg-400 is a step the scale defines
+   and nothing currently uses (issue #45).
+
+   No webfonts. The original pairing was served from Google Fonts, the site's
+   only third-party runtime dependency and the only asset without subresource
+   integrity, and was dropped for the system stack (issue #62). A side benefit:
+   the system stack has real italics, where the previous body face published
+   none and blockquote / .muted / <em> were being synthesized by the browser. */
 
 :root {
   /* Letterpress palette — light mode */
