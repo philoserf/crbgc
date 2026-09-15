@@ -4,6 +4,7 @@ slug: roger-hill-hickory-golf-profile
 description: "Profile of Roger Hill: Grand Rapids photographer turned hickory golfer, SoHG co-founder, and Michigan Hickory Tour commissioner."
 date: 2026-06-11T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - grand-rapids
   - hickory-golf

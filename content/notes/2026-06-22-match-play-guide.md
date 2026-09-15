@@ -4,6 +4,7 @@ slug: match-play-guide
 description: "A primer on match play—golf's original head-to-head format—covering scoring, concessions, handicaps, formats, and the strategy that sets it apart from stroke play."
 date: 2026-06-22T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - beginner-guide
   - golf

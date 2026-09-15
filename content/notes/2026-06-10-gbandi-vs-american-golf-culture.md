@@ -4,6 +4,7 @@ slug: gbandi-vs-american-golf-culture
 description: "Contrasts British and American golf club traditions across competition, pace, access, and format to propose a hybrid bogey club model."
 date: 2026-06-10T09:00:00-04:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - bogey-competition
   - club-culture

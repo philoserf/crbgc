@@ -4,6 +4,7 @@ slug: north-american-links-courses
 description: "Links-style golf courses across North America, listed with their city and state or province."
 date: 2026-02-27T09:00:00-05:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - golf
   - links-courses

@@ -4,6 +4,7 @@ slug: sam-sneads-legacy
 description: "Snead's swing, his majors, his longevity records, and the contested arithmetic behind 82 PGA Tour victories."
 date: 2026-08-16T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - american-golf
   - golf

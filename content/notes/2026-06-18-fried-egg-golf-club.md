@@ -4,6 +4,7 @@ slug: fried-egg-golf-club
 description: "Kindred-club note on Fried Egg Golf and its members' club — the architecture-and-municipal-golf ally of the C&RBGC's editorial side."
 date: 2026-06-18T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - course-architecture
   - golf-media

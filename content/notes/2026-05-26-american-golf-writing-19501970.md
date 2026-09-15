@@ -4,6 +4,7 @@ slug: american-golf-writing-19501970
 description: "Covers the key figures, publications, and three modes of golf writing from 1950–1970, centered on Herbert Warren Wind."
 date: 2026-05-26T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - american-literature
   - golf-history

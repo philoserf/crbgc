@@ -4,6 +4,7 @@ slug: camp-lake-golf-course-history
 description: "Traces the golf course on the west shore of Camp Lake from Charley Broman's eighteen holes in 1930 to the nine held by Moose Lodge No. 50 today."
 date: 2026-09-01T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - american-golf
   - golf

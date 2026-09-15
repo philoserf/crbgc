@@ -4,6 +4,7 @@ slug: zen-juice-appreciation-day
 description: "The Club's annual, tongue-in-cheek celebration of course-side scotch and the calm it lends a shaky stroke."
 date: 2026-06-22T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - golf
   - golf-community

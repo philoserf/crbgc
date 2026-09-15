@@ -4,6 +4,7 @@ slug: commons-day
 description: "The Club's annual round on common or public ground, in tribute to golf's birthright as a game played on land open to anyone."
 date: 2026-06-22T09:00:00-04:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - golf
   - public-golf

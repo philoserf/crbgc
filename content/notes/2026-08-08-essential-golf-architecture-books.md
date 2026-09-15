@@ -4,6 +4,7 @@ slug: essential-golf-architecture-books
 description: "Ten essential books on golf course design, from the Golden Age treatises to the modern minimalist accounts."
 date: 2026-08-08T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - course-design
   - golf

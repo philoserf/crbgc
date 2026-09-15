@@ -4,6 +4,7 @@ slug: history-of-public-golf-in-america
 description: "Traces the rise of American public golf from 1895's Van Cortlandt course through WPA expansion, desegregation, and postwar growth."
 date: 2026-05-25T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - american-history
   - desegregation
