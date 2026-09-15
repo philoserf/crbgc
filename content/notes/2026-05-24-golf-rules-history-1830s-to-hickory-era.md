@@ -18,4 +18,4 @@ For the late hickory era in the U.S., roughly the mid-1910s through the mid-1930
 
 The continuity across the century is the most striking thing. The 1830s framework—stymie on the green, six-inch rule for touching balls, stroke and distance for losses, no out-of-bounds concept defined in the Scottish codes, no club limit, match play as the default form—survived in recognizable shape into the late hickory era. The mid-twentieth-century reforms (the fourteen-club cap, stymie abolition, modern OB and casual water provisions, the joint USGA-R&A code of 1952) were what severed the modern game from a long, slow-evolving inheritance. A hickory player in 1925 reading the 1829 Society of St Andrews rules would have recognized the game immediately.
 
-The codified texts themselves—1744 through 1960—are gathered at Rules of Golf Editions.
+The codified texts themselves are here in full: [1744](/notes/rules-of-golf-1744/), [1858](/notes/rules-of-golf-1858/), [1891](/notes/rules-of-golf-1891/), and [1925](/notes/rules-of-golf-1925/).

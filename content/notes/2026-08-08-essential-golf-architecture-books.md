@@ -25,4 +25,4 @@ Ten books that between them cover the ground: the British origins, the Golden Ag
 9. **Derek Markham and Philip Truett, "A Matter of Course."** A club-history approach to how courses actually change over time.
 10. **Pete Dye, "Bury Me in a Pot Bunker" (1995).** Not a treatise but a memoir, and the necessary counterweight: the maximalist explaining himself in his own voice.
 
-The Course Architecture hub collects the notes that work through these arguments.
+The notes that work through these arguments are gathered under [Notes](/notes/).
