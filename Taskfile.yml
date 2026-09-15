@@ -17,20 +17,10 @@ tasks:
       - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
       - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
 
-  prettier:check:
-    desc: Check Prettier-managed files without writing
-    cmds:
-      - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
-
   biome:
     desc: Format and lint CSS with Biome
     cmds:
       - bunx biome check --write assets
-
-  biome:check:
-    desc: Check CSS with Biome without writing
-    cmds:
-      - bunx biome check assets
 
   format:
     desc: Format and fix all files
@@ -41,8 +31,11 @@ tasks:
   check:
     desc: Check all files without changing them
     cmds:
-      - task: prettier:check
-      - task: biome:check
+      # Inlined rather than delegated: `.github/workflows/pages.yml` runs these
+      # same two strings directly, so that CI need not install go-task for two
+      # lines. Keeping them here verbatim is what makes the two agree (#84).
+      - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
+      - bunx biome check assets
 
   serve:
     desc: Run Hugo dev server with drafts and future-dated content
@@ -52,4 +45,7 @@ tasks:
   build:
     desc: Build the site to ./public
     cmds:
-      - hugo --minify --gc
+      # --panicOnWarning: Hugo warnings are advisory by default, so a template
+      # lookup failure publishes a broken section and exits 0. CI uses the same
+      # flag (#87).
+      - hugo --minify --gc --panicOnWarning
