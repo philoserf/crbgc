@@ -16,11 +16,11 @@ The current next step for this repo is tracked in the workspace backlog at `../N
 
 The club's informal notes (essays, history surveys, course architecture writing) currently live in the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)).
 
-**They are being brought into this repo, and Flowershow — the service that published them — is being retired.** Do not add references to it or to `crbgc-philoserf.flowershow.me`; the remaining one is in a dated news post and is dealt with separately (see below).
+**They are being brought into this repo, and Flowershow — the service that published them — is being decommissioned.** This paragraph is the last mention of it anywhere in the repo: no link to `crbgc-philoserf.flowershow.me` survives in content, templates, or config. Do not add one.
 
 Until the notes land, this repo is still governance-only: bylaws, minutes, notices, news. The old rule was "keep the split clean — governance here, prose there"; that split is ending, so do not enforce it against work that is preparing for the move.
 
-One reference is deliberately left in place: `content/news/2026-06-21-club-formally-established.md` tells the reader the Club keeps two homes online and links to the notes site. That was true the day it was published and it is the Club's record of its own founding, so it is not edited to match the present. Revisit it when the notes actually arrive and there is a live URL to point at.
+`content/news/2026-06-21-club-formally-established.md` describes the Club keeping two homes online, and named the notes site with a link. The link was removed ahead of the decommissioning rather than left to rot — the prose is untouched, because it is the Club's record of its own founding and was true the day it was published. **Give "The notes" its link back when the notes land and there is an internal URL to point at**; that is the only edit that post still wants.
 
 ## Conventions
 
