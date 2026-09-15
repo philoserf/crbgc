@@ -6,7 +6,7 @@
     {{ if $n.current }}
       <ul class="item-list">
         {{ range $n.current }}
-          {{ partial "item-row.html" (dict "page" .) }}
+          {{ partial "item-row.html" . }}
         {{ end }}
       </ul>
     {{ else }}
@@ -16,7 +16,7 @@
       <h2>Expired</h2>
       <ul class="item-list expired">
         {{ range $n.expired }}
-          {{ partial "item-row.html" (dict "page" .) }}
+          {{ partial "item-row.html" . }}
         {{ end }}
       </ul>
     {{ end }}
