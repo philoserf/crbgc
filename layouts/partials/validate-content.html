@@ -21,18 +21,55 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{/* #73: cross-document citations carry a heading fragment
+  (/governance/bylaws/#article-iv--officers). Goldmark derives those anchors
+  from the heading text, so editing a heading silently breaks every inbound
+  citation — no error, and the link still resolves to the top of the page.
+  That is the same damage #56 gated for the slug half of the same URL.
+  Pages are resolved by RelPermalink rather than content path, because slug:
+  pins a URL that need not match the file. Section pages are included: one of
+  the citations lives in minutes/_index.md.
+  Limitation: .Fragments knows content headings only, so a fragment pointing
+  at an id emitted by a template would report as missing. None do today.
+*/}}
+{{- $byURL := dict -}}
+{{- range site.Pages -}}
+  {{- $byURL = merge $byURL (dict .RelPermalink .) -}}
+{{- end -}}
+{{- range site.Pages -}}
+  {{- if .File -}}
+    {{- $file := .File.Path -}}
+    {{- range findRESubmatch `\]\((/[^)#\s]*)#([^)\s]+)\)` .RawContent -}}
+      {{- $path := index . 1 -}}
+      {{- $frag := index . 2 -}}
+      {{- $key := cond (hasSuffix $path "/") $path (printf "%s/" $path) -}}
+      {{- with index $byURL $key -}}
+        {{- if not (in .Fragments.Identifiers $frag) -}}
+          {{- errorf "%s: link to %s#%s — %s has no heading with that anchor. Goldmark derives anchors from heading text, so retitling a heading breaks every citation of it." $file $path $frag $path -}}
+        {{- end -}}
+      {{- else -}}
+        {{- errorf "%s: link to %s#%s — no page at %s." $file $path $frag $path -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- range $section := slice "notices" "minutes" "news" "notes" -}}
   {{- $seen := dict -}}
   {{- with site.GetPage (printf "/%s" $section) -}}
-    {{- range .RegularPages -}}
+    {{/* Sorted by file path so the earliest-dated post owns a slug and the
+      later one is named as the file to fix (#78). Filenames are date-prefixed
+      in every dated section, and unlike .ByDate this stays deterministic
+      across the notes, which all share one date.
+    */}}
+    {{- range sort .RegularPages "File.Path" -}}
       {{- $file := .File.Path -}}
       {{/* #56: an explicit slug pins the URL against a retitle. */}}
       {{- if not .Params.slug -}}
-        {{- errorf "%s: dated post has no slug: — its URL would follow its title" $file -}}
+        {{- errorf "%s: dated post has no slug: field in frontmatter — its URL would follow its title" $file -}}
       {{- else -}}
         {{- $slug := .Params.slug -}}
         {{- with index $seen $slug -}}
-          {{- errorf "%s: slug %q is already pinned by %s" $file $slug . -}}
+          {{- errorf "%s: slug %q is already pinned by the earlier post %s — pick a different slug for this post" $file $slug . -}}
         {{- end -}}
         {{- $seen = merge $seen (dict $slug $file) -}}
       {{- end -}}
@@ -41,6 +78,13 @@
         {{- if not (gt (time .Params.expires) (time .Params.meeting_date)) -}}
           {{- errorf "%s: expires %s is not after meeting_date %s — expires is the first day the notice is hidden" $file .Params.expires .Params.meeting_date -}}
         {{- end -}}
+      {{- end -}}
+      {{/* #75: approval is a pair. `approved: true` with no approved_on reads
+        "Approved" with no date, which under RONR asserts a status the record
+        cannot substantiate — the date identifies the meeting that adopted it.
+      */}}
+      {{- if and (eq $section "minutes") .Params.approved (not .Params.approved_on) -}}
+        {{- errorf "%s: approved: true with no approved_on — both move together; set approved_on to the date the minutes were adopted" $file -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}

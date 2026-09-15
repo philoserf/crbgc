@@ -27,6 +27,11 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
 - **`layouts/index.llms.txt` is deliberately unformatted.** It is a plain-text template where whitespace is the output, and Prettier's `go-template` parser treats it as HTML — it splits Markdown headings from their text and collapses list items into a broken feed. It is excluded because the `task prettier` glob covers only `.{md,html,yml,yaml,toml,json}`; the exclusion cannot go in `.prettierignore`, which is a symlink to `.gitignore`, so an entry there would also stop git tracking the file. **Do not widen the glob.** Edit it by hand and check the rendered `/llms.txt`.
 - **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor.
 - **Explicit `slug:`** in every dated post's frontmatter pins its URL, and must be unique within its section. Without it, Hugo falls back to a title-derived value, and retitling a post would silently change its URL and break inter-content links. Both rules are checked in `layouts/partials/validate-content.html` and fail the build.
+- **Heading-fragment citations are checked.** Cross-references such as
+  `[Article IV](/governance/bylaws/#article-iv--officers)` rely on anchors Goldmark derives
+  from the heading text, so retitling a heading would silently send them to the top of the
+  page. The build fails when a `](/path#fragment)` link names an anchor the target page does
+  not have.
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
 - **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
@@ -71,6 +76,8 @@ Each section under `content/` has an `_index.md` (the list page) and dated posts
    ---
    ```
 3. The section list shows an **Approved** / **Draft** badge based on `approved`.
+4. **`approved` and `approved_on` move together.** The date identifies the meeting that
+   adopted the record, so the build fails on `approved: true` with `approved_on` left empty.
 
 ### A news post
 
