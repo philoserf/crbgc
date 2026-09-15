@@ -4,6 +4,7 @@ slug: colonel-bogey-and-the-bogey-competition
 description: "How the 1890s ground score became Colonel Bogey, how bogey drifted from good score to one over par, and why the C&RBGC plays match play against him."
 date: 2026-06-12T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - bogey
   - bogey-competition

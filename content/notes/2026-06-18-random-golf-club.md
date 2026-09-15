@@ -4,6 +4,7 @@ slug: random-golf-club
 description: "Kindred-club note on the Random Golf Club — the populist 'room for everyone' community the C&RBGC counts as its on-ramp cousin."
 date: 2026-06-18T09:00:00-04:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - golf-community
   - golf-organizations

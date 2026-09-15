@@ -4,6 +4,7 @@ slug: solo-play-in-golf-history
 description: "Traces how solo golf evolved from unregulated origins on Scottish links to a persistent but non-default form of play."
 date: 2026-05-29T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - golf
   - golf-culture

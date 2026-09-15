@@ -4,6 +4,7 @@ slug: founders-day
 description: "The Club's annual tribute to Mark Ayers and Dean Chase, and to the founding conviction that a bogey is an honest result."
 date: 2026-06-22T09:00:00-04:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - golf
   - golf-community

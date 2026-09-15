@@ -20,4 +20,4 @@ A course with understated maintenance beats one with conspicuous green-keeping.
 A club that emphasizes the simple game of golf beats one that pursues status trappings.  
 A course you want to play again and again beats one you only wish to play annually.
 
-The architects working closest to these principles are mapped in [Minimalist Golf Architecture School](/notes/minimalist-golf-architecture-school/); the ethic behind them is the subject of [Golf's Original Constraints](/notes/golfs-original-constraints/).
+The architects working closest to these principles are mapped in Minimalist Golf Architecture School; the ethic behind them is the subject of Golf's Original Constraints.

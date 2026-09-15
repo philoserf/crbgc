@@ -4,6 +4,7 @@ slug: recovering-golfs-original-orientation
 description: "Argues that golf has drifted from its roots and outlines practical ways to recover its original spirit of walking, simplicity, and connection."
 date: 2026-05-25T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - golf
   - golf-architecture

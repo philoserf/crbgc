@@ -4,6 +4,7 @@ slug: hickory-golf-resources-directory
 description: "Curated links to clubs, makers, collectors, and event orgs for hickory golf equipment and play."
 date: 2026-05-23T09:00:00-04:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - antique-golf-equipment
   - golf-collectors

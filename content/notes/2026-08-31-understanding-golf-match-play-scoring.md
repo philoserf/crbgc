@@ -4,6 +4,7 @@ slug: understanding-golf-match-play-scoring
 description: 'How to read a match-play result: why "3 & 2" states a lead in holes rather than a total in strokes.'
 date: 2026-08-31T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - golf
   - golf-formats

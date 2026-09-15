@@ -4,6 +4,7 @@ slug: mackenzies-13-golf-course-principles
 description: "Alister MacKenzie's thirteen principles for an ideal golf course—strategy, variety, natural beauty, and enjoyment for every class of player."
 date: 2026-08-29T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - alister-mackenzie
   - course-design

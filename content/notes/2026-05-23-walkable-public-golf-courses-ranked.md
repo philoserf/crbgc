@@ -4,6 +4,7 @@ slug: walkable-public-golf-courses-ranked
 description: "Force-ranked list of top walkable public golf courses weighted by walking policy, terrain, routing, and course quality."
 date: 2026-05-23T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - course-design
   - course-rankings

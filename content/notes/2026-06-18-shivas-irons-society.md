@@ -4,6 +4,7 @@ slug: shivas-irons-society
 description: "Kindred-club note on the Shivas Irons Society — the spirit-over-score argument made into a society, now more pilgrimage than community."
 date: 2026-06-18T09:00:00-04:00
 lastmod: 2026-08-07
+draft: true
 tags:
   - golf-organizations
   - golf-philosophy

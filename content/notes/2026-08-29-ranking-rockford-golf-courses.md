@@ -4,6 +4,7 @@ slug: ranking-rockford-golf-courses
 description: "Public golf courses near Rockford, Michigan ranked against Alister MacKenzie's thirteen design principles."
 date: 2026-08-29T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - alister-mackenzie
   - course-architecture

@@ -4,6 +4,7 @@ slug: 1744-golf-rules-modernized
 description: "The 13 original 1744 rules of golf restated in plain modern English."
 date: 2026-06-07T09:00:00-04:00
 lastmod: 2026-08-04
+draft: true
 tags:
   - golf
   - golf-history

@@ -4,6 +4,7 @@ slug: the-endless-golf-equipment-fee
 description: "Why golf equipment spending never truly ends—real fitting needs braided with manufactured obsolescence and identity."
 date: 2026-08-16T09:00:00-04:00
 lastmod: 2026-09-02
+draft: true
 tags:
   - equipment
   - golf
