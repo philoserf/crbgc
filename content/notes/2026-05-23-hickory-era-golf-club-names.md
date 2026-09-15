@@ -2,7 +2,7 @@
 title: "Hickory Era Golf Club Names"
 slug: hickory-era-golf-club-names
 description: "Maps historical hickory-era golf club names (mashie, niblick, cleek, etc.) to their modern iron/wood equivalents."
-date: 2026-05-23T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-04
 tags:
   - equipment

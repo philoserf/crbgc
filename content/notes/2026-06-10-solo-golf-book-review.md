@@ -2,7 +2,7 @@
 title: "Solo Golf Book Review"
 slug: solo-golf-book-review
 description: "Gary Belsky's 2026 book argues solo golf rounds are the game's purest form, reviewed for its merits and overreach."
-date: 2026-06-10T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

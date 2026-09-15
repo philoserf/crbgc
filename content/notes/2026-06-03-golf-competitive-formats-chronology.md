@@ -2,7 +2,7 @@
 title: "Golf Competitive Formats Chronology"
 slug: golf-competitive-formats-chronology
 description: "Eight golf formats from match play to skins, ordered by historical origin with key dates and defining rules."
-date: 2026-06-03T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

@@ -2,7 +2,7 @@
 title: "Golf Course Design Principles"
 slug: golf-course-design-principles
 description: "Eight principles prioritizing playability, walkability, pace, and simplicity in golf course design."
-date: 2026-02-27T09:00:00-05:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 tags:
   - course-design

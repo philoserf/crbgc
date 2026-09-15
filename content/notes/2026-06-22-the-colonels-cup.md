@@ -2,7 +2,7 @@
 title: "The Colonel's Cup"
 slug: the-colonels-cup
 description: "The Club's season-long bogey championship, awarded for the best aggregate margin against Colonel Bogey."
-date: 2026-06-22T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

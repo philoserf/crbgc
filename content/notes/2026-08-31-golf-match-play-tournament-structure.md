@@ -2,7 +2,7 @@
 title: "Golf Match-Play Tournament Structure"
 slug: golf-match-play-tournament-structure
 description: "How match play scales up into tournaments—brackets, stroke-play qualifying, pool play, and the team points of the Ryder Cup."
-date: 2026-08-31T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

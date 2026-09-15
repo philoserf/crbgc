@@ -2,7 +2,7 @@
 title: "Modernization's Corruption of Golf"
 slug: modernizations-corruption-of-golf
 description: "Argues that steel shafts, carts, television, residential development, and the equipment arms race have eroded golf's essential character."
-date: 2026-05-25T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

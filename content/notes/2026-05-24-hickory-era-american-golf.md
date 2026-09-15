@@ -2,7 +2,7 @@
 title: "Hickory Era American Golf"
 slug: hickory-era-american-golf
 description: "History of American golf from the 1880s to 1935, covering key figures, clubs, tournaments, and equipment of the hickory shaft era."
-date: 2026-05-24T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 tags:
   - american-golf

@@ -2,7 +2,7 @@
 title: "Dew Sweeper Championship"
 slug: dew-sweeper-championship
 description: "The Club's sunrise tournament near the summer solstice—a championship that filters for devotion rather than skill."
-date: 2026-06-22T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

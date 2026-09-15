@@ -2,7 +2,7 @@
 title: "Golf's Transition from Hickory to Steel Shafts"
 slug: golfs-transition-from-hickory-to-steel-shafts
 description: "How steel golf shafts displaced hickory over a decade through competing governing bodies, patents, and cultural resistance."
-date: 2026-06-10T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 tags:
   - equipment-technology

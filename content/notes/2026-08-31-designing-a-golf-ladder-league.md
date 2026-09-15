@@ -2,7 +2,7 @@
 title: "Designing a Golf Ladder League"
 slug: designing-a-golf-ladder-league
 description: "A blueprint for a simple, low-bureaucracy golf league using a challenge ladder, handicapped match play, and a season-ending playoff."
-date: 2026-08-31T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

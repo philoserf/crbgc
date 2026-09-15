@@ -2,7 +2,7 @@
 title: "Golf Rules History 1830s to Hickory Era"
 slug: golf-rules-history-1830s-to-hickory-era
 description: "Traces continuity in golf rules from Scotland's 1829 St Andrews code through the U.S. hickory era of the 1910s–1930s."
-date: 2026-05-24T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 draft: true
 tags:

@@ -2,7 +2,7 @@
 title: "Coore Crenshaw Course Portfolio"
 slug: coore-crenshaw-course-portfolio
 description: "Comprehensive list of Coore Crenshaw golf course designs, renovations, 9-hole additions, and Bill Coore's pre-partnership work."
-date: 2026-05-23T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 tags:
   - coore-crenshaw

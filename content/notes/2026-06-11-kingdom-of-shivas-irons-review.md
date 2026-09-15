@@ -2,7 +2,7 @@
 title: "Kingdom of Shivas Irons Review"
 slug: kingdom-of-shivas-irons-review
 description: "Compares Michael Murphy's 1997 sequel to Golf in the Kingdom—deeper mysticism, lesser mark on golf literature."
-date: 2026-06-11T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-09-02
 draft: true
 tags:

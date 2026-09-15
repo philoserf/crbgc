@@ -18,6 +18,13 @@ The club's informal writing — essays, history surveys, course architecture —
 
 Notes follow the same URL discipline as every other dated section — `YYYY-MM-DD-slug.md`, an explicit `slug:`, and enforcement in `validate-content.html`. They are prose rather than record, so the governance rules about amendment and minutes do not apply to them.
 
+**Every note carries the same `date:`** — `2026-06-21T09:00:00-04:00`, the day the Club was formally established. The dates they arrived with were Obsidian authoring dates, not editorial publication, and pretending to a chronology they never had made the feed and the list page assert an order that meant nothing. 09:00 is deliberate: it places the notes after the founding news post, the meeting notice and the minutes in that day's reverse-chronological order, so the formal record still leads.
+
+Two consequences, both intended:
+
+- **The filename date and the frontmatter date disagree, and that is fine.** Filenames keep the date each note was written, which is real information and is exactly what the prefix is for — `README.md` says it "exists only for editor sort order". Do not rename them to match; that would sort all 65 into one indistinguishable block.
+- **`layouts/notes/list.html` orders `ByTitle`, not `ByDate`.** With one shared date, date order is arbitrary. If notes ever get meaningful individual dates again, this should go back to `ByDate.Reverse`.
+
 Deliberately left behind, and not to be imported without a fresh decision:
 
 - **The 2023 Rules of Golf** — 62,000 words of verbatim current R&A/USGA licensed text. This is a copyright question, not a curation one.

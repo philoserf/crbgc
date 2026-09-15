@@ -2,7 +2,7 @@
 title: "Early American Golf's Decline"
 slug: early-american-golfs-decline
 description: "How colonial-era golf clubs in Charleston and Savannah faded after 1811, leaving a 70-year gap before the sport revived."
-date: 2026-05-24T09:00:00-04:00
+date: 2026-06-21T09:00:00-04:00
 lastmod: 2026-08-07
 tags:
   - american-history
