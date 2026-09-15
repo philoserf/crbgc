@@ -12,15 +12,20 @@ This repo is not the authoritative copy of the governance documents — they ren
 
 The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
 
-## Related: the notes
+## The notes
 
-The club's informal notes (essays, history surveys, course architecture writing) currently live in the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)).
+The club's informal writing — essays, history surveys, course architecture — lives in `content/notes/`. It arrived from the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)), which is **no longer authoritative**: edit notes here, not there. Flowershow, the service that used to publish them, is decommissioned; no link to `crbgc-philoserf.flowershow.me` survives anywhere in this repo, and this sentence is the last mention of it. Do not add one.
 
-**They are being brought into this repo, and Flowershow — the service that published them — is being decommissioned.** This paragraph is the last mention of it anywhere in the repo: no link to `crbgc-philoserf.flowershow.me` survives in content, templates, or config. Do not add one.
+Notes follow the same URL discipline as every other dated section — `YYYY-MM-DD-slug.md`, an explicit `slug:`, and enforcement in `validate-content.html`. They are prose rather than record, so the governance rules about amendment and minutes do not apply to them.
 
-Until the notes land, this repo is still governance-only: bylaws, minutes, notices, news. The old rule was "keep the split clean — governance here, prose there"; that split is ending, so do not enforce it against work that is preparing for the move.
+Deliberately left behind, and not to be imported without a fresh decision:
 
-`content/news/2026-06-21-club-formally-established.md` describes the Club keeping two homes online, and named the notes site with a link. The link was removed ahead of the decommissioning rather than left to rot — the prose is untouched, because it is the Club's record of its own founding and was true the day it was published. **Give "The notes" its link back when the notes land and there is an internal URL to point at**; that is the only edit that post still wants.
+- **The 2023 Rules of Golf** — 62,000 words of verbatim current R&A/USGA licensed text. This is a copyright question, not a curation one.
+- **The 1960 Rules** — also verbatim, and its status is genuinely unclear rather than clearly fine.
+- **Nine index notes** — Obsidian maps of content that were pure wikilink lists. Sentences that pointed at them were rewritten to point at real pages; do not reintroduce references to a "Rules of Golf Editions" or "Course Architecture" hub, because neither exists.
+- **Five of six `Drafts/`** — the sixth is here as `draft: true`.
+
+One open editorial question, recorded so it is not mistaken for an oversight: `content/news/2026-06-21-club-formally-established.md` says "The Club keeps two homes online, and the line between them is deliberate," and both of its bullets now point at crbgc.org. That was true the day it was published and it is the Club's record of its own founding, so the prose has been left alone and only the link updated. Whether a dated post should be amended when the world it describes changes is a call for the Club, not a defect to fix in passing.
 
 ## Conventions
 
