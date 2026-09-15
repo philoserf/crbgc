@@ -1,11 +1,12 @@
 {{/* Notices are filtered through notices-by-status.html rather than queried
-  directly. Unlike item-row's badge — a presentation choice the caller makes —
-  hiding expired notices is a correctness invariant that no caller should be
-  able to forget (issue #36).
+  directly: hiding expired notices is a correctness invariant that no caller
+  should be able to forget (issue #36). item-row decides the approval badge
+  for itself from the page's own frontmatter, so callers pass a page and
+  nothing else.
 */}}
 {{ $section := .section }}
 {{ $limit := .limit }}
-{{ $items := "" }}
+{{ $items := slice }}
 {{ if eq $section "notices" }}
   {{ $items = (partial "notices-by-status.html").current }}
 {{ else }}
@@ -14,7 +15,7 @@
 {{ $items = first $limit $items }}
 {{ if $items }}
   <ul class="item-list">
-    {{ range $items }}{{ partial "item-row.html" (dict "page" .) }}{{ end }}
+    {{ range $items }}{{ partial "item-row.html" . }}{{ end }}
   </ul>
 {{ else }}
   <p class="muted">Nothing yet.</p>

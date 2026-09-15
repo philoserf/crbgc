@@ -1,7 +1,7 @@
-{{ $p := .page }}
+{{ $p := . }}
 <li>
   <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
-  {{ if .badge }}
+  {{ if isset $p.Params "approved" }}
     {{ if $p.Params.approved }}
       <span class="badge approved">Approved</span>
     {{ else }}
