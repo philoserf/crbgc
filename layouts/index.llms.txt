@@ -10,7 +10,7 @@
 
 > {{ .Description }}
 
-The formal governance site of the Common & Recent Bogey Golf Club — bylaws, official notices, meeting minutes, and news. The club's informal notes (history, course architecture, courses to play) live separately at https://crbgc-philoserf.flowershow.me.
+The formal governance site of {{ .Site.Title }} — bylaws, official notices, meeting minutes, and news. The club's informal notes (history, course architecture, courses to play) live separately at https://crbgc-philoserf.flowershow.me.
 
 Base URL: {{ .Site.BaseURL }}
 {{ with (.Site.GetPage "/governance") }}{{ template "llms-section" (dict "heading" "Governance" "pages" .Pages.ByWeight) }}{{ end -}}
