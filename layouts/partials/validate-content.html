@@ -4,7 +4,7 @@
   time, which cannot catch a hand-written file or an edit made in review
   (issues #56, #61).
 */}}
-{{- range $section := slice "notices" "minutes" "news" -}}
+{{- range $section := slice "notices" "minutes" "news" "notes" -}}
   {{- $seen := dict -}}
   {{- with site.GetPage (printf "/%s" $section) -}}
     {{- range .RegularPages -}}
