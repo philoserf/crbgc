@@ -28,7 +28,7 @@ The remaining 24, which no note linked to, are ordered as an argument instead: t
 
 **The invariant both orders keep: a note is dated no earlier than the notes it cites.** One citation breaks it, `hickory-era-golf-writing-survey` → `american-golf-writing-19501970`, because the two cite each other and the hickory era genuinely precedes 1950. Seven such mutual clusters exist among the first 41. Preserve this rule when dating anything new: it is what lets the dates be read as a sequence rather than a shuffle.
 
-Adding a note now means giving it a `date:` and no `draft:`. The two move together — dropping `draft:` without a date builds clean and exits 0, but `home.rss.xml` selects on `PublishDate.IsZero`, so the note publishes, appears on `/notes/`, and is silently missing from the feed forever. A date without dropping `draft:` does nothing at all. Note also that `validate-content.html` cannot see a draft or a future-dated page, so its filename-matches-URL check reaches a note only once that note is live.
+Adding a note now means giving it a `date:` and no `draft:`. The two move together, and the build now enforces the first half: a post in any dated section without a `date:` fails `validate-content.html`. It used to build clean and exit 0 while `home.rss.xml`, which selects on `PublishDate.IsZero`, dropped it from the feed permanently and `item-row.html` rendered its list row as "January 1, 0001". A date without dropping `draft:` still does nothing at all — that half is unenforceable, since a draft is not built. Note also that `validate-content.html` cannot see a draft or a future-dated page, so its filename-matches-URL check reaches a note only once that note is live.
 
 One consequence, intended:
 

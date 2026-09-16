@@ -72,6 +72,18 @@
         not accompanied by a rename, which is the edit that silently moves a
         published URL. It also keeps the file findable from the URL.
       */}}
+      {{/* Every dated section's post must carry a date. Without one the page
+        still builds and publishes, but home.rss.xml selects on
+        PublishDate.IsZero, so it is absent from the site feed permanently, and
+        item-row.html renders its list row as "January 1, 0001". CLAUDE.md
+        described the feed half of this in prose; prose is where the rules that
+        broke silently used to live (#56, #61, #112). governance is excluded:
+        those documents are atemporal and joined this loop only for the
+        title-against-filename check below.
+      */}}
+      {{- if and (ne $section "governance") .Date.IsZero -}}
+        {{- errorf "%s: no date — a post in a dated section must carry one. Without it the page publishes but never reaches /index.xml, and its list row renders January 1, 0001." $file -}}
+      {{- end -}}
       {{- $seg := path.Base .RelPermalink -}}
       {{/* #113: governance is deliberately absent from [permalinks], so its URLs
         come from the filename and a prose retitle cannot move them. That is the
@@ -113,6 +125,17 @@
         {{- if not (in (slice "annual" "special" "regular") .Params.meeting_type) -}}
           {{- errorf "%s: meeting_type %q is not one of the three documented values (annual, special, regular)" $file .Params.meeting_type -}}
         {{- end -}}
+      {{- end -}}
+      {{/* The #61 check below is gated on both fields, so a notice carrying a
+        meeting_date and no expires skipped it and stayed current forever — the
+        notice for a meeting long past still listed as pending business. A
+        meeting notice announces an event that passes; none should outlive its
+        meeting. Omitting meeting_date as well still yields a genuinely
+        non-expiring notice, which is the escape hatch for a notice of motion or
+        a standing notice.
+      */}}
+      {{- if and (eq $section "notices") .Params.meeting_date (not .Params.expires) -}}
+        {{- errorf "%s: meeting_date with no expires — a meeting notice must stop being current after its meeting. Set expires to the day after meeting_date." $file -}}
       {{- end -}}
       {{/* #61: expires is the first day hidden, so it must clear the meeting. */}}
       {{- if and .Params.expires .Params.meeting_date -}}
