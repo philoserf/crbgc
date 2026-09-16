@@ -4,4 +4,4 @@ description: "The governing documents of the Common & Recent Bogeymens Golf Club
 outputs: ["html"] # atemporal documents; a chronological feed of them is meaningless (#54)
 ---
 
-The constitutional and administrative documents of the **C&RBGC**, in order of authority.
+The constitutional and administrative documents of the **C&RBGC**, in order of authority under _Robert's Rules of Order Newly Revised_, followed by the current roll of officers.
