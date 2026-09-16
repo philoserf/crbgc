@@ -1,6 +1,9 @@
-{{/* Fallback for sections without a custom single.html. Currently unreached —
-  every section ships its own — but kept deliberately so a future section
-  renders sensibly before it gets a bespoke template.
+{{/* Fallback for sections without a custom single.html. Every section under
+  content/ ships its own as of #111 — confirm by listing the section
+  directories under layouts/ rather than trusting this sentence. It was false
+  for the whole life of the notes section, which rendered here unnoticed.
+  (Do not write a glob here: a Go template comment ends at the first star-slash.)
+  Kept so a new section renders sensibly before it gets a bespoke template.
 */}}
 {{ define "main" }}
   <article>
