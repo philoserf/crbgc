@@ -54,7 +54,7 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- range $section := slice "notices" "minutes" "news" "notes" -}}
+{{- range $section := slice "notices" "minutes" "news" "notes" "governance" -}}
   {{- $seen := dict -}}
   {{- with site.GetPage (printf "/%s" $section) -}}
     {{/* Sorted by file path so a duplicate URL always names the same file as
@@ -73,8 +73,25 @@
         published URL. It also keeps the file findable from the URL.
       */}}
       {{- $seg := path.Base .RelPermalink -}}
-      {{- if ne .File.ContentBaseName $seg -}}
-        {{- errorf "%s: filename does not match its URL segment %q — Hugo derives the URL from the title, so rename the file to %s.md (note that Hugo drops & entirely; write \"and\" if you want it in the URL)." $file $seg $seg -}}
+      {{/* #113: governance is deliberately absent from [permalinks], so its URLs
+        come from the filename and a prose retitle cannot move them. That is the
+        right property for the four most heavily cited documents on the site —
+        the Bylaws alone are cited from the minutes, the notice, the Standing
+        Rules and the Officers page, several with heading fragments. It also
+        makes the check below vacuous there, since the URL segment IS the
+        filename. So governance is checked the other way round: the normalized
+        title against the filename. A retitle that skips the rename fails the
+        build instead of silently orphaning the page from its own name.
+      */}}
+      {{- if eq $section "governance" -}}
+        {{- $want := urlize .Title -}}
+        {{- if ne .File.ContentBaseName $want -}}
+          {{- errorf "%s: title %q normalizes to %q but the filename is %q — governance URLs come from the filename, so either restore the title or rename the file to %s.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations." $file .Title $want .File.ContentBaseName $want -}}
+        {{- end -}}
+      {{- else -}}
+        {{- if ne .File.ContentBaseName $seg -}}
+          {{- errorf "%s: filename does not match its URL segment %q — Hugo derives the URL from the title, so rename the file to %s.md (note that Hugo drops & entirely; write \"and\" if you want it in the URL)." $file $seg $seg -}}
+        {{- end -}}
       {{- end -}}
       {{- with index $seen $seg -}}
         {{- errorf "%s: URL /%s/%s/ is already taken by the earlier post %s — retitle this post." $file $section $seg . -}}
