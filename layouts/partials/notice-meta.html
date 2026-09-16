@@ -9,10 +9,6 @@
     <dt>Meeting</dt>
     <dd>{{ (time .).Format "January 2, 2006" }}</dd>
   {{ end }}
-  {{ with .Params.authority }}
-    <dt>Required by</dt>
-    <dd>{{ . }}</dd>
-  {{ end }}
   {{/* `expires` is the first day the notice is hidden, so the last day it is
     shown is the day before. Labelling the raw value "Expires" read as the last
     day shown and contradicted the section page, which files the notice under
