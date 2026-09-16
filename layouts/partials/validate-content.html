@@ -80,6 +80,23 @@
         {{- errorf "%s: URL /%s/%s/ is already taken by the earlier post %s — retitle this post." $file $section $seg . -}}
       {{- end -}}
       {{- $seen = merge $seen (dict $seg $file) -}}
+      {{/* #112: notice_type and meeting_type carry a controlled vocabulary that
+        lived only in README and the new-notice / new-minutes skills. Nothing
+        resolved them, so a typo published as a title-cased heading and exited 0
+        — notice-meta.html renders whatever it is given. Same reasoning as #56
+        and #61: a rule enforced only at creation time cannot catch a
+        hand-written file or an edit made in review.
+      */}}
+      {{- if and (eq $section "notices") .Params.notice_type -}}
+        {{- if not (in (slice "annual-meeting" "special-meeting" "previous-notice" "bylaw-amendment") .Params.notice_type) -}}
+          {{- errorf "%s: notice_type %q is not one of the four documented values (annual-meeting, special-meeting, previous-notice, bylaw-amendment)" $file .Params.notice_type -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if and (eq $section "minutes") .Params.meeting_type -}}
+        {{- if not (in (slice "annual" "special" "regular") .Params.meeting_type) -}}
+          {{- errorf "%s: meeting_type %q is not one of the three documented values (annual, special, regular)" $file .Params.meeting_type -}}
+        {{- end -}}
+      {{- end -}}
       {{/* #61: expires is the first day hidden, so it must clear the meeting. */}}
       {{- if and .Params.expires .Params.meeting_date -}}
         {{- if not (gt (time .Params.expires) (time .Params.meeting_date)) -}}

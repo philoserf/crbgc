@@ -16,7 +16,6 @@ From the arguments and conversation; ask for anything missing:
 - **title** — e.g. "Notice of the 2026 Annual Meeting"
 - **meeting_date** — `YYYY-MM-DD`
 - **notice_type** — one of `annual-meeting`, `special-meeting`, `previous-notice`, `bylaw-amendment`
-- **authority** — the bylaw provision requiring the notice, e.g. "Article V, Section 1"
 - **description** — one sentence; draft it from the title if not given
 
 ## Compute the date fields
@@ -45,7 +44,6 @@ date: <YYYY-MM-DD>
 meeting_date: <YYYY-MM-DD>
 expires: <YYYY-MM-DD>
 notice_type: <notice_type>
-authority: "<authority>"
 ---
 ```
 

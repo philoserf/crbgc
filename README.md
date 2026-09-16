@@ -53,8 +53,7 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
    date: 2026-06-01 # when posted
    meeting_date: 2026-06-15
    expires: 2026-06-16 # first day hidden — the day after meeting_date
-   notice_type: annual-meeting # or special-meeting | previous-notice | bylaw-amendment
-   authority: "Article V, Section 1" # the bylaw provision requiring this notice
+   notice_type: annual-meeting # or special-meeting | previous-notice | bylaw-amendment — the build fails on anything else
    ---
    ```
 3. **`expires` is the first day the notice is hidden**, not the last day it is shown. Set it to the day after `meeting_date` so the notice stays up through the meeting it announces; the build fails if `expires` does not fall after `meeting_date`. The notice's own page never shows the raw value — `notice-meta.html` renders the day before it, labelled **Shown through**, so the page agrees with the section split rather than reading a day late.
