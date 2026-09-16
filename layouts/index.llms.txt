@@ -18,6 +18,9 @@ Base URL: {{ .Site.BaseURL }}
 {{- template "llms-section" (dict "heading" "Notices" "pages" (first 15 $n.current)) -}}
 {{- with (.Site.GetPage "/minutes") }}{{ template "llms-section" (dict "heading" "Minutes" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end -}}
 {{- with (.Site.GetPage "/news") }}{{ template "llms-section" (dict "heading" "News" "pages" (first 15 .RegularPages.ByDate.Reverse)) }}{{ end }}
+{{- /* Notes sort ByTitle, not ByDate: /llms.txt is an index, not a feed, and a
+  machine reader scanning for a topic is served by alphabetical order. The list
+  page orders ByDate.Reverse; the two deliberately disagree. */ -}}
 {{- with (.Site.GetPage "/notes") }}{{ template "llms-section" (dict "heading" "Notes" "pages" .Pages.ByTitle) }}{{ end }}
 ## Feeds
 

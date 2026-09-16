@@ -19,9 +19,9 @@ assets/css/style.css              # site styles (Biome-managed)
 hugo.toml                         # config: permalinks, disabled kinds, locale
 ```
 
-Each section under `content/` has an `_index.md` (the list page) and dated posts. Feeds: `/index.xml` is the site feed, rendered by `layouts/home.rss.xml` — every dated post, newest first, and nothing atemporal. `news` and `minutes` keep Hugo's built-in section feed. `governance` emits no feed (the documents carry no dates) and neither does `notices` (a feed cannot both be an archive and hide expired notices, so the surface was dropped rather than made wrong); both set `outputs: ["html"]` in their `_index.md`. A feed is an archive — items are never removed from one. `notes` sets it too, for a third reason: every note carries the same `date`, so a section feed would list simultaneous items in arbitrary order. Published notes still reach `/index.xml`, where they sit as one dated cluster among posts that genuinely do precede one another.
+Each section under `content/` has an `_index.md` (the list page) and dated posts. Feeds: `/index.xml` is the site feed, rendered by `layouts/home.rss.xml` — every dated post, newest first, and nothing atemporal. `news` and `minutes` keep Hugo's built-in section feed. `governance` emits no feed (the documents carry no dates) and neither does `notices` (a feed cannot both be an archive and hide expired notices, so the surface was dropped rather than made wrong); both set `outputs: ["html"]` in their `_index.md`. A feed is an archive — items are never removed from one. `notes` sets it too, for a third reason: the site feed already carries every note, so a section feed would be almost entirely a duplicate of it.
 
-The homepage is curated, not a mirror of the nav. The nav carries five sections; the front page lists the latest notices, the latest news, and the governance documents — no Minutes and no Notes, by choice. Notes in particular have no meaningful "latest", sharing one date, so any slice of them on the front page would be arbitrary.
+The homepage is curated, not a mirror of the nav. The nav carries five sections; the front page lists the latest notices, the latest news, and the governance documents — no Minutes and no Notes, by choice.
 
 ## Conventions
 
