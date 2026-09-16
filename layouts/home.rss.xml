@@ -5,13 +5,19 @@ any page with a nonzero `weight` sorts ahead of every page without one,
 regardless of date. The governance documents carry `weight` to order the list
 page, so they led the feed, three of them stamped year 0001 (issue #54).
 
-Two changes from the embedded template, and no others:
+Three changes from the embedded template, and no others:
 
   1. Page selection is explicit — dated pages only, newest first — instead of
      site.RegularPages in default order.
   2. The branches for site.Params.author and site.Copyright are omitted. None
      is set, so this emits the same channel the embedded template does. Set
      either one and this template must grow the branch back.
+  3. No lastBuildDate. It was the only consumer of the hand-written `lastmod:`
+     that every note carried, and with those gone it would have reported the
+     newest `date:` — a value that never moves again, which is worse than an
+     absent optional element. Setting `enableGitInfo` would restore a real one,
+     but it also needs `fetch-depth: 0` in pages.yml, or CI's depth-1 clone
+     dates every file to the deploy commit.
 
 Notices appear here with no expiry test, and that is deliberate. The listing rule
 — every notices listing goes through notices-by-status.html — does not reach a
@@ -39,9 +45,6 @@ outside the `task prettier` glob — keep the trim markers deliberate by hand.
     <description>Recent content on {{ .Site.Title }}</description>
     <generator>Hugo</generator>
     <language>{{ site.Language.Locale }}</language>
-{{- with $pages }}
-    <lastBuildDate>{{ (index .ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
-{{- end }}
 {{- with .OutputFormats.Get "RSS" }}
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
 {{- end }}

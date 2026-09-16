@@ -1,7 +1,7 @@
 ---
 name: new-minutes
-description: Creates a meeting-minutes file in content/minutes/ with complete frontmatter in Draft state. Use when recording, drafting, or filing minutes for an annual, special, or regular meeting. Computes the dated filename and the correct US Eastern offset for the meeting datetime.
-argument-hint: <title> [meeting-datetime YYYY-MM-DDTHH:MM]
+description: Creates a meeting-minutes file in content/minutes/ with complete frontmatter in Draft state. Use when recording, drafting, or filing minutes for an annual, special, or regular meeting. Computes the dated filename from the meeting date.
+argument-hint: <title> [meeting-date YYYY-MM-DD]
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,7 @@ Create a minutes file in `content/minutes/` with complete, correct frontmatter.
 From the arguments and conversation; ask for anything missing:
 
 - **title** — e.g. "Minutes — 2026 Annual Meeting"
-- **meeting datetime** — date and start time of the meeting
+- **meeting date** — the date of the meeting
 - **meeting_type** — one of `annual`, `special`, `regular`
 - **presiding**, **secretary** — names
 - **present**, **absent** — member name lists (may be left as placeholders to fill during drafting)
@@ -22,24 +22,17 @@ From the arguments and conversation; ask for anything missing:
 
 ## Compute the date field
 
-`date` is the meeting datetime (not today), in US Eastern with the correct offset:
-
-```sh
-TZ=America/New_York date -j -f "%Y-%m-%dT%H:%M:%S" "<YYYY-MM-DDTHH:MM:00>" "+%z"
-```
-
-Insert a colon into the offset (`-0400` → `-04:00`). Never hand-write the offset; the command resolves DST for the meeting's date.
+`date` is the meeting date (not today), date only — no time, no offset. `hugo.toml` sets `timeZone = "America/New_York"`, so a bare date is read as Eastern midnight.
 
 ## Create the file
 
-Path: `content/minutes/<meeting-date YYYY-MM-DD>-<slug>.md` — the date prefix is the meeting date; the URL comes from the `slug:` frontmatter field, which pins it permanently. Slug: lowercase title, strip punctuation, hyphens between words (e.g. `minutes-2026-annual-meeting`). Stop and ask if the path already exists.
+Path: `content/minutes/<title, normalized>.md` — lowercase the title, drop punctuation, hyphens between words; no date prefix. A title like "Minutes — 2026 Annual Meeting" gives `minutes-2026-annual-meeting.md`. The filename is also the URL: Hugo derives the URL segment from the title by the same normalization, and `validate-content.html` fails the build if the two disagree. Nothing in frontmatter pins the URL, so a later retitle moves it — when that happens, rename the file and add the old path under `aliases:`. Stop and ask if the path already exists.
 
 ```yaml
 ---
 title: "<title>"
-slug: <slug>
 description: "<description>"
-date: <meeting datetime with offset>
+date: <meeting date YYYY-MM-DD>
 meeting_type: <meeting_type>
 approved: false
 approved_on:
@@ -57,7 +50,7 @@ Leave the body empty unless minutes text was provided.
 ## Verify
 
 1. `bunx prettier --write <file>` — must pass.
-2. Confirm the offset matches the season of the **meeting date**: `-04:00` roughly Mar–Nov (DST), `-05:00` otherwise. A wrong offset can hide the post from production builds.
+2. Confirm `date` is a bare `YYYY-MM-DD` with no time or offset.
 3. Show the user the file path and frontmatter.
 
-Done means: file exists at the meeting-dated path, all eleven frontmatter fields present, `approved: false`, Prettier-clean.
+Done means: file exists at the path, all ten frontmatter fields present, `approved: false`, Prettier-clean.

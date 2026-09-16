@@ -3,7 +3,7 @@
     <h1>{{ .Title }}</h1>
     {{ .Content }}
     <ul class="item-list">
-      {{ range .Pages.ByTitle }}
+      {{ range .Pages.ByDate.Reverse }}
         {{ partial "item-row.html" . }}
       {{ end }}
     </ul>
