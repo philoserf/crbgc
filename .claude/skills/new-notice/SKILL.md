@@ -1,6 +1,6 @@
 ---
 name: new-notice
-description: Creates an RONR meeting notice in content/notices/ with complete frontmatter. Use when posting a notice of an annual or special meeting, a motion requiring previous notice, or a bylaw amendment. Computes the dated filename, expires date, and correct US Eastern offset.
+description: Creates an RONR meeting notice in content/notices/ with complete frontmatter. Use when posting a notice of an annual or special meeting, a motion requiring previous notice, or a bylaw amendment. Computes the dated filename and the expires date.
 argument-hint: <title> [meeting-date YYYY-MM-DD]
 disable-model-invocation: true
 ---
@@ -21,26 +21,27 @@ From the arguments and conversation; ask for anything missing:
 
 ## Compute the date fields
 
-- `date` (when posted) — now, in US Eastern with the correct offset:
+- `date` (when posted) — today's date in US Eastern, date only:
 
   ```sh
-  TZ=America/New_York date "+%Y-%m-%dT%H:%M:%S%z"
+  TZ=America/New_York date "+%Y-%m-%d"
   ```
 
-  Insert a colon into the offset (`-0400` → `-04:00`). Never hand-write the offset; the command resolves DST.
+  `hugo.toml` sets `timeZone = "America/New_York"`, so a bare date is read as Eastern midnight. Never add a time.
 
-- `expires` — the day after `meeting_date` (date only, no time).
+- `expires` — the day after `meeting_date`.
+
+All three date fields are bare `YYYY-MM-DD`.
 
 ## Create the file
 
-Path: `content/notices/<today YYYY-MM-DD>-<slug>.md` — the date prefix is today (posting date) and exists only for editor sort order; the URL comes from the `slug:` frontmatter field, which pins it permanently. Slug: lowercase title, strip punctuation, hyphens between words (keep the "notice-of" prefix). Stop and ask if the path already exists.
+Path: `content/notices/<title, normalized>.md` — lowercase the title, drop punctuation, hyphens between words; no date prefix. Notice titles begin "Notice of …", so the `notice-of-` prefix falls out of the normalization. The filename is also the URL: Hugo derives the URL segment from the title by the same normalization, and `validate-content.html` fails the build if the two disagree. Nothing in frontmatter pins the URL, so a later retitle moves it — when that happens, rename the file and add the old path under `aliases:`. Stop and ask if the path already exists.
 
 ```yaml
 ---
 title: "<title>"
-slug: <slug>
 description: "<description>"
-date: <posted datetime with offset>
+date: <YYYY-MM-DD>
 meeting_date: <YYYY-MM-DD>
 expires: <YYYY-MM-DD>
 notice_type: <notice_type>
@@ -53,7 +54,7 @@ Leave the body empty unless notice text was provided.
 ## Verify
 
 1. `bunx prettier --write <file>` — must pass.
-2. Confirm the offset matches the season: `-04:00` roughly Mar–Nov (DST), `-05:00` otherwise. A wrong offset can hide the post from production builds.
+2. Confirm all three date fields are bare `YYYY-MM-DD` with no time or offset.
 3. Show the user the file path and frontmatter. Remind them the notice appears under "Expired" on the list page after `expires`.
 
-Done means: file exists at the dated path, all eight frontmatter fields populated, Prettier-clean.
+Done means: file exists at the path, all seven frontmatter fields populated, Prettier-clean.

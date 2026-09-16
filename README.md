@@ -28,8 +28,8 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 - **YAML frontmatter** across all content. TOML is only used in `hugo.toml`.
 - **Prettier** formats Markdown, HTML/Hugo templates, YAML, TOML, and JSON. **Biome** formats and lints CSS. Run `task format` before committing.
 - **`layouts/index.llms.txt` is deliberately unformatted.** It is a plain-text template where whitespace is the output, and Prettier's `go-template` parser treats it as HTML — it splits Markdown headings from their text and collapses list items into a broken feed. It is excluded because the `task prettier` glob covers only `.{md,html,yml,yaml,toml,json}`; the exclusion cannot go in `.prettierignore`, which is a symlink to `.gitignore`, so an entry there would also stop git tracking the file. **Do not widen the glob.** Edit it by hand and check the rendered `/llms.txt`.
-- **Dated filenames** (`YYYY-MM-DD-slug.md`) for date-driven content. Date prefix sorts the editor.
-- **Explicit `slug:`** in every dated post's frontmatter pins its URL, and must be unique within its section. Without it, Hugo falls back to a title-derived value, and retitling a post would silently change its URL and break inter-content links. Both rules are checked in `layouts/partials/validate-content.html` and fail the build.
+- **The title is the filename is the URL.** Hugo normalizes the title (lowercased, punctuation dropped, spaces to hyphens) into the URL segment; the filename is that same string, with no date prefix. No content file carries a `slug:`. `layouts/partials/validate-content.html` fails the build when a filename and its URL segment disagree, and when two posts in a section would claim the same URL.
+- **Retitling a published post changes its URL.** Rename the file to match and list the old path under `aliases:`, which Hugo publishes as a redirect. Note that Hugo drops `&` entirely — "Dream Golf & Cabot" would give `dream-golf-cabot`, so write "and" in the title when you want it in the URL.
 - **Heading-fragment citations are checked.** Cross-references such as
   `[Article IV](/governance/bylaws/#article-iv--officers)` rely on anchors Goldmark derives
   from the heading text, so retitling a heading would silently send them to the top of the
@@ -37,20 +37,20 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
   not have.
 - **`description:` feeds the link preview.** It renders as both `meta name="description"` and `og:description`. Every content file carries one; a page without one still builds, and simply publishes with no preview text. Nothing enforces it.
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
+- **No `tags:`, no `lastmod:`.** With taxonomy and term pages disabled, tags rendered nowhere and reached no feed. `lastmod:` fed only the feed's `lastBuildDate`, which is also gone — `layouts/home.rss.xml` explains why and what restoring it would cost. Content frontmatter is `title`, `description`, `date`, plus the fields its own section needs.
 - **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
 
 ## Adding content
 
 ### A meeting notice
 
-1. Create `content/notices/YYYY-MM-DD-slug.md` (date prefix is for editor sort order; the URL comes from the `slug:` field).
+1. Create `content/notices/<normalized title>.md` (the filename and the URL are both the normalized title).
 2. Required frontmatter:
    ```yaml
    ---
    title: "Notice of …"
-   slug: notice-of-… # pins the URL; never change after publishing
    description: "…"
-   date: 2026-06-01T09:00:00-05:00 # when posted
+   date: 2026-06-01 # when posted
    meeting_date: 2026-06-15
    expires: 2026-06-16 # first day hidden — the day after meeting_date
    notice_type: annual-meeting # or special-meeting | previous-notice | bylaw-amendment
@@ -62,14 +62,13 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 
 ### Meeting minutes
 
-1. Create `content/minutes/YYYY-MM-DD-slug.md`.
+1. Create `content/minutes/<normalized title>.md`.
 2. Required frontmatter:
    ```yaml
    ---
    title: "Minutes — …"
-   slug: minutes-… # pins the URL; never change after publishing
    description: "…"
-   date: 2026-06-15T19:00:00-05:00 # the meeting datetime
+   date: 2026-06-15 # the meeting date
    meeting_type: annual # annual | special | regular
    approved: false # flip to true when approved at the next meeting
    approved_on: # set to the approval date when flipped
@@ -85,8 +84,8 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 
 ### A news post
 
-1. Create `content/news/YYYY-MM-DD-slug.md`.
-2. Minimal frontmatter: `title`, `slug`, `description`, `date`. That's it.
+1. Create `content/news/<normalized title>.md`.
+2. Minimal frontmatter: `title`, `description`, `date`. That's it.
 
 ### Amending bylaws or standing rules
 

@@ -1,6 +1,6 @@
 ---
 name: new-news
-description: Creates a news post in content/news/ with the section's minimal frontmatter (title, description, date). Use when posting an event recap, announcement, or casual club update. Computes the dated filename and the correct US Eastern offset automatically.
+description: Creates a news post in content/news/ with the section's minimal frontmatter (title, description, date). Use when posting an event recap, announcement, or casual club update. Computes the dated filename automatically.
 argument-hint: <title>
 disable-model-invocation: true
 ---
@@ -16,24 +16,23 @@ Create a news file in `content/news/` with the section's minimal frontmatter.
 
 ## Compute the date field
 
-`date` is now, in US Eastern with the correct offset:
+`date` is today's date in US Eastern, date only — no time, no offset:
 
 ```sh
-TZ=America/New_York date "+%Y-%m-%dT%H:%M:%S%z"
+TZ=America/New_York date "+%Y-%m-%d"
 ```
 
-Insert a colon into the offset (`-0400` → `-04:00`). Never hand-write the offset; the command resolves DST.
+`hugo.toml` sets `timeZone = "America/New_York"`, so a bare date is read as Eastern midnight. Never add a time.
 
 ## Create the file
 
-Path: `content/news/<today YYYY-MM-DD>-<slug>.md` — the date prefix is for editor sort order; the URL comes from the `slug:` frontmatter field, which pins it permanently. Slug: lowercase title, strip punctuation, hyphens between words. Stop and ask if the path already exists.
+Path: `content/news/<title, normalized>.md` — lowercase the title, drop punctuation, hyphens between words; no date prefix. The filename is also the URL: Hugo derives the URL segment from the title by the same normalization, and `validate-content.html` fails the build if the two disagree. Nothing in frontmatter pins the URL, so a later retitle moves it — when that happens, rename the file and add the old path under `aliases:`. Stop and ask if the path already exists.
 
 ```yaml
 ---
 title: "<title>"
-slug: <slug>
 description: "<description>"
-date: <posted datetime with offset>
+date: <YYYY-MM-DD>
 ---
 ```
 
@@ -42,7 +41,7 @@ That is the complete frontmatter for news — do not add fields from the other s
 ## Verify
 
 1. `bunx prettier --write <file>` — must pass.
-2. Confirm the offset matches the season: `-04:00` roughly Mar–Nov (DST), `-05:00` otherwise. A wrong offset can hide the post from production builds.
+2. Confirm `date` is a bare `YYYY-MM-DD` with no time or offset.
 3. Show the user the file path and frontmatter.
 
-Done means: file exists at the dated path, exactly four frontmatter fields, Prettier-clean.
+Done means: file exists at the path, exactly three frontmatter fields, Prettier-clean.

@@ -9,7 +9,8 @@
   The notes arrived from an Obsidian vault and 227 wikilinks were converted on
   import; anything editing this content in Obsidian will offer to put them
   back, and neither of Obsidian's link modes can produce a working link here,
-  because URLs come from `slug:` rather than from filenames. Checked across
+  because a URL is Hugo's normalization of the title, not the vault path.
+  Checked across
   every page with a file, not just the dated sections, so it also covers
   governance documents and section _index.md files. Frontmatter is out of
   scope: RawContent excludes it.
@@ -26,9 +27,9 @@
   from the heading text, so editing a heading silently breaks every inbound
   citation — no error, and the link still resolves to the top of the page.
   That is the same damage #56 gated for the slug half of the same URL.
-  Pages are resolved by RelPermalink rather than content path, because slug:
-  pins a URL that need not match the file. Section pages are included: one of
-  the citations lives in minutes/_index.md.
+  Pages are resolved by RelPermalink rather than content path: the two now
+  agree for dated posts, but not for governance or section pages. Section
+  pages are included: one of the citations lives in minutes/_index.md.
   Limitation: .Fragments knows content headings only, so a fragment pointing
   at an id emitted by a template would report as missing. None do today.
 */}}
@@ -56,23 +57,29 @@
 {{- range $section := slice "notices" "minutes" "news" "notes" -}}
   {{- $seen := dict -}}
   {{- with site.GetPage (printf "/%s" $section) -}}
-    {{/* Sorted by file path so the earliest-dated post owns a slug and the
-      later one is named as the file to fix (#78). Filenames are date-prefixed
-      in every dated section, and unlike .ByDate this stays deterministic
-      across the notes, which all share one date.
+    {{/* Sorted by file path so a duplicate URL always names the same file as
+      the one to fix (#78) — the first alphabetically owns it, the later one
+      is reported. No section date-prefixes its filenames, so this is
+      alphabetical order. .ByDate would not do: nothing stops two posts in a
+      section sharing a date, and a date carries no time, so which file got
+      named would be free to drift between builds.
     */}}
     {{- range sort .RegularPages "File.Path" -}}
       {{- $file := .File.Path -}}
-      {{/* #56: an explicit slug pins the URL against a retitle. */}}
-      {{- if not .Params.slug -}}
-        {{- errorf "%s: dated post has no slug: field in frontmatter — its URL would follow its title" $file -}}
-      {{- else -}}
-        {{- $slug := .Params.slug -}}
-        {{- with index $seen $slug -}}
-          {{- errorf "%s: slug %q is already pinned by the earlier post %s — pick a different slug for this post" $file $slug . -}}
-        {{- end -}}
-        {{- $seen = merge $seen (dict $slug $file) -}}
+      {{/* #56: nothing in frontmatter pins a URL any more — it is the title as
+        Hugo normalizes it, and the filename is the same normalization written
+        by hand. Requiring the two to agree is what catches a retitle that was
+        not accompanied by a rename, which is the edit that silently moves a
+        published URL. It also keeps the file findable from the URL.
+      */}}
+      {{- $seg := path.Base .RelPermalink -}}
+      {{- if ne .File.ContentBaseName $seg -}}
+        {{- errorf "%s: filename does not match its URL segment %q — Hugo derives the URL from the title, so rename the file to %s.md (note that Hugo drops & entirely; write \"and\" if you want it in the URL)." $file $seg $seg -}}
       {{- end -}}
+      {{- with index $seen $seg -}}
+        {{- errorf "%s: URL /%s/%s/ is already taken by the earlier post %s — retitle this post." $file $section $seg . -}}
+      {{- end -}}
+      {{- $seen = merge $seen (dict $seg $file) -}}
       {{/* #61: expires is the first day hidden, so it must clear the meeting. */}}
       {{- if and .Params.expires .Params.meeting_date -}}
         {{- if not (gt (time .Params.expires) (time .Params.meeting_date)) -}}
