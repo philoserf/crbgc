@@ -58,7 +58,7 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
    notice_type: annual-meeting # or special-meeting | previous-notice | bylaw-amendment — the build fails on anything else
    ---
    ```
-3. **`expires` is the first day the notice is hidden**, not the last day it is shown. Set it to the day after `meeting_date` so the notice stays up through the meeting it announces; the build fails if `expires` does not fall after `meeting_date`. The notice's own page never shows the raw value — `notice-meta.html` renders the day before it, labelled **Shown through**, so the page agrees with the section split rather than reading a day late.
+3. **`expires` is the first day the notice is hidden**, not the last day it is shown. Set it to the day after `meeting_date` so the notice stays up through the meeting it announces; the build fails if `expires` does not fall after `meeting_date`, and fails too if a notice carries a `meeting_date` without one — a meeting notice must stop being current after its meeting. A notice with neither field never expires, which is how a notice of motion or a standing notice is written. The notice's own page never shows the raw value — `notice-meta.html` renders the day before it, labelled **Shown through**, so the page agrees with the section split rather than reading a day late.
 4. On and after `expires`, the notice moves under the "Expired" heading on the section page and drops off the homepage and `llms.txt`. The split is computed once in `layouts/partials/notices-by-status.html`; anything that lists notices must read from it rather than querying the section directly (the site feed is the documented exception — see Feeds above).
 
 ### Meeting minutes
