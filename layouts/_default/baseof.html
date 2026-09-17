@@ -64,7 +64,22 @@
   </head>
   <body>
     <header>
-      <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+      {{/* The seal is decorative here: alt="" keeps it out of the accessible
+        name, which stays the title text beside it. width/height are explicit so
+        the header does not shift while the SVG loads. It is an <img> rather than
+        inline SVG on purpose — inlining would ship the seal's traced path data
+        on every one of the site's pages.
+      */}}
+      <a href="{{ "/" | relURL }}" class="site-title">
+        <img
+          class="site-seal"
+          src="{{ "seal.svg" | relURL }}"
+          alt=""
+          width="56"
+          height="56"
+        />
+        <span>{{ .Site.Title }}</span>
+      </a>
       {{ $section := .Section }}
       <nav class="site-nav">
         <a
