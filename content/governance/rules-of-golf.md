@@ -1,7 +1,6 @@
 ---
 title: "Rules of Golf"
 description: "A short match-play code proposed for adoption under Article VII of the Bylaws — draft, not yet adopted."
-draft: true
 weight: 35
 ---
 
