@@ -91,11 +91,21 @@ header {
 }
 
 .site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   font-family: var(--font-heading);
   font-size: var(--size-h5);
   font-weight: 400;
   color: var(--fg);
   text-decoration: none;
+}
+
+/* The seal keeps its own size; only the title text beside it wraps. */
+.site-seal {
+  flex: none;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .site-title:hover {

@@ -16,7 +16,7 @@ content/
   notes/                          # essays, history, course architecture — the informal side
 layouts/                          # Hugo templates and partials
 assets/css/style.css              # site styles (Biome-managed)
-static/                           # served at the root: CNAME, favicons, the Open Graph card
+static/                           # served at the root: CNAME, the seal, favicons, the Open Graph card
 hugo.toml                         # config: permalinks, disabled kinds, locale
 ```
 
@@ -42,9 +42,10 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
 - **No `tags:`, no `lastmod:`.** With taxonomy and term pages disabled, tags rendered nowhere and reached no feed. `lastmod:` fed only the feed's `lastBuildDate`, which is also gone — `layouts/home.rss.xml` explains why and what restoring it would cost. Content frontmatter is `title`, `description`, `date`, plus the fields its own section needs.
 - **`<abbr>` tags** in content are intentional (e.g., for C&RBGC tooltips).
-- **The icons and the link-preview card are generated — `task icons`.** `static/favicon.svg` is the source and is the one file that task does not rebuild: its `<path>` is a traced outline of the New York ampersand, the `&` from the Club's own name. It is an outline rather than a `<text>` element on purpose — the site renders body text in the reader's own system serif by design, but an icon is a mark and should look the same everywhere. Retracing it needs `qlmanage` and `potrace`; the rasters below it need only ImageMagick.
+- **The icons and the link-preview card are generated — `task icons`.** Two files are the sources and are the ones that task does not rebuild: `static/seal.svg`, the Club's seal, and `static/favicon.svg`. Both carry traced outlines rather than `<text>` — the seal's ring is Copperplate, and both centre on the same traced New York ampersand, the `&` from the Club's own name, so the favicon is literally the seal's middle. They are outlines on purpose: the site renders body text in the reader's own system serif by design, but a mark should look the same everywhere, and the seal's ring text would over- or under-run its arc under a substitute face. Retracing needs a WebKit render plus `potrace`; everything downstream needs only ImageMagick.
 - **`favicon.ico` earns its place next to `favicon.svg`.** Browsers take the SVG, but scrapers, feed readers and chat clients request `/favicon.ico` unconditionally, whatever the markup says. Every icon has an opaque white ground: a `#09090b` mark on transparency vanishes into dark browser chrome, and iOS fills a transparent touch icon with black.
-- **One Open Graph card for the whole site.** `static/og-image.png` carries the Club's name and nothing else, so it never goes stale and never disagrees with the page it fronts — `og:title` and `og:description` already carry everything page-specific. `og:image` must be absolute, so the template builds it with `absURL`.
+- **One Open Graph card for the whole site.** `static/og-image.png` is the seal over the Club's name, and carries nothing page-specific, so it never goes stale and never disagrees with the page it fronts — `og:title` and `og:description` already carry that. `og:image` must be absolute, so the template builds it with `absURL`.
+- **The seal in the header is an `<img>`, never inlined.** Inline SVG would ship the seal's traced path data on every page. It is decorative there — `alt=""`, with the title text beside it carrying the accessible name — and has explicit `width`/`height` so the header does not shift as it loads. Below roughly 30rem the seal keeps its size and only the text wraps.
 
 ## Adding content
 

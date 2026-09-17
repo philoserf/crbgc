@@ -40,10 +40,12 @@ tasks:
   icons:
     desc: Regenerate the favicon rasters and the Open Graph card (macOS only)
     cmds:
-      # static/favicon.svg is the source and is NOT generated here: its path is a
-      # traced outline of the New York ampersand, so the mark renders identically
-      # everywhere instead of following the reader's serif the way body text does.
-      # Retracing it needs qlmanage + potrace; everything below is reproducible.
+      # Two files are sources and are NOT generated here: static/favicon.svg and
+      # static/seal.svg. Both carry traced outlines rather than <text> — the same
+      # New York ampersand in each, plus Copperplate ring text in the seal — so the
+      # marks render identically everywhere instead of following the reader's own
+      # fonts the way body text does. Retracing needs a WebKit render plus potrace;
+      # everything below is reproducible from those two files.
       - magick -background white -density 1152 static/favicon.svg -resize 1024x1024 /tmp/crbgc-icon.png
       # -strip and the excluded chunks keep the output byte-identical run to run:
       # without them ImageMagick stamps a tIME chunk and every run dirties the tree.
@@ -52,9 +54,12 @@ tasks:
       - magick /tmp/crbgc-icon.png -resize 32x32 -background white -alpha remove -alpha off /tmp/crbgc-32.png
       - magick /tmp/crbgc-icon.png -resize 48x48 -background white -alpha remove -alpha off /tmp/crbgc-48.png
       - magick /tmp/crbgc-16.png /tmp/crbgc-32.png /tmp/crbgc-48.png -colors 64 static/favicon.ico
-      # The card is drawn from fonts rather than from the SVG, by full path:
-      # ImageMagick resolves no font by name on this machine.
-      - magick -size 1200x630 xc:white -fill '#09090b' -font /System/Library/Fonts/NewYork.ttf -pointsize 92 -gravity north -annotate +0+160 'The Common & Recent' -annotate +0+280 'Bogeymens Golf Club' -fill '#e4e4e5' -draw 'rectangle 500,425 700,426' -fill '#6b6b6f' -font /System/Library/Fonts/SFNS.ttf -pointsize 30 -kerning 3 -annotate +0+462 'crbgc.org' -depth 8 -strip static/og-image.png
+      # The card is the seal over the club name. The seal is rasterised in its own
+      # command because -density leaks past the parentheses and would scale
+      # -pointsize with it, blowing the type up by 16x. Fonts are given by full
+      # path: ImageMagick resolves no font by name on this machine.
+      - magick -background white -density 1152 static/seal.svg -resize 250x250 /tmp/crbgc-seal.png
+      - magick -size 1200x630 xc:white /tmp/crbgc-seal.png -gravity north -geometry +0+78 -composite -font /System/Library/Fonts/NewYork.ttf -fill '#09090b' -pointsize 58 -gravity north -annotate +0+368 'The Common & Recent Bogeymens Golf Club' -fill '#e4e4e5' -draw 'rectangle 520,478 680,479' -font /System/Library/Fonts/SFNS.ttf -fill '#6b6b6f' -pointsize 28 -kerning 3 -gravity north -annotate +0+512 'crbgc.org' -depth 8 -strip static/og-image.png
 
   serve:
     desc: Run Hugo dev server with drafts and future-dated content
