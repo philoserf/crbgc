@@ -37,6 +37,25 @@ tasks:
       - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
       - bunx biome check assets
 
+  icons:
+    desc: Regenerate the favicon rasters and the Open Graph card (macOS only)
+    cmds:
+      # static/favicon.svg is the source and is NOT generated here: its path is a
+      # traced outline of the New York ampersand, so the mark renders identically
+      # everywhere instead of following the reader's serif the way body text does.
+      # Retracing it needs qlmanage + potrace; everything below is reproducible.
+      - magick -background white -density 1152 static/favicon.svg -resize 1024x1024 /tmp/crbgc-icon.png
+      # -strip and the excluded chunks keep the output byte-identical run to run:
+      # without them ImageMagick stamps a tIME chunk and every run dirties the tree.
+      - magick /tmp/crbgc-icon.png -resize 180x180 -background white -alpha remove -alpha off -colors 64 -strip -define png:exclude-chunks=date,time PNG8:static/apple-touch-icon.png
+      - magick /tmp/crbgc-icon.png -resize 16x16 -background white -alpha remove -alpha off /tmp/crbgc-16.png
+      - magick /tmp/crbgc-icon.png -resize 32x32 -background white -alpha remove -alpha off /tmp/crbgc-32.png
+      - magick /tmp/crbgc-icon.png -resize 48x48 -background white -alpha remove -alpha off /tmp/crbgc-48.png
+      - magick /tmp/crbgc-16.png /tmp/crbgc-32.png /tmp/crbgc-48.png -colors 64 static/favicon.ico
+      # The card is drawn from fonts rather than from the SVG, by full path:
+      # ImageMagick resolves no font by name on this machine.
+      - magick -size 1200x630 xc:white -fill '#09090b' -font /System/Library/Fonts/NewYork.ttf -pointsize 92 -gravity north -annotate +0+160 'The Common & Recent' -annotate +0+280 'Bogeymens Golf Club' -fill '#e4e4e5' -draw 'rectangle 500,425 700,426' -fill '#6b6b6f' -font /System/Library/Fonts/SFNS.ttf -pointsize 30 -kerning 3 -annotate +0+462 'crbgc.org' -depth 8 -strip static/og-image.png
+
   serve:
     desc: Run Hugo dev server with drafts and future-dated content
     cmds:

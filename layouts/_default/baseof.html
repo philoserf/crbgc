@@ -19,11 +19,16 @@
       and notices linked from minutes and from the notes, and pasted into chat
       — so a link preview should come from the page rather than from whatever
       the client scrapes. Every content file already carries a description, so
-      the data was already here; only the tags were missing. No og:image: no
-      image asset exists, and adding one was out of scope.
+      the data was already here; only the tags were missing.
       Both values are computed into variables first. Prettier's go-template
       plugin reflows an inline if/else onto its own lines, which is harmless in
       <title> but would put newlines inside a content="…" attribute.
+      og:image is one card for the whole site, not one per page: it carries the
+      Club's name and nothing else, so it never goes stale and never disagrees
+      with the page it fronts — og:title and og:description already carry
+      everything page-specific. It must be an absolute URL, hence absURL; a
+      relative one is dropped by every scraper. twitter:card only selects the
+      layout — X and Slack read title and description from the og: tags above.
     */}}
     {{ $ogType := cond .IsHome "website" "article" }}
     {{ $ogTitle := cond .IsHome .Site.Title .Title }}
@@ -35,6 +40,21 @@
     {{ with .Description }}
       <meta property="og:description" content="{{ . }}" />
     {{ end }}
+    <meta property="og:image" content="{{ "og-image.png" | absURL }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{ .Site.Title }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {{/* The icons are generated from static/favicon.svg — see the `icons` task.
+      The SVG is served to browsers that take one; favicon.ico stays because
+      scrapers, feed readers and chat clients request /favicon.ico flat out,
+      whatever the markup says. Each has an opaque white ground on purpose: a
+      near-black mark on transparency disappears into dark browser chrome, and
+      iOS fills a transparent touch icon with black.
+    */}}
+    <link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="32x32" />
+    <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" />
     {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
     <link
       rel="stylesheet"
