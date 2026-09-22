@@ -116,4 +116,5 @@ Dependencies are refreshed manually, roughly quarterly: `bun update && task chec
 
 ## License
 
-See [LICENSE](./LICENSE).
+- **Code / config**: [MIT](./LICENSE).
+- **Content**: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) © 2022–2026 C&RBGC. See [CONTENT-LICENSE.md](./CONTENT-LICENSE.md).
