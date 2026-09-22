@@ -4,3 +4,7 @@ resources/
 node_modules/
 .obsidian/
 .trash/
+.task/
+.issues/
+.task/
+.issues/
