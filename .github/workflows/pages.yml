@@ -14,10 +14,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 env:
   HUGO_VERSION: latest
 
@@ -82,6 +78,12 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
+    # Scoped to the deploy job, so a pull request's build never queues behind
+    # a deploy. Never cancel: an interrupted Pages deploy can leave the site
+    # half-published.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write
