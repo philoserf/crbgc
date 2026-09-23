@@ -1,12 +1,12 @@
 ---
 title: "Rules of Golf"
-description: "A short match-play code proposed for adoption under Article VII of the Bylaws — draft, not yet adopted."
+description: "A short match-play code proposed for adoption as part of the Standing Rules — draft, not yet adopted."
 weight: 35
 ---
 
-**Draft. Not adopted.** Proposed for adoption as a Standing Rule under [Article VII](/governance/bylaws/#article-vii--standing-rules) of the Bylaws, which commits the conduct of play to the Club and requires a majority of the Members in Good Standing at any meeting. Until that vote these rules govern nothing.
+**Draft. Not adopted.** Proposed for adoption as part of the [Standing Rules](/governance/standing-rules/) under [Article VII](/governance/bylaws/#article-vii--standing-rules) of the Bylaws, which commits the conduct of play to the Club and requires a majority of the Members in Good Standing at any meeting. It is moved in one motion with [the amendment to the Standing Rules](#the-amendment-to-the-standing-rules) that strikes the rules of play it absorbs and puts a pointer here in their place. Until that vote these rules govern nothing, and the Standing Rules as they stand govern play.
 
-The modern code is written for a competitor being watched — by a field, a committee, a camera. It is long because it is trying to be fair to a stranger playing a course you will never see, for money. The [1744 Articles](/notes/rules-of-golf-1744/) are two pages long because they were written by a few men who played together and had to agree only with each other. This code is written for the second case: two friends walking, one hole at a time, settling it between them.
+The modern code is written for a competitor being watched — by a field, a committee, a camera. It is long because it is trying to be fair to a stranger playing a course you will never see, for money. The [1744 Articles](/notes/rules-of-golf-1744/) are two pages long because they were written by a few men who played together and had to agree only with each other. This code is written for the second case: a few friends walking, one hole at a time, settling it between them.
 
 So it takes the older codes' brevity and their assumption that the game is a match, and the modern code's genuine kindnesses — the ones that removed a penalty without removing a problem. It keeps nothing that exists to protect a scorecard from a stranger.
 
@@ -14,10 +14,10 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 
 ## The Match
 
-1. **The Form.** Golf is played by two sides, one hole at a time. A side is one player or two. Strokes are counted only to decide the hole, and the hole is the unit of the game.
+1. **The Form.** Golf is played by two sides, one hole at a time. A side is one player or two. Any two Members may play as a side in foursomes, the Club's honored alternate-shot format — one ball, struck in turn — which halves the time and doubles the blame. Strokes are counted only to decide the hole, and the hole is the unit of the game.
 2. **The Hole.** The side holing in fewer strokes wins the hole. Equal strokes halve it, and a halved hole is a real result, not a failure to produce one.
 3. **The Match.** A match is won when a side leads by more holes than remain. All square after the last hole is a halved match; the Club requires no extra holes unless both sides want them.
-4. **Order of Play.** Play when you are ready and it is safe, as [Ready Play](/governance/standing-rules/#course-etiquette) requires. The honor — the invitation to the side that won the last hole to play first — survives as a courtesy on the tee, freely offered and freely declined. No stroke is ever recalled for being played out of turn; the old power to recall belongs to a game played against strangers.
+4. **Order of Play.** Play when you are ready and it is safe to do so, rather than waiting on the honor or the player who is away. Readiness, not ceremony, sets the order of play. This is courtesy, not haste: it never overrides safety, and you may always cede the shot to a partner who wants it. The honor — the invitation to the side that won the last hole to play first — survives as a courtesy on the tee, freely offered and freely declined. No stroke is ever recalled for being played out of turn; the old power to recall belongs to a game played against strangers.
 5. **Concession.** At any time you may concede a stroke, a hole, or the match. A concession cannot be refused or withdrawn. Concede generously and without theater.
 6. **Information.** Tell your opponent your stroke count truthfully whenever asked. Wrong information that changes how they play costs the hole, unless you correct it before they play again.
 7. **Advice.** Ask your partner anything. Ask your opponent anything, too — this Club would rather you learned the shot than lost the hole for wanting to. What you may not do is ask and then dispute the answer.
@@ -25,10 +25,10 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 
 ## Playing the Ball
 
-9. **Play It as It Lies.** Play the ball as it lies and the ground as you find it. Do not improve your lie, your stance, your swing, or your line. [Standing Rule 5](/governance/standing-rules/#rules-of-play) has already said why, and said it better. Everything below is either an application of it or an admitted exception to it.
+9. **Play It as It Lies.** Play the ball as it lies and the ground as you find it. Do not improve your lie, your stance, your swing, or your line. Firm turf, an awkward stance, and the run of the land are the problem, not a defect to be relieved. It is the oldest rule there is, and the most generous: it turns every patch of bad ground into a question of intelligence. Everything below is either an application of it or an admitted exception to it.
 10. **Fairly Struck.** A stroke is the forward movement of the club made with the intention of striking the ball. Strike at the ball; do not push, scrape, or spoon it.
-11. **Your Own Ball.** Play your own ball from the tee to the hole, and mark it so that you can say it is yours. Playing a wrong ball costs the hole — unless both sides did it, in which case neither is penalized and the hole is played out with the balls as exchanged.
-12. **One Ball to the Hole.** The ball you play from the tee is the ball you hole, which is the third of the thirteen Articles and has never needed amending. If it cracks or splits, say so, and change it.
+11. **Your Own Ball.** Play your own ball — your side's, in foursomes — from the tee to the hole, and mark it so that you can say it is yours. Playing a wrong ball costs the hole — unless both sides did it, in which case neither is penalized and the hole is played out with the balls as exchanged.
+12. **One Ball to the Hole.** The ball you play from the tee is the ball you hole, as the third of the thirteen Articles has it. If it cracks or splits, say so, and change it. If it is lost or out of bounds, play another under Rules 19 and 20.
 13. **Loose Impediments.** Move any loose natural thing, anywhere on the course, including in a bunker and on the green — stone, leaf, twig, worm cast, the whole ancient list of break-clubs. If the ball moves because you moved one, replace it, without penalty. 1744 forbade it and the modern code allows it, and the game loses nothing by that.
 14. **Movable Obstructions.** A rake, a bottle, a sign, a forgotten headcover: move it. If the ball moves, replace it, without penalty.
 15. **Rub of the Green.** If anything or anyone stops or deflects your ball — an animal, a rake, your opponent, yourself — play it where it lies, without penalty, and say nothing more about it.
@@ -38,7 +38,7 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 
 ## Trouble
 
-19. **Lost Ball.** Look for it. A [Reasonable Search](/governance/standing-rules/#glossary) is what the Standing Rules say it is — the modern three minutes is a fair measure. Then drop a ball where the two of you agree it was lost, no nearer the hole, and play on without penalty, as [Lost Ball Protocol](/governance/standing-rules/#course-etiquette) provides.
+19. **Lost Ball.** Look for it, for a Reasonable Search: the time spent looking before someone suggests it's time to move on. The modern three minutes is a fair measure. Then drop a ball where the two of you agree it was lost, no nearer the hole, and play on without penalty.
 20. **Out of Bounds.** Treated as a lost ball, under Rule 19. A stake at the edge of someone's yard is not a hazard the architect put there.
 21. **Unplayable.** You alone judge your ball unplayable, and you may do so anywhere. For one stroke, choose: play again from where you played the last stroke; drop within two club-lengths of the ball, no nearer the hole; or drop anywhere on the line back from the hole through where the ball lay, as far back as you like.
 22. **Water.** Play it as it lies, or, for one stroke, drop behind the water on the line back from the hole through the point where the ball last crossed the margin — as far back as you like. This is the 1744 relief, in modern geometry.
@@ -54,7 +54,7 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 
 ## Playing the Colonel
 
-29. **The Bogey Competition.** In the Club's official format the opponent is the card, and [Colonel Bogey](/governance/standing-rules/#rules-of-play) makes bogey on every hole. The rules above that need a living opponent fall away: there are no concessions, no questions of information or order, and no recall. Play the ball as it lies, keep your own count honestly, pick up once the hole is lost, and record the margin.
+29. **The Bogey Competition.** The Club's official format is the bogey competition, played over any number of holes. The opponent is the card, and [Colonel Bogey](/governance/standing-rules/#rules-of-play) makes bogey on every hole. Play the Colonel at match play, up, down, or halved on each hole; in foursomes, the side plays the Colonel as one. The rules above that need a living opponent fall away: there are no concessions, no questions of information or order, and no recall. Play the ball as it lies, keep your own count honestly, pick up once the hole is lost, and record your margin against the Colonel. That margin is the result.
 30. **Your Own Referee.** Playing alone, you are the whole committee. Rule the doubt against yourself, and then forget it; nobody at the Club will ever check.
 
 ## Penalty, Dispute, Equity
@@ -69,11 +69,22 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 > It's not about the score you post but the stories you tell.  
 > —C&RBGC Philosophy
 
+## The Amendment to the Standing Rules
+
+_This section is part of the proposal, not of the code. Strike it on adoption._
+
+Moved together with this code, and numbered as the [Standing Rules](/governance/standing-rules/) stand today:
+
+1. **Rules of Play 2, The Bogey Competition,** is replaced by: "**The Rules of Golf.** The conduct of play is governed by the Rules of Golf, adopted as part of these Standing Rules. The bogey competition is the official format of the Club and is played under them."
+2. **Rules of Play 5, Play It as It Lies,** is struck, and the Rules of Play after it are renumbered. Its text is Rule 9 here.
+3. **Course Etiquette 2, 3, and 4** — Ready Play, Lost Ball Protocol, and the Foursomes Provision — are struck. Their text is Rules 4, 19, and 1 here.
+4. **The glossary entries** for Foursomes, Ready Play, and Reasonable Search are struck.
+
 ## Questions Reserved for the Vote
 
 _This section is part of the proposal, not of the code. Strike it on adoption._
 
-1. **The lost ball, and out of bounds.** Rules 19 and 20 carry forward the adopted [Lost Ball Protocol](/governance/standing-rules/#course-etiquette) — drop and play on, no penalty. Every historical code charged stroke and distance, and 1891 charged the hole outright. The draft follows the Standing Rule rather than amending it by implication. If the Club would rather pay a stroke, amend the Standing Rule and Rule 19 together.
-2. **The honor.** Rule 4 keeps the honor as a courtesy and abolishes the recall, because [Ready Play](/governance/standing-rules/#course-etiquette) is already adopted and the two cannot both be binding. The alternative is to restore order of play as a rule and make ready play the exception.
+1. **The lost ball, and out of bounds.** Rules 19 and 20 carry forward the Club's Lost Ball Protocol, which this motion moves here from the Standing Rules — drop and play on, no penalty. Every historical code charged stroke and distance, and 1891 charged the hole outright. If the Club would rather pay a stroke, adding "for one stroke" to Rule 19 is the whole amendment.
+2. **The honor.** Rule 4 carries forward the Club's Ready Play, which this motion moves here from the Standing Rules, keeps the honor as a courtesy, and abolishes the recall, because ready play and a binding honor cannot both hold. The alternative is to restore order of play as a rule and make ready play the exception; that is a rewrite of Rule 4, not a one-line amendment.
 3. **The stymie.** Rule 27 abolishes it. The Club's own notes mourn it, and a case can be made that it is precisely the kind of arbitrary difficulty this Club exists to defend. It is left out because "friendly" and "the stymie" pull against each other, and friendly won. Reverse it by striking Rule 27.
 4. **The cart path.** Rule 23 gives free relief from a cart path, which is the modern kindness. The 1891 and 1925 codes made paths and roads hazards outright — you played it off the road, and the Road Hole is what that produced. The Club's own [complaint against the cart](/notes/modernizations-corruption-of-golf/) makes this the one place the draft takes the modern side against its own argument. Striking "a cart path" from Rule 23 is the whole amendment.
