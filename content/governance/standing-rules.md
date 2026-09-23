@@ -6,6 +6,8 @@ last_amended: 2026-06-21
 weight: 30
 ---
 
+**A revision is proposed.** The draft [Rules of Golf](/governance/rules-of-golf/), for the 2027 Annual Meeting, would move the rules of play out of these Standing Rules; [the amendment](/governance/rules-of-golf/#the-amendment-to-the-standing-rules) is set out there. Until the Members vote, the rules below govern play as adopted.
+
 Adopted under [Article VII](/governance/bylaws/#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogeymens Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
 
 These rules describe the older orientation of the game in working form: a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball. Everything that thickens the Member's relationship to the ground and the company belongs; everything that thins it does not.
