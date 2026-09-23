@@ -6,8 +6,7 @@
       "Bash(defuddle parse *)",
       "Bash(task check)",
       "Bash(task check *)",
-      "Bash(claude mcp list *)",
-      "mcp__apple-eventkit__calendar_list_events"
+      "Bash(claude mcp list *)"
     ]
   }
 }
