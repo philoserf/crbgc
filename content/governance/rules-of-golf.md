@@ -21,7 +21,7 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 5. **Concession.** At any time you may concede a stroke, a hole, or the match. A concession cannot be refused or withdrawn. Concede generously and without theater.
 6. **Information.** Tell your opponent your stroke count truthfully whenever asked. Wrong information that changes how they play costs the hole, unless you correct it before they play again.
 7. **Advice.** Ask your partner anything. Ask your opponent anything, too — this Club would rather you learned the shot than lost the hole for wanting to. You may not ask and then dispute the answer.
-8. **Strokes.** Any strokes given are agreed on the first tee, before the first stroke, and are not revisited. Start from each side's [Club Bogey Handicap](/governance/standing-rules/#scoring--handicaps); the Club keeps no other index and appoints no committee, and two sides who know each other can settle the rest in a sentence.
+8. **Strokes.** Any strokes given are agreed on the first tee, before the first stroke, and are not revisited. Start from each side's Club Bogey Handicap under Rule 32; two sides who know each other can settle the rest in a sentence.
 
 ## Playing the Ball
 
@@ -57,12 +57,18 @@ Read it once, in full, and carry it in your head. Where it is silent, the last r
 29. **The Bogey Competition.** The Club's official format is the bogey competition, played over any number of holes. The opponent is the card, and [Colonel Bogey](/governance/standing-rules/#rules-of-play) makes bogey on every hole. Play the Colonel at match play, up, down, or halved on each hole; in foursomes, the side plays the Colonel as one. The rules above that need a living opponent fall away: there are no concessions and no questions of information or order. Play the ball as it lies, keep your own count honestly, pick up once the hole is lost, and record your margin against the Colonel. That margin is the result.
 30. **Your Own Referee.** Playing alone, you are the whole committee. Rule the doubt against yourself, and then forget it; nobody at the Club will ever check.
 
+## The Card
+
+31. **The Honor System.** Every score is reported on your honor, and taken on it.
+32. **Club Bogey Handicap.** Keep your own Club Bogey Handicap: your average margin against Colonel Bogey over your last ten rounds. There is no index, no fee, and no committee: only arithmetic and honor.
+33. **All Rounds Count.** There are no casual rounds, only rounds. Every round counts toward your handicap, solo or in company, twilight or medal.
+
 ## Penalty, Dispute, Equity
 
-31. **The General Penalty Is Loss of the Hole.** Where a rule above names no penalty, breaching it costs the hole. There is no two-stroke penalty in this code, and no disqualification: losing the hole is punishment enough.
-32. **What Costs Nothing.** A deflection, an accident, a ball moved by nature, a ball moved while clearing something loose, a double-hit, a lost ball, a ball out of bounds, a cracked ball changed openly, a question asked of anyone. None of these is an offense.
-33. **Settle It Before the Next Tee.** Raise a doubt before either side plays from the next tee — on the last hole, before you shake hands. After that the hole stands as played.
-34. **Equity.** Where this code is silent, and it is silent about a great deal, decide it between you in equity: the outcome two sides who would rather play than argue can both accept. If you cannot agree, halve the hole and let it lie. A rule you have to look up has already cost more than the shot was worth.
+34. **The General Penalty Is Loss of the Hole.** Where a rule above names no penalty, breaching it costs the hole. There is no two-stroke penalty in this code, and no disqualification: losing the hole is punishment enough.
+35. **What Costs Nothing.** A deflection, an accident, a ball moved by nature, a ball moved while clearing something loose, a double-hit, a lost ball, a ball out of bounds, a cracked ball changed openly, a question asked of anyone. None of these is an offense.
+36. **Settle It Before the Next Tee.** Raise a doubt before either side plays from the next tee — on the last hole, before you shake hands. After that the hole stands as played.
+37. **Equity.** Where this code is silent, and it is silent about a great deal, decide it between you in equity: the outcome two sides who would rather play than argue can both accept. If you cannot agree, halve the hole and let it lie. A rule you have to look up has already cost more than the shot was worth.
 
 ---
 
@@ -75,10 +81,11 @@ _This section is part of the proposal, not of the code. Strike it on adoption._
 
 Moved together with this code, and numbered as the [Standing Rules](/governance/standing-rules/) stand today:
 
-1. **Rules of Play 2, The Bogey Competition,** is replaced by: "**The Rules of Golf.** The conduct of play is governed by the Rules of Golf, adopted as part of these Standing Rules. The bogey competition is the official format of the Club and is played under them."
+1. **Rules of Play 2, The Bogey Competition,** is replaced by: "**The Rules of Golf.** The conduct of play and the keeping of scores are governed by the Rules of Golf, adopted as part of these Standing Rules. The bogey competition is the official format of the Club and is played under them."
 2. **Rules of Play 5, Play It as It Lies,** is struck, and the Rules of Play after it are renumbered. Its substance is Rule 9 here.
 3. **Course Etiquette 2, 3, and 4** — Ready Play, Lost Ball Protocol, and the Foursomes Provision — are struck. Their substance is Rules 4, 19, and 1 here.
-4. **The glossary entries** for Foursomes, Ready Play, and Reasonable Search are struck.
+4. **Scoring & Handicaps** — Honor System, Club Bogey Handicap, and All Rounds Count — is struck as a section. Its substance is Rules 31, 32, and 33 here.
+5. **The glossary entries** for Club Bogey Handicap, Foursomes, Ready Play, and Reasonable Search are struck.
 
 ## Questions Reserved for the Vote
 
