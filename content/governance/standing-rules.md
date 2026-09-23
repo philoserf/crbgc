@@ -13,14 +13,15 @@ These rules describe the older orientation of the game in working form: a walk o
 ## Rules of Play
 
 1. **The Bogey Standard.** Bogey is the target. Members shall consider every hole playable to bogey, regardless of actual difficulty. Colonel Bogey scores bogey on every hole of every course—three, nine, eighteen, or thirty-six—without effort or joy.
-2. **The Rules of Golf.** The conduct of play and the keeping of scores are governed by the [Rules of Golf](/governance/rules-of-golf/), adopted as part of these Standing Rules. The bogey competition is the official format of the Club and is played under them.
+2. **The Bogey Competition.** The official format of the Club is the bogey competition, played over any number of holes. Each Member plays match play against Colonel Bogey on the card: up, down, or halved on each hole. A Member shall pick up once the hole is lost. The Member's result is their margin against the Colonel. In foursomes, the side plays the Colonel as one.
 3. **The Walking Rule.** Golf is played on foot. The walk is the game—it restores the conversation, the attention to the ground underfoot, the rhythm of effort and recovery between shots, and the body's slow learning of the course. A cart requires medical necessity or an exceptional ruling, granted reluctantly.
 4. **The Half-Set.** A Member is encouraged to carry seven or eight clubs rather than fourteen. The reduction forces invention—the half-shot, the bumped seven-iron from forty yards, the punched three-quarter wedge—and invention is where skill lives.
-5. **The Short Game.** Honor the labor no one practices. Some seventy percent of strokes fall within a hundred yards of the hole; the Member who can pitch, chip, and putt beats the Member who flies it forty yards farther, every time, at the level any of us play.
-6. **Hold Equipment Lightly.** Buy what you will use until it breaks, and resist the marketing cycle that wants a new bag every three years. Persimmon, hickory, and graphite all belong in the hands of a Member who knows why they chose them.
-7. **Zen Juice Protocol.** Consumption of scotch whisky from a flask is permitted and encouraged, particularly after a poor shot.
-8. **Dew Sweeper Priority.** A Member first off the tee shall hold bragging rights for the rest of that day.
-9. **Gallery Rule.** Any shot witnessed by a Gallery shall be deemed to have improved by one stroke category. The improvement applies to bragging rights only and shall never be recorded on the card.
+5. **The Rules of Golf.** The conduct of play, in the bogey competition and in every match, is governed by the [Rules of Golf](/governance/rules-of-golf/), adopted as part of these Standing Rules.
+6. **The Short Game.** Honor the labor no one practices. Some seventy percent of strokes fall within a hundred yards of the hole; the Member who can pitch, chip, and putt beats the Member who flies it forty yards farther, every time, at the level any of us play.
+7. **Hold Equipment Lightly.** Buy what you will use until it breaks, and resist the marketing cycle that wants a new bag every three years. Persimmon, hickory, and graphite all belong in the hands of a Member who knows why they chose them.
+8. **Zen Juice Protocol.** Consumption of scotch whisky from a flask is permitted and encouraged, particularly after a poor shot.
+9. **Dew Sweeper Priority.** A Member first off the tee shall hold bragging rights for the rest of that day.
+10. **Gallery Rule.** Any shot witnessed by a Gallery shall be deemed to have improved by one stroke category. The improvement applies to bragging rights only and shall never be recorded on the card.
 
 ## Course Etiquette
 
@@ -31,6 +32,12 @@ These rules describe the older orientation of the game in working form: a walk o
 
 1. **The Solo Round Counts.** A Member alone is a Member at play. The solitary walked round is golf in its oldest form, and it counts in full—played against the Colonel as ever, and posted like any other.
 2. **The Contemplative Clause.** Golf is among the few things a modern adult may do that asks for extended attention, in a landscape, on a problem of no consequence, with body and mind engaged together. Its great moments are accompanied by little public exclamation. A Member is entitled to a quiet round and owes no apology for preferring one.
+
+## Scoring & Handicaps
+
+1. **Honor System.** All scores shall be reported on the honor system.
+2. **Club Bogey Handicap.** Each Member shall maintain their own Club Bogey Handicap: the average margin against Colonel Bogey over the Member's last ten rounds. There shall be no index, no fees, and no committee—only arithmetic and honor.
+3. **All Rounds Count.** There are no casual rounds; there are only rounds. Every round counts toward the Club Bogey Handicap—solo or in company, twilight or medal.
 
 ## Visitors & Membership
 
@@ -53,6 +60,7 @@ These rules describe the older orientation of the game in working form: a walk o
 ## Glossary
 
 **Bogey**: one over par on any hole; the target of all Club play and the Colonel's score on every hole.  
+**Club Bogey Handicap**: a Member's average margin against Colonel Bogey over their last ten rounds, self-maintained on the honor system.  
 **Colonel Bogey**: the Member's eternal opponent, who scores bogey on every hole of every course, in all conditions, without effort or joy.  
 **Dew Sweeper**: one who enjoys an earlier morning round of golf, generally first off the tee.  
 **Gallery**: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
