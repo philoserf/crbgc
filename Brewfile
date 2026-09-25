@@ -4,3 +4,6 @@ brew "hugo"
 brew "bun"
 # Task runner (Taskfile.yml)
 brew "go-task"
+# Image processing for site assets (magick, potrace)
+brew "imagemagick"
+brew "potrace"
