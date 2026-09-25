@@ -6,8 +6,6 @@ last_amended: 2026-06-21
 weight: 30
 ---
 
-**A revision is proposed.** The draft [Rules of Golf](/governance/rules-of-golf/), for the 2027 Annual Meeting, would move the rules of play out of these Standing Rules; [the amendment](/governance/rules-of-golf/#the-amendment-to-the-standing-rules) is set out there. Until the Members vote, the rules below govern play as adopted.
-
 Adopted under [Article VII](/governance/bylaws/#article-vii--standing-rules) of the Bylaws of **The Common & Recent Bogeymens Golf Club**. These rules may be adopted, amended, or rescinded by a majority vote of the Members in Good Standing at any meeting. No Standing Rule may conflict with the Bylaws; in any conflict, the Bylaws control.
 
 These rules describe the older orientation of the game in working form: a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball. Everything that thickens the Member's relationship to the ground and the company belongs; everything that thins it does not.
@@ -18,7 +16,7 @@ These rules describe the older orientation of the game in working form: a walk o
 2. **The Bogey Competition.** The official format of the Club is the bogey competition, played over any number of holes. Each Member plays match play against Colonel Bogey on the card: up, down, or halved on each hole. A Member shall pick up once the hole is lost. The Member's result is their margin against the Colonel. In foursomes, the side plays the Colonel as one.
 3. **The Walking Rule.** Golf is played on foot. The walk is the game—it restores the conversation, the attention to the ground underfoot, the rhythm of effort and recovery between shots, and the body's slow learning of the course. A cart requires medical necessity or an exceptional ruling, granted reluctantly.
 4. **The Half-Set.** A Member is encouraged to carry seven or eight clubs rather than fourteen. The reduction forces invention—the half-shot, the bumped seven-iron from forty yards, the punched three-quarter wedge—and invention is where skill lives.
-5. **Play It as It Lies.** Play the ball as it lies and the ground as you find it. Firm turf, an awkward stance, and the run of the land are the problem, not a defect to be relieved. It is the oldest rule there is, and the most generous: it turns every patch of bad ground into a question of intelligence.
+5. **The Rules of Golf.** The conduct of play, in the bogey competition and in every match, is governed by the [Rules of Golf](/governance/rules-of-golf/), adopted as part of these Standing Rules.
 6. **The Short Game.** Honor the labor no one practices. Some seventy percent of strokes fall within a hundred yards of the hole; the Member who can pitch, chip, and putt beats the Member who flies it forty yards farther, every time, at the level any of us play.
 7. **Hold Equipment Lightly.** Buy what you will use until it breaks, and resist the marketing cycle that wants a new bag every three years. Persimmon, hickory, and graphite all belong in the hands of a Member who knows why they chose them.
 8. **Zen Juice Protocol.** Consumption of scotch whisky from a flask is permitted and encouraged, particularly after a poor shot.
@@ -28,10 +26,7 @@ These rules describe the older orientation of the game in working form: a walk o
 ## Course Etiquette
 
 1. **Pace of Play.** Slow play is acceptable with good conversation, provided faster groups are waved through. Conversation justifies the Member's pace, never the pace of the group behind. A round should feel like a long conversation, not a traffic jam.
-2. **Ready Play.** Play when you are ready and it is safe to do so, rather than waiting on the honor or the player who is away. Readiness, not ceremony, sets the order of play. This is courtesy, not haste—it never overrides safety, and a Member may always cede the shot to a partner who wants it.
-3. **Lost Ball Protocol.** After a Reasonable Search, a Member shall drop a ball and play on, without penalty in Club play.
-4. **Foursomes Provision.** Alternate shot is recognized as an honored format of the Club and may be invoked by any two Members to halve the time and double the blame.
-5. **Vote with the Greens Fee.** Where a Member may choose, prefer courses read into the land—firm, walkable, thoughtful—over those imposed upon it. Architects build what gets paid for; spend the greens fee where the ground was respected.
+2. **Vote with the Greens Fee.** Where a Member may choose, prefer courses read into the land—firm, walkable, thoughtful—over those imposed upon it. Architects build what gets paid for; spend the greens fee where the ground was respected.
 
 ## The Solitary Round
 
@@ -68,12 +63,9 @@ These rules describe the older orientation of the game in working form: a walk o
 **Club Bogey Handicap**: a Member's average margin against Colonel Bogey over their last ten rounds, self-maintained on the honor system.  
 **Colonel Bogey**: the Member's eternal opponent, who scores bogey on every hole of every course, in all conditions, without effort or joy.  
 **Dew Sweeper**: one who enjoys an earlier morning round of golf, generally first off the tee.  
-**Foursomes**: an alternate-shot format for testing friendships.  
 **Gallery**: any witness to a golf shot, whose presence automatically improves the quality of said shot.  
 **Golf**: a walk on a nice lawn with friends.  
 **Ground Game**: the run-up, the bump, and the use of slope and firm turf to move the ball along the ground rather than only through the air.  
 **Half-Set**: a carried bag of seven or eight clubs, chosen so that invention supplies what the missing clubs would have.  
 **The Older Orientation**: golf as a walk on interesting ground in good company, organized around a few arbitrary problems with a small stick and a small ball.  
-**Ready Play**: playing when ready and safe rather than by strict order of honor and who is away; courtesy, not haste.  
-**Reasonable Search**: the amount of time spent looking for a lost ball before someone suggests it's time to move on.  
 **Zen Juice**: scotch whisky drunk from a flask while golfing, particularly when taken after a poor stroke.
