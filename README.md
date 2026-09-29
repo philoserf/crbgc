@@ -1,5 +1,7 @@
 # crbgc — source for crbgc.org
 
+![Status: Active](https://img.shields.io/badge/Status-Active-blue.svg)
+
 Hugo site for **The Common & Recent Bogeymens Golf Club** (C&RBGC), a small parliamentary golf society governed by _Robert's Rules of Order Newly Revised_. The published site lives at [crbgc.org](https://crbgc.org/) — read the bylaws, standing rules, and notices there, not here.
 
 This repo holds Hugo source for the site. It is **not** the authoritative copy of the bylaws or rules — the governance documents render here, but their adoption history lives in [minutes](https://crbgc.org/minutes/). Amendments are recorded by editing the document and noting the vote in the meeting minutes.
