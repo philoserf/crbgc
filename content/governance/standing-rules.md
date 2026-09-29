@@ -46,11 +46,10 @@ These rules describe the older orientation of the game in working form: a walk o
 
 ## Annual Traditions
 
-1. **Founders' Day.** Annual tribute to Mark Ayers and Dean Chase's founding vision.
-2. **Dew Sweeper Championship.** Annual tournament for the truly dedicated, contested at sunrise near the summer solstice.
-3. **Zen Juice Appreciation Day.** Annual celebration of the medicinal properties of course-side scotch.
-4. **The Colonel's Cup.** Annual bogey championship, awarded to the Member with the best aggregate margin against Colonel Bogey for the season.
-5. **Commons Day.** Annual round contested on common or public ground, in tribute to the game's birthright—the links of St Andrews and Leith, the heathland off the open commons, the American munis from Van Cortlandt and Bethpage to Doak's aptly named CommonGround—land that gave the game to anyone who wanted it.
+1. **Dew Sweeper Championship.** Annual tournament for the truly dedicated, contested at sunrise near the summer solstice.
+2. **Zen Juice Appreciation Day.** Annual celebration of the medicinal properties of course-side scotch.
+3. **The Colonel's Cup.** Annual bogey championship, awarded to the Member with the best aggregate margin against Colonel Bogey for the season.
+4. **Commons Day.** Annual round contested on common or public ground, in tribute to the game's birthright—the links of St Andrews and Leith, the heathland off the open commons, the American munis from Van Cortlandt and Bethpage to Doak's aptly named CommonGround—land that gave the game to anyone who wanted it.
 
 ---
 
