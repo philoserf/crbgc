@@ -1,6 +1,11 @@
-/* A letterpress-style light theme: near-black text on white, grays derived
+/* A letterpress-style light theme: dark olive text on cream, grays derived
    from the foreground with oklch(from ...), serif headings at normal weight,
    and restrained link / blockquote / rule / code treatments.
+
+   The colors are the Forest palette — dark olive and dusty blue from a mossy
+   woodland photograph — with Golden's cream as the page, since Forest has no
+   light tone. The dusty blue (#6D89A3) is darkened to clear WCAG AA for the
+   approved badge's cream-on-accent text, on both background and surface.
 
    The palette began as a copy of another site's theme, which is why the gray
    ramp is complete rather than minimal — --fg-400 is a step the scale defines
@@ -13,12 +18,14 @@
    none and blockquote / .muted / <em> were being synthesized by the browser. */
 
 :root {
-  /* Letterpress palette — light mode */
-  --color-foreground: #09090b;
-  --color-background: #ffffff;
-  --color-accent: #09090b;
+  /* Forest palette — light mode */
+  --color-foreground: #393e20;
+  --color-background: #f4e9d4;
+  --color-accent: #4b667e;
 
-  --fg-100: oklch(from var(--color-foreground) 0.925 c h);
+  /* 0.875 rather than the ramp's 0.925: on cream, 0.925 sits at the page's
+     own lightness and the rules vanish. */
+  --fg-100: oklch(from var(--color-foreground) 0.875 c h);
   --fg-400: oklch(from var(--color-foreground) 0.625 c h);
   --fg-600: oklch(from var(--color-foreground) 0.425 c h);
   --fg-700: oklch(from var(--color-foreground) 0.325 c h);
