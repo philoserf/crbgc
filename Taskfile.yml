@@ -31,9 +31,9 @@ tasks:
   check:
     desc: Check all files without changing them
     cmds:
-      # Inlined rather than delegated: `.github/workflows/pages.yml` runs these
-      # same two strings directly, so that CI need not install go-task for two
-      # lines. Keeping them here verbatim is what makes the two agree (#84).
+      # Biome is not redundant with Prettier: their CSS output is identical
+      # here, but Biome also lints, and on a hand-written stylesheet using
+      # relative oklch() that lint is the point (#87).
       - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
       - bunx biome check assets
 
@@ -70,6 +70,30 @@ tasks:
     desc: Build the site to ./public
     cmds:
       # --panicOnWarning: Hugo warnings are advisory by default, so a template
-      # lookup failure publishes a broken section and exits 0. CI uses the same
-      # flag (#87).
+      # lookup failure publishes a broken section and exits 0 (#87).
       - hugo --minify --gc --panicOnWarning
+
+  validate:
+    desc: Render drafts and future-dated posts in memory, failing on any warning
+    cmds:
+      # Both flags are load-bearing: validate-content.html iterates
+      # .RegularPages, which excludes future-dated posts (--buildFuture) and
+      # drafts (-D) from a default build, so without them a post written ahead
+      # of time is unchecked until the day it publishes.
+      - hugo --buildFuture -D --renderToMemory --gc --panicOnWarning
+
+  deploy:
+    desc: Check, validate, build from clean, then deploy public/ to Cloudflare
+    cmds:
+      # Checks run first so a formatting or content break fails here, by hand,
+      # rather than in almanac's unattended 05:00 run. rm -rf because Hugo never
+      # prunes public/, and a stale page would ship alongside the current ones.
+      - task: check
+      - task: validate
+      - rm -rf public
+      - task: build
+      - |
+        if token=$(security find-generic-password -s cloudflare-api-token -w 2>/dev/null); then
+          export CLOUDFLARE_API_TOKEN="$token"
+        fi
+        bunx wrangler deploy
