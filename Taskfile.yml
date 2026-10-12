@@ -86,7 +86,7 @@ tasks:
     desc: Check, validate, build from clean, then deploy public/ to Cloudflare
     cmds:
       # Checks run first so a formatting or content break fails here, by hand,
-      # rather than in almanac's unattended 05:00 run. rm -rf because Hugo never
+      # rather than in almanac's unattended Monday run. rm -rf because Hugo never
       # prunes public/, and a stale page would ship alongside the current ones.
       - task: check
       - task: validate
