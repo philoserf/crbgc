@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Hugo-built static site for the Common & Recent Bogeymens Golf Club (C&RBGC), hosted via GitHub Pages at crbgc.org.
+Hugo-built static site for the Common & Recent Bogeymens Golf Club (C&RBGC), served as Cloudflare Worker static assets at crbgc.org.
 
 This repo is not the authoritative copy of the governance documents — they render here, but adoption history lives in the meeting minutes. Amending bylaws or standing rules means editing the document, bumping `last_amended` in its frontmatter, and recording the vote in the minutes.
 
@@ -46,4 +46,4 @@ One open editorial question, recorded so it is not mistaken for an oversight: `c
 - Frontmatter conventions for each content type are documented in the project README.
 - Keep the copyright year range in `layouts/_default/baseof.html` current.
 - The homepage intentionally has no `h1` — a design choice, reaffirmed 2026-05-26. Do not flag it as an accessibility or SEO issue or try to restore one.
-- CI (`pages.yml`) is the build and formatter verifier — it runs the two `task check` commands and both Hugo passes on every push and pull request. Push and watch it rather than running routine local production builds. When a local build is needed, run `rm -rf public && task build`; Hugo does not prune stale artifacts from `public/`.
+- There is no CI. `task deploy` is the verifier and the publisher: it runs `task check`, `task validate` (drafts and future-dated posts, in memory), then `rm -rf public && task build`, then `bunx wrangler deploy` (`wrangler.jsonc`). Run `task check` and `task validate` before opening a PR. Merging publishes nothing; the next deploy does. `almanac` runs `task deploy` daily at 05:00 Eastern from `~/.config/refresh.zsh`, which is what makes future-dated posts appear on their date, and anyone can publish sooner by hand. Wrangler authenticates with `bunx wrangler login`, run once per machine from a real terminal (it refuses without a TTY); a `cloudflare-api-token` in the login keychain takes precedence if present.

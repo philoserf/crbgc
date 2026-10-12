@@ -18,7 +18,7 @@ content/
   notes/                          # essays, history, course architecture — the informal side
 layouts/                          # Hugo templates and partials
 assets/css/style.css              # site styles (Biome-managed)
-static/                           # served at the root: CNAME, the seal, favicons, the Open Graph card
+static/                           # served at the root: the seal, favicons, the Open Graph card
 hugo.toml                         # config: permalinks, disabled kinds, locale
 ```
 
@@ -104,17 +104,19 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 ## Build and deploy
 
 ```bash
-task serve   # hugo server -D --buildFuture (drafts + future posts visible)
-task build   # hugo --minify --gc --panicOnWarning (production)
-task format  # prettier (md/html/yaml/toml/json) + biome (css)
-task check   # prettier --check + biome check — CI runs these same two commands
+task serve     # hugo server -D --buildFuture (drafts + future posts visible)
+task build     # hugo --minify --gc --panicOnWarning (production)
+task format    # prettier (md/html/yaml/toml/json) + biome (css)
+task check     # prettier --check + biome check
+task validate  # drafts + future-dated posts rendered in memory, warnings fail
+task deploy    # check, validate, clean build, publish to Cloudflare
 ```
 
 `--panicOnWarning` makes Hugo's warnings fail the build instead of advising. Note it does not catch a new section with no templates today: `layouts/_default/list.html` and `single.html` are deliberate fallbacks (#19) and answer the lookup, so no warning is raised. The flag is what would make that case loud if those fallbacks were ever removed.
 
-Deployment is automated by `.github/workflows/pages.yml`: pushes to `main` build with Hugo and publish to GitHub Pages. The site serves from the custom domain via `CNAME`. Every push and pull request also runs the two `task check` commands and both Hugo passes, so an unformatted file or a lint error fails the PR rather than riding along; the formatter gate runs first, before either Hugo pass.
+The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. `task deploy` publishes it, and refuses to if `task check` or `task validate` fails, so an unformatted file, a lint error or a broken future-dated post stops the deploy rather than riding along. There is no CI: merging to `main` publishes nothing by itself. `almanac` runs `task deploy` every day at 05:00 Eastern, which is when a future-dated post goes live; run it by hand to publish sooner.
 
-Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately at both ends (`HUGO_VERSION: latest` in `pages.yml`, unpinned `brew "hugo"` in the `Brewfile`), so local and CI track the same upstream release and a breaking one shows up as a failed build rather than a version skew. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
+Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately (unpinned `brew "hugo"` in the `Brewfile`), so a breaking release shows up as a failed deploy rather than a silent change. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
 
 ## License
 
