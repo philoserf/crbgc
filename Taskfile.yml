@@ -33,7 +33,8 @@ tasks:
     cmds:
       # Biome is not redundant with Prettier: their CSS output is identical
       # here, but Biome also lints, and on a hand-written stylesheet using
-      # relative oklch() that lint is the point (#87).
+      # relative oklch() that lint is the point (#87). wrangler.jsonc's
+      # build.command runs these same two strings, so keep them in step.
       - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
       - bunx biome check assets
 
@@ -83,15 +84,9 @@ tasks:
       - hugo --buildFuture -D --renderToMemory --gc --panicOnWarning
 
   deploy:
-    desc: Check, validate, build from clean, then deploy public/ to Cloudflare
+    desc: Deploy by hand (Workers Builds deploys every push to main)
     cmds:
-      # Checks run first so a formatting or content break fails here, by hand,
-      # rather than in almanac's unattended Monday run. rm -rf because Hugo never
-      # prunes public/, and a stale page would ship alongside the current ones.
-      - task: check
-      - task: validate
-      - rm -rf public
-      - task: build
+      # wrangler.jsonc's build.command checks, validates and builds first.
       - |
         if token=$(security find-generic-password -s cloudflare-api-token -w 2>/dev/null); then
           export CLOUDFLARE_API_TOKEN="$token"
