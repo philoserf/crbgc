@@ -109,14 +109,14 @@ task build     # hugo --minify --gc --panicOnWarning (production)
 task format    # prettier (md/html/yaml/toml/json) + biome (css)
 task check     # prettier --check + biome check
 task validate  # drafts + future-dated posts rendered in memory, warnings fail
-task deploy    # check, validate, clean build, publish to Cloudflare
+task deploy    # deploy by hand; pushes to main deploy on their own
 ```
 
 `--panicOnWarning` makes Hugo's warnings fail the build instead of advising. Note it does not catch a new section with no templates today: `layouts/_default/list.html` and `single.html` are deliberate fallbacks (#19) and answer the lookup, so no warning is raised. The flag is what would make that case loud if those fallbacks were ever removed.
 
-The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. `task deploy` publishes it, and refuses to if `task check` or `task validate` fails, so an unformatted file, a lint error or a broken future-dated post stops the deploy rather than riding along. There is no CI: merging to `main` publishes nothing by itself. `almanac` runs `task deploy` every Monday at 05:00 Eastern, so a future-dated post goes live on the first Monday on or after its date; run it by hand to publish sooner.
+The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and uploads a preview of every other branch. Each build runs `build.command`: the `task check` commands, the validate pass and the production build. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. `almanac` triggers a rebuild every Monday at 05:00 Eastern through the Worker's deploy hook, which is when a future-dated post goes live; run `task deploy` or merge anything to publish sooner.
 
-Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately (unpinned `brew "hugo"` in the `Brewfile`), so a breaking release shows up as a failed deploy rather than a silent change. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
+Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately: unpinned `brew "hugo"` in the `Brewfile`, and `HUGO_VERSION` in the Workers Builds settings. A breaking release shows up as a failed build rather than a silent change. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
 
 ## License
 
