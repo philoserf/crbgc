@@ -114,9 +114,21 @@ task deploy    # deploy by hand; pushes to main deploy on their own
 
 `--panicOnWarning` makes Hugo's warnings fail the build instead of advising. Note it does not catch a new section with no templates today: `layouts/_default/list.html` and `single.html` are deliberate fallbacks (#19) and answer the lookup, so no warning is raised. The flag is what would make that case loud if those fallbacks were ever removed.
 
-The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and uploads a preview of every other branch. Each build runs `build.command`: the `task check` commands, the validate pass and the production build. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. `almanac` triggers a rebuild every Monday at 05:00 Eastern through the Worker's deploy hook, which is when a future-dated post goes live; run `task deploy` or merge anything to publish sooner.
+The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and builds every other branch without deploying it. Each build runs `build.command`: the `task check` commands, the validate pass and the production build. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. `almanac` triggers a rebuild every Monday at 05:00 Eastern through the Worker's deploy hook, which is when a future-dated post goes live; run `task deploy` or merge anything to publish sooner.
 
-Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately: unpinned `brew "hugo"` in the `Brewfile`, and `HUGO_VERSION` in the Workers Builds settings. A breaking release shows up as a failed build rather than a silent change. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
+Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately: unpinned `brew "hugo"` in the `Brewfile`, and `HUGO_VERSION=latest` in the Workers Builds settings (see Cloudflare settings). A breaking release shows up as a failed build rather than a silent change. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
+
+### Cloudflare settings
+
+`wrangler.jsonc` holds the Worker, its build and its custom domain. These settings live only in Cloudflare, so restore them by hand if the Worker is ever recreated:
+
+- **Builds connection** (Workers & Pages → `crbgc` → Settings → Builds): GitHub `philoserf/crbgc`, root directory `/`, build command empty, since `build.command` is the build. The Cloudflare GitHub app needs access to this repo.
+- **Production branch** `main`, deploy command `bunx wrangler deploy`.
+- **Non-production branches** on, deploy command `bunx wrangler versions upload`. They build and validate, and report as the "Workers Builds: crbgc" check on GitHub, but get no preview URL: `preview_urls` is off.
+- **Build variable** `HUGO_VERSION=latest` on both, so the build image's Hugo floats.
+- **Deploy hook** "almanac Monday rebuild" on `main`. Its URL is a secret kept only in `~/.config/crbgc-deploy-hook` (mode 600) on `almanac`, which `refresh.zsh` POSTs. To replace it, create a hook under Settings → Builds → Deploy Hooks, write its URL to that file, and delete the old hook.
+
+On a fresh account, run `task deploy` once to create the Worker and attach the domain, then connect Builds. The domain attaches only when no other DNS record holds the hostname.
 
 ## License
 
