@@ -55,6 +55,7 @@ layouts/          Go templates; no theme
   partials/       shared fragments, including the build-time validator
   home.rss.xml    the site feed, forked from Hugo's embedded template
   index.llms.txt  plain-text index for machine readers
+  robots.txt      crawler rules and content signals, matching site
 assets/css/       one stylesheet, Biome-managed, piped through Hugo Pipes
 hugo.toml         permalinks, disabled kinds, output formats, locale
 ```
