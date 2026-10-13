@@ -8,7 +8,15 @@
   "build": {
     "command": "bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}' && bunx biome check assets && hugo --buildFuture -D --renderToMemory --gc --panicOnWarning && rm -rf public && hugo --minify --gc --panicOnWarning",
   },
-  "assets": { "directory": "./public", "not_found_handling": "404-page" },
+  "main": "./worker.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+  },
+  // Mondays 09:00 UTC (05:00 Eastern in summer, 04:00 in winter): rebuild so
+  // future-dated posts go live. DEPLOY_HOOK is a secret: see the README.
+  "triggers": { "crons": ["0 9 * * 1"] },
   // The custom domain is the only address: no workers.dev, no preview URLs.
   "workers_dev": false,
   "preview_urls": false,
