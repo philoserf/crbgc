@@ -9,5 +9,8 @@
     "command": "bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}' && bunx biome check assets && hugo --buildFuture -D --renderToMemory --gc --panicOnWarning && rm -rf public && hugo --minify --gc --panicOnWarning",
   },
   "assets": { "directory": "./public", "not_found_handling": "404-page" },
+  // The custom domain is the only address: no workers.dev, no preview URLs.
+  "workers_dev": false,
+  "preview_urls": false,
   "routes": [{ "pattern": "crbgc.org", "custom_domain": true }],
 }
