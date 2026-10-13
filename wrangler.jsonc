@@ -20,5 +20,7 @@
   // The custom domain is the only address: no workers.dev, no preview URLs.
   "workers_dev": false,
   "preview_urls": false,
+  // Workers Logs, free tier: keeps the Worker's errors, including a failed cron, for 3 days.
+  "observability": { "enabled": true },
   "routes": [{ "pattern": "crbgc.org", "custom_domain": true }],
 }
