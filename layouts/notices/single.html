@@ -1,7 +1,27 @@
 {{ define "main" }}
   <article>
     <h1>{{ .Title }}</h1>
-    {{ partial "notice-meta.html" . }}
+    <dl class="meta">
+      <dt>Posted</dt>
+      <dd>{{ .Date.Format "January 2, 2006" }}</dd>
+      {{ with .Params.notice_type }}
+        <dt>Type</dt>
+        <dd>{{ title (replace . "-" " ") }}</dd>
+      {{ end }}
+      {{ with .Params.meeting_date }}
+        <dt>Meeting</dt>
+        <dd>{{ (time .).Format "January 2, 2006" }}</dd>
+      {{ end }}
+      {{/* `expires` is the first day the notice is hidden, so the last day it is
+        shown is the day before. Labelling the raw value "Expires" read as the last
+        day shown and contradicted the section page, which files the notice under
+        Expired from the first instant of that date (#76).
+      */}}
+      {{ with .Params.expires }}
+        <dt>Shown through</dt>
+        <dd>{{ ((time .).AddDate 0 0 -1).Format "January 2, 2006" }}</dd>
+      {{ end }}
+    </dl>
     {{ .Content }}
   </article>
 {{ end }}
