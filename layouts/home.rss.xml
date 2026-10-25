@@ -16,7 +16,7 @@ Three changes from the embedded template, and no others:
      that every note carried, and with those gone it would have reported the
      newest `date:` — a value that never moves again, which is worse than an
      absent optional element. Setting `enableGitInfo` would restore a real one,
-     but it also needs `fetch-depth: 0` in pages.yml, or CI's depth-1 clone
+     but only from a build whose clone carries full history: a shallow clone
      dates every file to the deploy commit.
 
 Notices appear here with no expiry test, and that is deliberate. The listing rule

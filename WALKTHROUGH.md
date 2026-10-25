@@ -6,30 +6,36 @@ the note at the end about how to treat it.
 
 ## 1. Overview
 
-This repository builds **crbgc.org**, the governance site of the Common & Recent
-Bogeymens Golf Club. It is a Hugo static site with no theme, no JavaScript, and
-one hand-written stylesheet. Everything rendered comes from Markdown in
-`content/` and Go templates in `layouts/`.
+This repository builds and serves **crbgc.org**, the governance site of the
+Common & Recent Bogeymens Golf Club. It is a Hugo static site with no theme, no
+client-side JavaScript, and one hand-written stylesheet. Everything rendered
+comes from Markdown in `content/` and Go templates in `layouts/`. The output is
+served as static assets by a Cloudflare Worker, and the Worker's one script
+exists to rebuild the site every Monday.
 
 There is no application entry point in the usual sense. The entry points are:
 
-- **`hugo`** — reads `hugo.toml`, walks `content/`, renders through `layouts/`,
-  writes `public/`.
+- **`wrangler.jsonc`'s `build.command`** — the whole build: format check, CSS
+  lint, a validation pass, then the production `hugo` build into `public/`.
+  Cloudflare's Workers Builds runs it on every push; `task deploy` runs it on a
+  Mac.
+- **`worker.js`** — the Worker. Its `fetch` handler hands every request back to
+  asset serving; its `scheduled` handler fires on a Monday cron and triggers a
+  rebuild.
 - **`Taskfile.yml`** — the developer-facing commands (`format`, `check`,
-  `build`, `serve`).
-- **`.github/workflows/pages.yml`** — CI, which runs the same commands and
-  deploys to GitHub Pages.
+  `validate`, `build`, `serve`, `deploy`).
 
-The site publishes five content sections and three machine-readable outputs
-(`/index.xml`, `/llms.txt`, `/sitemap.xml`). A current build:
+The site publishes five content sections and several machine-readable outputs
+(`/index.xml`, `/llms.txt`, `/sitemap.xml`, `/robots.txt`, two section feeds).
+A current build:
 
 ```
                   │ EN
 ──────────────────┼────
- Pages            │ 88
+ Pages            │ 90
  Paginator pages  │  0
  Non-page files   │  0
- Static files     │  1
+ Static files     │  6
  Processed images │  0
  Aliases          │  1
  Cleaned          │  0
@@ -37,27 +43,33 @@ The site publishes five content sections and three machine-readable outputs
 
 _(Transcript of `hugo --gc --panicOnWarning`, run while authoring.)_
 
-The single static file is `static/CNAME`, which maps the custom domain. The
-single alias is a redirect left behind by a retitled news post.
+The six static files are the seal, the favicon in three forms, the Open Graph
+card, and `_headers`. The single alias is a redirect left behind by a retitled
+news post.
 
 ## 2. Architecture
 
 ```
 content/          Markdown; five sections plus the homepage
-  governance/     bylaws, standing rules, special rules of order, officers
+  governance/     bylaws, standing rules, special rules of order, officers,
+                  and the draft Rules of Golf
   notices/        meeting and bylaw-amendment notices (expire)
   minutes/        meeting minutes (approved / draft)
   news/           dated posts
-  notes/          65 essays — the Club's informal writing
-layouts/          Go templates; no theme
+  notes/          66 essays — the Club's informal writing
+layouts/          Go templates; no theme; hand-formatted
   _default/       baseof + fallback list/single
   <section>/      per-section list.html and single.html
   partials/       shared fragments, including the build-time validator
   home.rss.xml    the site feed, forked from Hugo's embedded template
   index.llms.txt  plain-text index for machine readers
-  robots.txt      crawler rules and content signals, matching site
+  robots.txt      crawler rules and content signals
 assets/css/       one stylesheet, Biome-managed, piped through Hugo Pipes
+static/           seal, favicons, link-preview card, _headers
 hugo.toml         permalinks, disabled kinds, output formats, locale
+wrangler.jsonc    the Worker: build command, assets, cron, custom domain
+worker.js         the Worker's only code
+bunfig.toml       formatter configuration
 ```
 
 **The data flow is one-directional and shallow.** Frontmatter fields drive
@@ -65,17 +77,67 @@ template branches directly; there are no taxonomies (`disableKinds` removes
 taxonomy and term pages), no `slug:` anywhere, and no content database beyond
 Hugo's own page collections.
 
+`hugo.toml` — `[permalinks]`
+
+```toml
+[permalinks]
+notices = "/notices/:slug/"
+minutes = "/minutes/:slug/"
+news = "/news/:slug/"
+notes = "/notes/:slug/"
+```
+
 Two cross-cutting rules shape most of the template code, and both are worth
 holding in mind before reading further:
 
-1. **The title is the URL** — in the four dated sections. `[permalinks]` uses
-   `:slug`, whose fallback is the normalized title, and the filename is that
-   same string written by hand. `governance` is deliberately exempt.
+1. **The title is the URL** — in the four dated sections. `:slug` falls back to
+   the normalized title when no `slug:` is set, and none ever is, so title, URL
+   segment and filename are one string. `governance` is deliberately absent
+   from `[permalinks]`, so its URLs come from the filename instead.
 2. **Every notices _listing_ goes through one partial.** A notice expires, and
    a listing that re-derives "recent notices" for itself drifts back into
    showing expired ones.
 
-## 3. The build gate runs first
+## 3. From push to published: the build command
+
+Every deploy, wherever it starts, runs one string:
+
+`wrangler.jsonc` — `build`
+
+```jsonc
+  "build": {
+    "command": "bunx bun@1.4.4 fmt --check && bunx biome check assets && hugo --buildFuture -D --renderToMemory --gc --panicOnWarning && rm -rf public && hugo --minify --gc --panicOnWarning",
+  },
+```
+
+Four stages, cheapest first, each gating the next:
+
+1. **`bun fmt --check`** — formatting of everything outside `layouts/` and
+   `assets/` (§11). bun is pinned through `bunx` because the build image's own
+   bun may predate 1.4.4, the first release with `bun fmt`.
+2. **`biome check assets`** — format and lint the stylesheet.
+3. **The validate pass** — a full render held in memory with drafts (`-D`) and
+   future-dated posts (`--buildFuture`) included. Both flags are load-bearing:
+   the validator (§4) iterates `.RegularPages`, which excludes drafts and future
+   posts from a default build, so without them a post written ahead of time is
+   unchecked until the day it publishes.
+4. **The production build** — into a freshly emptied `public/`, because Hugo
+   never prunes it.
+
+The first two are `task check`, and the last two are `task validate` and
+`task build`, written out again rather than delegated. `Taskfile.yml`'s `check`
+carries a comment asking that the two copies be kept in step.
+
+Who runs the string: Cloudflare's Workers Builds, connected to the GitHub repo,
+runs it on every push. A push to `main` follows it with `bunx wrangler deploy`;
+any other branch follows it with `bunx wrangler versions upload`, which builds
+and validates but publishes nothing and has no preview URL (`preview_urls` is
+off). `task deploy` runs `bunx wrangler deploy` from a Mac, and wrangler runs
+the same `build.command` first. The connection, the branch deploy commands and
+the `HUGO_VERSION=latest` build variable live in the Cloudflare dashboard, not
+the repo; README's "Cloudflare settings" records them.
+
+## 4. The build gate runs first
 
 Before any markup, the base template calls the validator. This is the most
 load-bearing file in the repository and the least visible, because it renders
@@ -94,12 +156,13 @@ nothing.
 per page. The call sits in `<head>` because every page inherits `baseof.html`,
 so there is no page Hugo can render without passing through it.
 
-`layouts/partials/validate-content.html` enforces four invariants. Taking them
-in order:
+`layouts/partials/validate-content.html` enforces its invariants in three
+passes. The first two run over `site.Pages` — every page, including governance
+documents and section `_index.md` files.
 
 **Obsidian wikilinks.** The notes arrived from an Obsidian vault, and Goldmark
-renders `[[Target]]` as literal brackets — the build exits 0 and the page
-publishes with visible markup.
+renders `[[Target]]` as literal brackets — the build would exit 0 and the page
+publish with visible markup.
 
 `layouts/partials/validate-content.html` — wikilink check
 
@@ -113,14 +176,12 @@ publishes with visible markup.
 {{- end -}}
 ```
 
-Note this one runs over `site.Pages`, not a section list — it covers governance
-documents and section `_index.md` files too. The header comment records why
-frontmatter is out of scope: `RawContent` excludes it by construction.
+`RawContent` excludes frontmatter by construction, so only the body is checked.
 
 **Heading-fragment citations.** Cross-document links carry anchors
-(`/governance/bylaws/#article-v--meetings`). Goldmark derives those anchors from
-heading text, so editing a heading silently breaks every inbound citation — the
-link still resolves, just to the top of the page.
+(`/governance/bylaws/#article-iv--officers`). Goldmark derives those anchors
+from heading text, so editing a heading silently breaks every inbound citation
+— the link still resolves, just to the top of the page.
 
 `layouts/partials/validate-content.html` — fragment check
 
@@ -133,14 +194,18 @@ link still resolves, just to the top of the page.
   {{- if .File -}}
     {{- $file := .File.Path -}}
     {{- range findRESubmatch `\]\((/[^)#\s]*)#([^)\s]+)\)` .RawContent -}}
-      ...
+      {{- $path := index . 1 -}}
+      {{- $frag := index . 2 -}}
+      {{- $key := cond (hasSuffix $path "/") $path (printf "%s/" $path) -}}
       {{- with index $byURL $key -}}
         {{- if not (in .Fragments.Identifiers $frag) -}}
-          {{- errorf "%s: link to %s#%s — %s has no heading with that anchor. ..." $file $path $frag $path -}}
 ```
 
 Pages are indexed by `RelPermalink` rather than content path, because the two
-disagree for governance and section pages.
+disagree for governance and section pages. A link whose path matches no page at
+all fails too, with its own message. The header comment names the limitation:
+`.Fragments` knows content headings only, so a fragment pointing at an id a
+template emits would report as missing. None do today.
 
 **Then a per-section loop** carries the remaining checks:
 
@@ -150,118 +215,139 @@ disagree for governance and section pages.
 {{- range $section := slice "notices" "minutes" "news" "notes" "governance" -}}
   {{- $seen := dict -}}
   {{- with site.GetPage (printf "/%s" $section) -}}
-    {{- range sort .RegularPages "File.Path" -}}
-      {{- $file := .File.Path -}}
 ```
 
-Sorting by file path is deliberate: a duplicate URL always names the same file
-as the one to fix. `.ByDate` would not do, because nothing stops two posts in a
-section sharing a date and a bare date carries no time, so which file got named
-would drift between builds.
+Inside, pages are walked with `range sort .RegularPages "File.Path"`. Sorting by
+file path is deliberate: a duplicate URL always names the same file as the one
+to fix. `.ByDate` would not do, because nothing stops two posts in a section
+sharing a date and a bare date carries no time, so which file got named would
+drift between builds.
 
-**Inside the loop, the identity check branches on section** — this is the one
-place the "title is the URL" rule is not uniform:
+First, **a date is required in every dated section** — `governance` is excluded,
+because those documents are atemporal. An undated post would otherwise publish,
+render its list row as "January 1, 0001", and be absent from the site feed
+forever (§9 shows why).
+
+Next, **the identity check, which branches on section** — the one place the
+"title is the URL" rule is not uniform:
 
 `layouts/partials/validate-content.html` — identity check
 
 ```go-html-template
-{{- $seg := path.Base .RelPermalink -}}
-{{- if eq $section "governance" -}}
-  {{- $want := urlize .Title -}}
-  {{- if ne .File.ContentBaseName $want -}}
-    {{- errorf "%s: title %q normalizes to %q but the filename is %q — governance URLs come from the filename, so either restore the title or rename the file to %s.md. ..." $file .Title $want .File.ContentBaseName $want -}}
-  {{- end -}}
-{{- else -}}
-  {{- if ne .File.ContentBaseName $seg -}}
-    {{- errorf "%s: filename does not match its URL segment %q — Hugo derives the URL from the title, so rename the file to %s.md ..." $file $seg $seg -}}
-  {{- end -}}
-{{- end -}}
+      {{- $seg := path.Base .RelPermalink -}}
+      ...
+      {{- if eq $section "governance" -}}
+        {{- $want := urlize .Title -}}
+        {{- if ne .File.ContentBaseName $want -}}
+          ...
+        {{- end -}}
+      {{- else -}}
+        {{- if ne .File.ContentBaseName $seg -}}
+          ...
+        {{- end -}}
+      {{- end -}}
+      {{- with index $seen $seg -}}
+        {{- errorf "%s: URL /%s/%s/ is already taken by the earlier post %s — retitle this post." $file $section $seg . -}}
+      {{- end -}}
+      {{- $seen = merge $seen (dict $seg $file) -}}
 ```
 
-The reason for the branch: governance is absent from `[permalinks]`, so a
-governance URL comes from its filename and a prose retitle cannot move it —
-the right property for documents that everything else cites. That also makes
-the ordinary check vacuous there, since the URL segment _is_ the filename. So
-governance is checked in the other direction.
+In a dated section the URL segment comes from the title, so requiring the
+filename to equal it is what catches a retitle that was not accompanied by a
+rename — the edit that silently moves a published URL. In `governance` the
+segment _is_ the filename, so that comparison would be vacuous; the check runs
+the other way round, normalizing the title with `urlize` and comparing it to
+the filename. A retitle there still has to be accompanied by a rename. The
+`$seen` dict then catches two posts whose titles normalize to the same URL.
 
-The remaining checks in the loop are: a date is required in every dated section;
-the `notice_type` and `meeting_type` enumerations; the notices expiry rules — a
-notice carrying a `meeting_date` must also carry `expires`, and `expires` must
-fall after it; and the minutes approval pair, where `approved: true` requires
-`approved_on`.
+The rest of the loop checks frontmatter vocabularies and pairs: `notice_type`
+and `meeting_type` must be one of their documented values; a notice with a
+`meeting_date` must also carry `expires`, and `expires` must fall after the
+meeting; and `approved: true` in minutes requires `approved_on`.
 
-All of these fail the build rather than warn. Transcript of each firing, from
+Every one of these fails the build. Transcripts of each firing, from
 deliberately broken copies:
 
 ```
-ERROR notices/notice-of-2027-annual-meeting.md: notice_type "anual-meeting" is not one of the four documented values (annual-meeting, special-meeting, previous-notice, bylaw-amendment)
-ERROR minutes/minutes-2026-annual-meeting.md: meeting_type "anual" is not one of the three documented values (annual, special, regular)
-ERROR governance/bylaws.md: title "Constitution and Bylaws" normalizes to "constitution-and-bylaws" but the filename is "bylaws" — governance URLs come from the filename, so either restore the title or rename the file to constitution-and-bylaws.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations.
+ERROR notes/probe-wiki.md: contains an Obsidian wikilink ([[...]]) — Hugo publishes these as literal brackets. Write a root-relative link instead, e.g. [Label](/notes/some-slug/).
+ERROR notes/probe-frag.md: link to /governance/bylaws/#article-xx--nothing — /governance/bylaws/ has no heading with that anchor. Goldmark derives anchors from heading text, so retitling a heading breaks every citation of it.
 ERROR notes/probe-undated.md: no date — a post in a dated section must carry one. Without it the page publishes but never reaches /index.xml, and its list row renders January 1, 0001.
+ERROR notes/probe-misnamed.md: filename does not match its URL segment "probe-name" — Hugo derives the URL from the title, so rename the file to probe-name.md (note that Hugo drops & entirely; write "and" if you want it in the URL).
+ERROR governance/bylaws.md: title "Constitution and Bylaws" normalizes to "constitution-and-bylaws" but the filename is "bylaws" — governance URLs come from the filename, so either restore the title or rename the file to constitution-and-bylaws.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations.
+ERROR notices/notice-of-2027-annual-meeting.md: notice_type "anual-meeting" is not one of the four documented values (annual-meeting, special-meeting, previous-notice, bylaw-amendment)
 ERROR notices/notice-of-2027-annual-meeting.md: meeting_date with no expires — a meeting notice must stop being current after its meeting. Set expires to the day after meeting_date.
 ```
 
-_(Transcripts of `hugo --renderToMemory --gc --panicOnWarning` against planted
-typos, each reverted afterward.)_
+_(Transcripts of `hugo --buildFuture -D --renderToMemory --gc --panicOnWarning`
+against planted files and edits in a scratch clone, one at a time.)_
 
-`errorf` only fails the build because of `--panicOnWarning`, which both
-`task build` and CI pass. Without it a template lookup failure publishes a
-broken section and exits 0.
+`errorf` fails the build on its own — the same planted typo exits 1 without
+`--panicOnWarning`. That flag is there for Hugo's own warnings, which are
+advisory by default: without it a template lookup failure publishes a broken
+section and exits 0.
 
-## 4. The page shell
+## 5. The page shell
 
-With validation passed, `baseof.html` renders the shell every page shares.
+With validation passed, `baseof.html` renders the shell every page shares: a
+`<title>`, the description, canonical and Open Graph tags, icons, the
+stylesheet, a header with the seal and nav, `main`, and a footer.
 
 `layouts/_default/baseof.html` — head metadata
 
 ```go-html-template
-{{ $ogType := cond .IsHome "website" "article" }}
-{{ $ogTitle := cond .IsHome .Site.Title .Title }}
-<link rel="canonical" href="{{ .Permalink }}" />
-<meta property="og:type" content="{{ $ogType }}" />
-<meta property="og:title" content="{{ $ogTitle }}" />
+    {{ $ogType := cond .IsHome "website" "article" }}
+    {{ $ogTitle := cond .IsHome .Site.Title .Title }}
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <meta property="og:type" content="{{ $ogType }}" />
+    <meta property="og:title" content="{{ $ogTitle }}" />
 ```
 
-The values are computed into variables first rather than inlined. The comment
-above them says why: Prettier's go-template plugin reflows an inline `if/else`
-onto its own lines, which is harmless inside `<title>` but would put newlines
-inside a `content="…"` attribute. This is the first of several places where the
-formatter, not Hugo, dictates how the template is written.
+The values are computed into variables first rather than inlined, so an inline
+`if/else` never sits inside a `content="…"` attribute, where a line break would
+become part of the value. The comment above them carries the rest of the
+reasoning: the site exists to be cited, so a link preview should come from the
+page; `og:image` is one card for the whole site, and must be absolute.
 
 The stylesheet goes through Hugo Pipes with subresource integrity:
 
 `layouts/_default/baseof.html` — stylesheet
 
 ```go-html-template
-{{ $style := resources.Get "css/style.css" | minify | fingerprint }}
-<link
-  rel="stylesheet"
-  href="{{ $style.RelPermalink }}"
-  integrity="{{ $style.Data.Integrity }}"
-/>
+    {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
+    <link
+      rel="stylesheet"
+      href="{{ $style.RelPermalink }}"
+      integrity="{{ $style.Data.Integrity }}"
+    />
 ```
 
-The nav is five hand-written links rather than a loop over sections, each
-carrying `aria-current="page"` when it matches `.Section`. The footer's
-copyright range ends at `{{ now.Year }}`, so it never goes stale.
+The fingerprint puts a content hash in the filename, which is what lets
+`static/_headers` mark `/css/*` immutable for a year (§10).
 
-## 5. The homepage
+The header's seal is an `<img>` rather than inline SVG, so its traced path data
+is not shipped on every page. The nav is five hand-written links rather than a
+loop over sections, each carrying `aria-current="page"` when it matches
+`.Section`. The footer's copyright range ends at `{{ now.Year }}`, so it never
+goes stale.
+
+## 6. The homepage
 
 `layouts/index.html` is curated rather than a mirror of the nav — it lists
 notices, news and governance, and deliberately omits minutes and notes.
 
-`layouts/index.html` — sections
+`layouts/index.html` — notices section
 
 ```go-html-template
-<section>
-  <h2>Latest notices</h2>
-  {{ partial "latest.html" (dict "section" "notices" "limit" 3) }}
-  <p><a href="{{ "/notices/" | relURL }}">All notices &rarr;</a></p>
-</section>
+  <section>
+    <h2>Latest notices</h2>
+    {{ partial "latest.html" (dict "section" "notices" "limit" 3) }}
+    <p><a href="{{ "/notices/" | relURL }}">All notices &rarr;</a></p>
+  </section>
 ```
 
-Note the page has **no `h1`**. That is a design choice, reaffirmed rather than
-overlooked, and the homepage's own content supplies the opening prose instead.
+News takes the same shape with a limit of 5; governance ranges over the section
+`ByWeight`. The page has **no `h1`**. That is a design choice, reaffirmed
+rather than overlooked; `content/_index.md` supplies the opening prose instead.
 
 `layouts/partials/latest.html` is the shared "most recent N" helper, and it
 carries the notices rule:
@@ -279,9 +365,10 @@ carries the notices rule:
 ```
 
 The branch is the whole point: notices cannot be queried directly, because
-"most recent 3" would silently include expired ones.
+"most recent 3" would silently include expired ones. An empty result renders
+"Nothing yet."
 
-## 6. The notices split
+## 7. The notices split
 
 `layouts/partials/notices-by-status.html` is the only place the expiry rule is
 computed. It renders nothing and returns a dict.
@@ -304,21 +391,30 @@ computed. It renders nothing and returns a dict.
 {{- return dict "current" $current "expired" $expired -}}
 ```
 
-Two subtleties. A notice with **no** `expires` falls to the `else` branch and is
-treated as current — absence means permanent, not expired. And `expires` is the
-first day the notice is _hidden_, not the last day shown, which is why
-`notice-meta.html` renders the day before it under the label "Shown through"
-rather than printing the raw value.
+Three consequences:
 
-`layouts/notices/list.html` consumes the same partial and renders both halves,
-the expired ones under their own heading.
+- A notice with **no** `expires` falls to the `else` branch and is current —
+  absence means permanent. The validator (§4) only allows that for a notice
+  with no `meeting_date` either, which is the escape hatch for a notice of
+  motion or a standing notice.
+- `expires` is the first day the notice is _hidden_, not the last day shown.
+  That is why `notice-meta.html` renders the day before it, under the label
+  "Shown through", rather than the raw value.
+- `now` is evaluated at build time. A notice moves from current to expired only
+  when the site is rebuilt, which is one of the two reasons for the Monday
+  rebuild (§10).
 
-## 7. Section pages and metadata
+Three callers consume the partial: `latest.html`, `layouts/notices/list.html`
+(which renders both halves, the expired ones under their own heading), and
+`/llms.txt` (§9).
+
+## 8. Section pages and metadata
 
 Each section ships a `list.html` and a `single.html`, and they are
-near-identical by design — the variation lives in which meta partial they call.
+near-identical by design — the variation lives in ordering and in which meta
+partial they call.
 
-`layouts/news/list.html` is the plain shape:
+`layouts/news/list.html`
 
 ```go-html-template
 {{ define "main" }}
@@ -334,60 +430,56 @@ near-identical by design — the variation lives in which meta partial they call
 {{ end }}
 ```
 
-`layouts/notes/list.html` is the same shape. `layouts/minutes/list.html` adds
-`GroupByDate "2006"` to head each year. `layouts/governance/list.html` orders
-`ByWeight` instead of by date, because those documents are atemporal and their
-order is editorial.
+`layouts/notes/list.html` is byte-identical. `layouts/minutes/list.html` wraps
+the same list in `(.Pages.GroupByDate "2006").Reverse` to head each year.
+`layouts/governance/list.html` orders `ByWeight` instead and prints each
+document's description beside its link, because those documents are atemporal
+and their order is editorial. `layouts/notices/list.html` is §7's consumer.
 
 `layouts/partials/item-row.html` renders one row and decides the approval badge
 for itself:
 
+`layouts/partials/item-row.html` — approval badge
+
 ```go-html-template
-{{ if isset $p.Params "approved" }}
-  {{ if $p.Params.approved }}
-    <span class="badge approved">Approved</span>
-  {{ else }}
-    <span class="badge draft">Draft</span>
+  {{ if isset $p.Params "approved" }}
+    {{ if $p.Params.approved }}
+      <span class="badge approved">Approved</span>
+    {{ else }}
+      <span class="badge draft">Draft</span>
+    {{ end }}
   {{ end }}
-{{ end }}
 ```
 
 `isset` rather than `with`: `approved: false` is meaningful and must render
-"Draft", where `with` would skip it.
+"Draft", where `with` would skip it. Only minutes carry the field, so only
+minutes rows get a badge.
 
-The three meta partials split by section. `minutes-meta.html` renders meeting
-type, approval status, presiding and secretary officers, and present/absent
-rosters. `governance-meta.html` renders adoption and amendment dates, and
-renders nothing at all when a document carries neither. `notice-meta.html`
-renders posted date, type, meeting date, and the "Shown through" transformation.
+On the single side, `news/single.html` and `notes/single.html` are identical —
+a title, a `<time>` element, the content. The other three call a meta partial
+between title and content:
 
-Single templates are one line of variation each:
-
-`layouts/notes/single.html`
-
-```go-html-template
-{{ define "main" }}
-  <article>
-    <h1>{{ .Title }}</h1>
-    <p class="post-date">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "January 2, 2006" }}
-      </time>
-    </p>
-    {{ .Content }}
-  </article>
-{{ end }}
-```
+- `notice-meta.html` — posted date, type, meeting date, and "Shown through".
+- `minutes-meta.html` — meeting date and type, approval status (with the
+  `approved_on` date when approved), presiding and secretary officers, and
+  present/absent rosters.
+- `governance-meta.html` — adoption and amendment dates, and nothing at all when
+  a document carries neither. The draft Rules of Golf and the Officers page
+  carry neither today.
 
 `layouts/_default/` still carries a `list.html` and a `single.html`, both
 unreached, kept so a future section renders sensibly before it gets a bespoke
-template. Their header comments say so — and the `single.html` one now says how
-to verify rather than asserting it, because the claim was silently false for the
-whole life of the notes section.
+template. The `single.html` header comment tells the reader to confirm that by
+listing the section directories rather than trusting the sentence, because the
+claim was once silently false for the whole notes section (#111).
 
-## 8. The machine-readable outputs
+`layouts/404.html` is the one page with no section; §10 shows how it is served.
+
+## 9. The machine-readable outputs
 
 `hugo.toml` gives the homepage three output formats:
+
+`hugo.toml` — output formats
 
 ```toml
 [outputFormats.llms]
@@ -403,7 +495,10 @@ home = ["html", "rss", "llms"]
 `isPlainText` matters: it routes rendering through `text/template` rather than
 `html/template`, so nothing is HTML-escaped.
 
-`layouts/index.llms.txt` defines one section template and calls it five times:
+**`/llms.txt`.** `layouts/index.llms.txt` defines one section template and calls
+it five times:
+
+`layouts/index.llms.txt` — `llms-section`
 
 ```go-html-template
 {{- define "llms-section" -}}
@@ -416,22 +511,18 @@ home = ["html", "rss", "llms"]
 {{- end -}}
 ```
 
-The four dated sections pass `first 15` of their pages by date; notes pass
-`.Pages.ByTitle`, uncapped. The departure is deliberate and now commented at the
+Governance passes `.Pages.ByWeight`; notices pass `first 15` of the `current`
+half from §7; minutes and news pass `first 15` of their pages newest first; notes
+pass `.Pages.ByTitle`, uncapped. The departure for notes is commented at the
 call site — `/llms.txt` is an index rather than a feed, so alphabetical order
-serves a machine reader scanning for a topic, and truncating reference material
-alphabetically would drop entries for no benefit.
+serves a machine reader scanning for a topic. Every line uses `{{-`/`-}}` trim
+markers deliberately, because whitespace in this template is output.
 
-**This file is hand-formatted.** It is excluded from Prettier because the
-`task prettier` glob covers only `.{md,html,yml,yaml,toml,json}` — and the
-exclusion cannot move into `.prettierignore`, which is a **symlink to
-`.gitignore`**, so an entry there would also stop git tracking the file. Every
-line uses `{{-`/`-}}` trim markers, because whitespace in this template is
-output.
+**The site feed.** `layouts/home.rss.xml` is a fork of Hugo's embedded
+`rss.xml`. Its header comment enumerates exactly three changes, and the first is
+the reason for the fork:
 
-`layouts/home.rss.xml` is a fork of Hugo's embedded `rss.xml`. Its header
-comment enumerates exactly three changes, and the first is the reason for the
-fork:
+`layouts/home.rss.xml` — page selection
 
 ```go-html-template
 {{- $pages := where site.RegularPages "PublishDate.IsZero" false -}}
@@ -440,89 +531,188 @@ fork:
 
 Hugo's default page order puts any page with a nonzero `weight` ahead of every
 page without one, regardless of date. The governance documents carry `weight` to
-order their list page, so they led the feed — three of them stamped year 0001.
-Selecting dated pages explicitly fixes that.
+order their list page, so they led the feed — three of them stamped year 0001
+(#54). Selecting dated pages explicitly fixes that, and it is also why an
+undated post would vanish from the feed — the reason §4 rejects one. The other
+two changes drop the author and copyright branches, which nothing sets, and
+`lastBuildDate`, which had no honest value once `lastmod:` was removed.
 
-This selector used to be the trap worth knowing: a note with no `date:` published,
-appeared on `/notes/`, and was absent from the feed forever, because
-`PublishDate.IsZero` excludes it — while `item-row.html` rendered its list row as
-"January 1, 0001". The build now rejects an undated post in any dated section, so
-the selector can no longer silently drop one.
+The feed keeps expired notices. That is the documented exception to the notices
+rule: a feed is an archive, and items are never removed from one.
 
-This feed keeps expired notices, which is the documented exception to the
-notices rule — a feed is an archive, and items are never removed from one.
+**Section feeds.** Hugo gives every section an RSS feed by default. Three of the
+five turn theirs off in their `_index.md`, each with its reason inline:
 
-## 9. Toolchain and CI
-
-`Taskfile.yml` drives everything locally. The Prettier task runs **twice**:
+`content/notices/_index.md` — frontmatter
 
 ```yaml
-prettier:
-  cmds:
-    - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
-    - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
+outputs: ["html"] # no feed: a notices listing must go through notices-by-status.html (#55)
 ```
 
-`prettier-plugin-go-template` is non-idempotent and can need a second pass to
-converge. Upstream was abandoned in 2023, so the version is pinned exact and the
-duplicate pass is permanent. Prettier itself is capped at 3.x: under Prettier 4
-the plugin's printer breaks and Prettier silently falls back to the HTML parser,
-which mangles every template in `layouts/`.
+`governance` does the same because a chronological feed of atemporal documents
+is meaningless, and `notes` because the site feed already carries every note.
+Only `/minutes/index.xml` and `/news/index.xml` remain.
 
-`.github/workflows/pages.yml` runs three gates in order — formatting and lint,
-then validation, then the real build:
+**Crawlers.** `enableRobotsTXT = true` makes Hugo render `layouts/robots.txt`,
+which allows everything, declares content signals permitting search, AI input
+and AI training, and points at the sitemap, which Hugo generates on its own.
+
+## 10. Serving: the Worker and the Monday rebuild
+
+`wrangler.jsonc` binds `public/` as the Worker's static assets:
+
+`wrangler.jsonc` — `main` and `assets`
+
+```jsonc
+  "main": "./worker.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+  },
+```
+
+Requests are answered from `public/` before any code runs. `404-page` makes a
+miss return Hugo's `404.html` with a 404 status. The rest of the file pins the
+Worker to the custom domain only: no `workers.dev` address, no preview URLs,
+and Workers Logs on, so a failed cron leaves an error behind for three days.
+
+The Worker's code is one object:
+
+`worker.js` — default export
+
+```js
+export default {
+  fetch: (request, env) => env.ASSETS.fetch(request),
+
+  async scheduled(controller, env) {
+    const response = await fetch(env.DEPLOY_HOOK, { method: "POST" });
+    if (!response.ok)
+      throw new Error(`deploy hook answered ${response.status}`);
+  },
+};
+```
+
+`fetch` exists only for a request that matched no file and reached the script;
+per the file's header comment, it goes straight back to asset serving, which
+answers with the 404 page. `scheduled` is the reason the script exists. It runs
+on the cron in `wrangler.jsonc` — `"0 9 * * 1"`, Mondays 09:00 UTC — and POSTs
+the Worker's own deploy hook, whose URL is the secret `DEPLOY_HOOK`. Workers
+Builds then runs §3's build from `main`.
+
+That rebuild is what makes time-based content work on a static site:
+
+- A post dated in the future is left out of the production build (no
+  `--buildFuture` there), so it appears on the first Monday on or after its
+  date, unless any merge or `task deploy` publishes sooner.
+- A notice crosses into "Expired" only when `now` is re-evaluated (§7).
+
+Throwing on a non-OK response is what turns a failed hook into a failed
+invocation that Workers Logs records.
+
+`static/_headers` is copied into `public/` unchanged, and Cloudflare reads it as
+response-header rules:
+
+`static/_headers`
+
+```
+# Hugo fingerprints everything under /css/, so a changed file gets a new name.
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+```
+
+## 11. Formatting and the toolchain
+
+Formatting is split by what each tool can parse. `bun fmt` takes everything it
+can, Biome takes the CSS, and `layouts/` is formatted by hand.
+
+`bunfig.toml` — `[fmt]`
+
+```toml
+[fmt]
+# Leave fenced code in Markdown alone: a Hugo snippet quoted in a note or in
+# WALKTHROUGH.md is a quotation, and formatting it would change what it says.
+embeddedLanguageFormatting = "off"
+# layouts/ is Go templates, which bun fmt cannot parse; they are hand-formatted.
+# assets/ is CSS, which Biome formats and lints.
+ignorePatterns = ["layouts/**", "assets/**"]
+```
+
+The exclusions live here, under `ignorePatterns`, so the Taskfile and the build
+command can both call bare `bun fmt` with no glob. They cannot live in
+`.prettierignore`, which `bun fmt` also reads: that file is a **symlink to
+`.gitignore`**, so an entry there would also stop git tracking the file.
+
+What remains in scope is the Markdown in `content/` and the repo root, the
+project skills under `.claude/`, `hugo.toml`, `bunfig.toml`, `worker.js`,
+`wrangler.jsonc`, `Taskfile.yml`, and the JSON configs — 100 files.
+
+`Taskfile.yml` — `check`
 
 ```yaml
-- name: Validate content
-  run: hugo --buildFuture -D --renderToMemory --gc --panicOnWarning
-
-- name: Build
-  run: hugo --minify --gc --panicOnWarning
+  check:
+    desc: Check all files without changing them
+    cmds:
+      # Biome owns assets/ (bunfig.toml excludes it from bun fmt) because it
+      # also lints, and on a hand-written stylesheet using relative oklch()
+      # that lint is the point (#87). wrangler.jsonc's build.command runs these
+      # same two checks, so keep them in step.
+      - bun fmt --check
+      - bunx biome check assets
 ```
 
-Both flags on the validate step are load-bearing. `validate-content.html`
-iterates `.RegularPages`, which excludes drafts and future-dated posts from a
-default build — so without `-D --buildFuture` a post written ahead of time is
-unchecked until the day it publishes. The formatting step runs first so that
-failing on whitespace does not cost a Hugo build.
+`task format` is the writing counterpart (`task fmt`, then `biome check
+--write`). Locally `bun` is the Homebrew one, from the `Brewfile`; only the
+build command pins a version. The other tasks wrap commands already shown:
+`serve` runs `hugo server -D --buildFuture`, `validate` and `build` are stages 3
+and 4 of §3, `deploy` reads a Cloudflare API token from the macOS keychain when
+there is one and runs `bunx wrangler deploy`, and `icons` regenerates the
+favicon rasters and the Open Graph card from the two SVG sources.
 
-The two formatter commands are copied verbatim from `Taskfile.yml` rather than
-delegated, so CI need not install go-task for two lines.
+Authoring has its own tooling under `.claude/`: the `new-notice`,
+`new-minutes` and `new-news` skills scaffold frontmatter for each dated section
+and finish with `bun fmt <file>`, and `.claude/rules/notes.md` carries the
+dating rules for notes.
 
-## 10. Things worth knowing that the code does not say
+## 12. Things worth knowing that the code does not say
 
-- **A Go template comment ends at the first `*/`.** Writing a glob such as
-  `layouts/*/single.html` inside `{{/* … */}}` fails the build with "comment
-  ends before closing delimiter". Several comments in `layouts/` are long enough
-  that this is a live hazard.
-- **`.prettierignore` is a symlink to `.gitignore`.** A formatter-only exclusion
-  put there also stops git tracking the file.
+- **A Go template comment ends at the first `*/`.** Writing a glob such as a
+  wildcard directory followed by `/single.html` inside `{{/* … */}}` fails the
+  build with "comment ends before closing delimiter". Several comments in
+  `layouts/` are long enough that this is a live hazard;
+  `_default/single.html` carries a reminder.
+- **The templates were machine-formatted until #150** and are hand-formatted
+  now, so some layout in them reads as a leftover of the old formatter rather
+  than a choice: each nav link's closing `</a` with its `>` on the next line,
+  and the `(time` / `.)` split across lines in `minutes-meta.html`. Whitespace
+  inside a tag or a `{{ }}` action is not output, so either renders the same
+  if tidied by hand.
 - **A note needs both a `date:` and no `draft:`.** They move together. The date
-  half is now a build failure (see §8); the `draft:` half cannot be checked,
-  because a draft is not built — a dated note that keeps `draft: true` simply
-  does nothing.
-- **`validate-content.html` cannot see a draft or a future-dated page** in a
-  default build, which is why CI passes `-D --buildFuture`.
+  half is a build failure (§4); the `draft:` half cannot be checked, because a
+  draft is not built in production — a dated note that keeps `draft: true`
+  simply never appears.
+- **The validator cannot see a draft or a future-dated page** in a default
+  build, which is why the build command's validate stage passes
+  `-D --buildFuture` (§3).
+- **Hugo floats.** Neither the `Brewfile` nor the build image pins it
+  (`HUGO_VERSION=latest`), so a breaking release appears as a failed build
+  rather than a silent change.
 
 ## Section map
 
 | Section | Covers                                          | Key files                                            |
 | ------- | ----------------------------------------------- | ---------------------------------------------------- |
 | 1–2     | What the site is; layout and data flow          | `hugo.toml`                                          |
-| 3       | The build-time validator, run once per build    | `layouts/partials/validate-content.html`             |
-| 4       | The shared page shell, head metadata, nav       | `layouts/_default/baseof.html`                       |
-| 5       | The curated homepage and the "latest N" helper  | `layouts/index.html`, `layouts/partials/latest.html` |
-| 6       | The notices current/expired split               | `layouts/partials/notices-by-status.html`            |
-| 7       | Section list/single templates and meta partials | `layouts/<section>/`, `layouts/partials/*-meta.html` |
-| 8       | `/llms.txt` and the site feed                   | `layouts/index.llms.txt`, `layouts/home.rss.xml`     |
-| 9       | Task runner, formatter pinning, CI gates        | `Taskfile.yml`, `.github/workflows/pages.yml`        |
-| 10      | Hazards the code does not state                 | —                                                    |
-
-## Index of findings
-
-None outstanding. This pass filed one — a notice carrying a `meeting_date` but no
-`expires` skipped the expiry check and stayed current forever — and it was fixed
-in #118 before this document was committed.
+| 3       | The build command and who runs it               | `wrangler.jsonc`                                     |
+| 4       | The build-time validator, run once per build    | `layouts/partials/validate-content.html`             |
+| 5       | The shared page shell, head metadata, nav       | `layouts/_default/baseof.html`                       |
+| 6       | The curated homepage and the "latest N" helper  | `layouts/index.html`, `layouts/partials/latest.html` |
+| 7       | The notices current/expired split               | `layouts/partials/notices-by-status.html`            |
+| 8       | Section list/single templates and meta partials | `layouts/<section>/`, `layouts/partials/*-meta.html` |
+| 9       | `/llms.txt`, feeds, robots                      | `layouts/index.llms.txt`, `layouts/home.rss.xml`     |
+| 10      | Asset serving, the Monday cron, cache headers   | `worker.js`, `wrangler.jsonc`, `static/_headers`     |
+| 11      | Formatter split and the task runner             | `bunfig.toml`, `Taskfile.yml`                        |
+| 12      | Hazards the code does not state                 | —                                                    |
 
 ---
 
