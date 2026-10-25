@@ -112,7 +112,7 @@ task validate  # drafts + future-dated posts rendered in memory, warnings fail
 task deploy    # deploy by hand; pushes to main deploy on their own
 ```
 
-`--panicOnWarning` makes Hugo's warnings fail the build instead of advising. Note it does not catch a new section with no templates today: `layouts/_default/list.html` and `single.html` are deliberate fallbacks (#19) and answer the lookup, so no warning is raised. The flag is what would make that case loud if those fallbacks were ever removed.
+`--panicOnWarning` makes Hugo's warnings fail the build instead of advising. Note it does not catch a new section with no templates: `layouts/_default/list.html` and `single.html` answer the lookup. They are the templates news and notes render through, so a new section gets the dated-post layout rather than a warning.
 
 The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and builds every other branch without deploying it. Each build runs `build.command`: the `task check` commands, the validate pass and the production build. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. A cron trigger in `wrangler.jsonc` runs `worker.js` every Monday at 09:00 UTC (05:00 Eastern in summer, 04:00 in winter), which POSTs the Worker's own deploy hook; that is when a future-dated post goes live. Run `task deploy` or merge anything to publish sooner. The script is the Worker's only code: requests are served from `public/`, and one matching no file is handed straight back to asset serving for the 404 page.
 

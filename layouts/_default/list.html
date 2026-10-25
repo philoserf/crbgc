@@ -1,14 +1,10 @@
-{{/* Fallback for sections without a custom list.html. Currently unreached —
-  every section ships its own — but kept deliberately so a future section
-  renders sensibly before it gets a bespoke template.
-*/}}
 {{ define "main" }}
   <article>
     <h1>{{ .Title }}</h1>
     {{ .Content }}
-    <ul>
-      {{ range .Pages }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    <ul class="item-list">
+      {{ range .Pages.ByDate.Reverse }}
+        {{ partial "item-row.html" . }}
       {{ end }}
     </ul>
   </article>
