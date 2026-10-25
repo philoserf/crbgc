@@ -66,12 +66,6 @@
     */}}
     {{- range sort .RegularPages "File.Path" -}}
       {{- $file := .File.Path -}}
-      {{/* #56: nothing in frontmatter pins a URL any more — it is the title as
-        Hugo normalizes it, and the filename is the same normalization written
-        by hand. Requiring the two to agree is what catches a retitle that was
-        not accompanied by a rename, which is the edit that silently moves a
-        published URL. It also keeps the file findable from the URL.
-      */}}
       {{/* Every dated section's post must carry a date. Without one the page
         still builds and publishes, but home.rss.xml selects on
         PublishDate.IsZero, so it is absent from the site feed permanently, and
@@ -84,6 +78,12 @@
       {{- if and (ne $section "governance") .Date.IsZero -}}
         {{- errorf "%s: no date — a post in a dated section must carry one. Without it the page publishes but never reaches /index.xml, and its list row renders January 1, 0001." $file -}}
       {{- end -}}
+      {{/* #56: nothing in frontmatter pins a URL any more — it is the title as
+        Hugo normalizes it, and the filename is the same normalization written
+        by hand. Requiring the two to agree is what catches a retitle that was
+        not accompanied by a rename, which is the edit that silently moves a
+        published URL. It also keeps the file findable from the URL.
+      */}}
       {{- $seg := path.Base .RelPermalink -}}
       {{/* #113: governance is deliberately absent from [permalinks], so its URLs
         come from the filename and a prose retitle cannot move them. That is the
