@@ -18,8 +18,8 @@ those documents from asserting something the Club cannot substantiate.
 
 Read the build checks with that in mind and they stop looking like lint:
 
-- A notice shown as current after its meeting has passed **misstates what
-  business is pending before the Club**.
+- A notice that never expires **keeps a meeting long past listed as business
+  pending before the Club**.
 - Minutes marked "Approved" with no approval date **assert a status that under
   RONR only a meeting can confer**, and the date is what identifies the meeting.
 - A citation to `/governance/bylaws/#article-v--meetings` that resolves to no
@@ -45,9 +45,8 @@ relationship to time**:
   RONR's order of authority, not chronology.
 - **Notices** — forward-looking, with a lifespan. A notice exists to establish
   that required notice was given _before_ business is transacted; once the
-  meeting passes, its job is done and continuing to show it as current is a
-  false statement. This is the only section whose membership in a listing
-  changes with the clock.
+  meeting passes, its job is done and it has to come down. This is the only
+  section whose membership in a listing changes with the clock.
 - **Minutes** — backward-looking, and their _truth status changes_. Draft versus
   Approved is a real parliamentary distinction, not a publishing workflow.
 - **News and Notes** — dated and immutable. Chronology is all they have.
@@ -133,16 +132,9 @@ Worker's own deploy hook, and Workers Builds rebuilds `main`. So publishing is
 weekly by design — a future-dated post appears on the first Monday on or after
 its date — and any merge or `task deploy` publishes sooner.
 
-The notices live with that cadence on purpose. `expires` is the first day a
-notice is hidden, but it takes effect at the first build on or after that day,
-so a notice whose `expires` falls midweek stays listed as current until the
-next Monday — the 2027 Annual Meeting notice, expiring Tuesday, June 22, would
-come down on the 28th. That lag was weighed and accepted (#155): a notice staying
-up a few days past its meeting does not matter to the Club, and where it would,
-setting `expires` to a Monday lines it up with the rebuild. So the record's
-promise about notices is week-grained, not day-grained, and "Shown through" on a
-notice's page is the intended last day, not a guarantee. Do not add rebuild
-machinery to close the gap without reopening that decision.
+A notice therefore comes down at the first rebuild on or after its `expires`,
+which can be a few days later. That does not matter, and when it would, the
+notice's `expires` is set to a Monday to match the rebuild (#155).
 
 ## Where the boundaries are principled, and where they are scars
 
@@ -225,9 +217,6 @@ and nothing prompts any of them.
   config toggle; it reopens the decision that deleted `tags:`.
 - **A notice that must be _retracted_ rather than expire.** The model has one
   lifecycle verb, and it is the clock.
-- **Anything time-sensitive finer than a week**, for the reasons above. The
-  mechanism is cheap — a different cron, or rebuilding on notice dates — but it
-  reverses an accepted publishing decision, not a template detail.
 - **Membership as data.** The Bylaws make the Secretary-Treasurer keeper of the
   roll, and the roll exists nowhere in this system — `officers.md` holds a
   hand-written Markdown table. **The system models documents, not the
