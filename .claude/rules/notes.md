@@ -21,4 +21,4 @@ Adding a note now means giving it a `date:` and no `draft:`. The two move togeth
 
 One consequence, intended:
 
-- **`layouts/notes/list.html` orders `ByDate.Reverse`**, as every other dated section does. It ordered `ByTitle` for as long as the notes shared a single date, when date order would have been arbitrary. So the list page now leads with the 24 argument-ordered notes, `the-endless-golf-equipment-fee` first, and ends on the reference layer — the reverse of the order that produced the dates.
+- **The notes list (`layouts/_default/list.html`, shared with news) orders `ByDate.Reverse`**, as every other dated section does. It ordered `ByTitle` for as long as the notes shared a single date, when date order would have been arbitrary. So the list page now leads with the 24 argument-ordered notes, `the-endless-golf-equipment-fee` first, and ends on the reference layer — the reverse of the order that produced the dates.
