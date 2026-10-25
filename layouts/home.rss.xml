@@ -29,7 +29,7 @@ does not read it as a bug (#80).
 `[services.rss] limit` still applies. RSS is not a plain-text output format, so
 this runs through html/template: the prolog needs `safeHTML` and the summary
 needs `transform.XMLEscape | safeHTML`, or the feed is mangled. This file is
-outside the `task prettier` glob — keep the trim markers deliberate by hand.
+hand-formatted, like all of layouts/ — keep the trim markers deliberate.
 */ -}}
 {{- $pages := where site.RegularPages "PublishDate.IsZero" false -}}
 {{- $pages = $pages.ByPublishDate.Reverse -}}

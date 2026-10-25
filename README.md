@@ -29,8 +29,8 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 ## Conventions
 
 - **YAML frontmatter** across all content. TOML is only used in `hugo.toml`.
-- **Prettier** formats Markdown, HTML/Hugo templates, YAML, TOML, and JSON. **Biome** formats and lints CSS. Run `task format` before committing.
-- **`layouts/index.llms.txt` is deliberately unformatted.** It is a plain-text template where whitespace is the output, and Prettier's `go-template` parser treats it as HTML — it splits Markdown headings from their text and collapses list items into a broken feed. It is excluded because the `task prettier` glob covers only `.{md,html,yml,yaml,toml,json}`; the exclusion cannot go in `.prettierignore`, which is a symlink to `.gitignore`, so an entry there would also stop git tracking the file. **Do not widen the glob.** Edit it by hand and check the rendered `/llms.txt`.
+- **`bun fmt`** formats everything except `layouts/` and `assets/`, which `bunfig.toml` excludes. **Biome** formats and lints the CSS in `assets/`. Run `task format` before committing.
+- **Everything in `layouts/` is hand-formatted.** These are Hugo templates, which `bun fmt` cannot parse — its HTML formatter would flatten `{{ if }}`/`{{ range }}` structure and reflow template comments as prose — and `index.llms.txt` and `home.rss.xml` are templates whose whitespace is the output. Keep the exclusion in `bunfig.toml`, not `.prettierignore`: `bun fmt` reads that file too, but it is a symlink to `.gitignore`, so an entry there would also stop git tracking the file.
 - **The title is the filename is the URL** — in the four dated sections. Hugo normalizes the title (lowercased, punctuation dropped, spaces to hyphens) into the URL segment; the filename is that same string, with no date prefix. No content file carries a `slug:`. `layouts/partials/validate-content.html` fails the build when a filename and its URL segment disagree, and when two posts in a section would claim the same URL.
 - **`governance` is deliberately exempt.** It is absent from `[permalinks]`, so a governance URL comes from its filename and a retitle cannot move it — which is what keeps the site's most heavily cited documents citable. The build checks those the other way round: the normalized title must match the filename, so a retitle that skips the rename still fails rather than orphaning the page from its own name.
 - **Adding a section means adding it to the `validate-content.html` loop.** Nothing prompts that step, and a section left out of the loop gets none of these checks.
@@ -106,8 +106,8 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 ```bash
 task serve     # hugo server -D --buildFuture (drafts + future posts visible)
 task build     # hugo --minify --gc --panicOnWarning (production)
-task format    # prettier (md/html/yaml/toml/json) + biome (css)
-task check     # prettier --check + biome check
+task format    # bun fmt (all but layouts/ and assets/) + biome (css)
+task check     # bun fmt --check + biome check
 task validate  # drafts + future-dated posts rendered in memory, warnings fail
 task deploy    # deploy by hand; pushes to main deploy on their own
 ```
@@ -116,7 +116,7 @@ task deploy    # deploy by hand; pushes to main deploy on their own
 
 The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and builds every other branch without deploying it. Each build runs `build.command`: the `task check` commands, the validate pass and the production build. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. A cron trigger in `wrangler.jsonc` runs `worker.js` every Monday at 09:00 UTC (05:00 Eastern in summer, 04:00 in winter), which POSTs the Worker's own deploy hook; that is when a future-dated post goes live. Run `task deploy` or merge anything to publish sooner. The script is the Worker's only code: requests are served from `public/`, and one matching no file is handed straight back to asset serving for the 404 page.
 
-Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately: unpinned `brew "hugo"` in the `Brewfile`, and `HUGO_VERSION=latest` in the Workers Builds settings (see Cloudflare settings). A breaking release shows up as a failed build rather than a silent change. No Dependabot/Renovate by choice — four devDependencies don't warrant the PR noise.
+Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately: unpinned `brew "hugo"` in the `Brewfile`, and `HUGO_VERSION=latest` in the Workers Builds settings (see Cloudflare settings). A breaking release shows up as a failed build rather than a silent change. No Dependabot/Renovate by choice — one devDependency doesn't warrant the PR noise.
 
 ### Cloudflare settings
 

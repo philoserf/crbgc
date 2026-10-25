@@ -1,0 +1,7 @@
+[fmt]
+# Leave fenced code in Markdown alone: a Hugo snippet quoted in a note or in
+# WALKTHROUGH.md is a quotation, and formatting it would change what it says.
+embeddedLanguageFormatting = "off"
+# layouts/ is Go templates, which bun fmt cannot parse; they are hand-formatted.
+# assets/ is CSS, which Biome formats and lints.
+ignorePatterns = ["layouts/**", "assets/**"]

@@ -40,8 +40,8 @@ That is the complete frontmatter for news — do not add fields from the other s
 
 ## Verify
 
-1. `bunx prettier --write <file>` — must pass.
+1. `bun fmt <file>` — must pass.
 2. Confirm `date` is a bare `YYYY-MM-DD` with no time or offset.
 3. Show the user the file path and frontmatter.
 
-Done means: file exists at the path, exactly three frontmatter fields, Prettier-clean.
+Done means: file exists at the path, exactly three frontmatter fields, `bun fmt`-clean.

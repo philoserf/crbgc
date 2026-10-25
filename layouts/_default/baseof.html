@@ -20,9 +20,9 @@
       — so a link preview should come from the page rather than from whatever
       the client scrapes. Every content file already carries a description, so
       the data was already here; only the tags were missing.
-      Both values are computed into variables first. Prettier's go-template
-      plugin reflows an inline if/else onto its own lines, which is harmless in
-      <title> but would put newlines inside a content="…" attribute.
+      Both values are computed into variables first, so an inline if/else
+      never sits inside a content="…" attribute, where a line break added by
+      hand or by a formatter would become part of the value.
       og:image is one card for the whole site, not one per page: it carries the
       Club's name and nothing else, so it never goes stale and never disagrees
       with the page it fronts — og:title and og:description already carry
