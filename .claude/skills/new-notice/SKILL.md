@@ -51,8 +51,8 @@ Leave the body empty unless notice text was provided.
 
 ## Verify
 
-1. `bunx prettier --write <file>` — must pass.
+1. `bun fmt <file>` — must pass.
 2. Confirm all three date fields are bare `YYYY-MM-DD` with no time or offset.
 3. Show the user the file path and frontmatter. Remind them the notice appears under "Expired" on the list page after `expires`.
 
-Done means: file exists at the path, all seven frontmatter fields populated, Prettier-clean.
+Done means: file exists at the path, all seven frontmatter fields populated, `bun fmt`-clean.

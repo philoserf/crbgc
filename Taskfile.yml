@@ -7,15 +7,10 @@ tasks:
       - brew bundle --file=Brewfile
       - bun install
 
-  prettier:
-    desc: Format markdown, HTML/Hugo, YAML, TOML, and JSON with Prettier
+  fmt:
+    desc: Format everything bun fmt manages (exclusions in bunfig.toml)
     cmds:
-      # Run twice: prettier-plugin-go-template is non-idempotent and can need a
-      # second pass to converge. Upstream is abandoned (no commit since 2023-07-26,
-      # no 1.0 coming), so the version is pinned exact and this pass is permanent.
-      # Prettier 4 breaks the plugin outright — see issue #52.
-      - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
-      - bunx prettier --write '**/*.{md,html,yml,yaml,toml,json}'
+      - bun fmt
 
   biome:
     desc: Format and lint CSS with Biome
@@ -25,17 +20,17 @@ tasks:
   format:
     desc: Format and fix all files
     cmds:
-      - task: prettier
+      - task: fmt
       - task: biome
 
   check:
     desc: Check all files without changing them
     cmds:
-      # Biome is not redundant with Prettier: their CSS output is identical
-      # here, but Biome also lints, and on a hand-written stylesheet using
-      # relative oklch() that lint is the point (#87). wrangler.jsonc's
-      # build.command runs these same two strings, so keep them in step.
-      - bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}'
+      # Biome owns assets/ (bunfig.toml excludes it from bun fmt) because it
+      # also lints, and on a hand-written stylesheet using relative oklch()
+      # that lint is the point (#87). wrangler.jsonc's build.command runs these
+      # same two checks, so keep them in step.
+      - bun fmt --check
       - bunx biome check assets
 
   icons:

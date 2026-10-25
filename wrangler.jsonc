@@ -4,9 +4,10 @@
   // The whole build, run before every deploy on a Mac (task deploy) or in
   // Workers Builds: the two task check commands, the validate pass over drafts
   // and future-dated posts, then the production build. rm -rf because Hugo
-  // never prunes public/.
+  // never prunes public/. bun is pinned through bunx because the build image's
+  // own bun may predate 1.4.4, the first release with bun fmt.
   "build": {
-    "command": "bunx prettier --check '**/*.{md,html,yml,yaml,toml,json}' && bunx biome check assets && hugo --buildFuture -D --renderToMemory --gc --panicOnWarning && rm -rf public && hugo --minify --gc --panicOnWarning",
+    "command": "bunx bun@1.4.4 fmt --check && bunx biome check assets && hugo --buildFuture -D --renderToMemory --gc --panicOnWarning && rm -rf public && hugo --minify --gc --panicOnWarning",
   },
   "main": "./worker.js",
   "assets": {

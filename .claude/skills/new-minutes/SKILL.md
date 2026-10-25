@@ -49,8 +49,8 @@ Leave the body empty unless minutes text was provided.
 
 ## Verify
 
-1. `bunx prettier --write <file>` — must pass.
+1. `bun fmt <file>` — must pass.
 2. Confirm `date` is a bare `YYYY-MM-DD` with no time or offset.
 3. Show the user the file path and frontmatter.
 
-Done means: file exists at the path, all ten frontmatter fields present, `approved: false`, Prettier-clean.
+Done means: file exists at the path, all ten frontmatter fields present, `approved: false`, `bun fmt`-clean.
