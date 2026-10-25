@@ -5,13 +5,25 @@
 
   <section>
     <h2>Latest notices</h2>
-    {{ partial "latest.html" (dict "section" "notices" "limit" 3) }}
+    {{ with first 3 (partial "notices-by-status.html").current }}
+      <ul class="item-list">
+        {{ range . }}{{ partial "item-row.html" . }}{{ end }}
+      </ul>
+    {{ else }}
+      <p class="muted">Nothing yet.</p>
+    {{ end }}
     <p><a href="{{ "/notices/" | relURL }}">All notices &rarr;</a></p>
   </section>
 
   <section>
     <h2>Latest news</h2>
-    {{ partial "latest.html" (dict "section" "news" "limit" 5) }}
+    {{ with first 5 (where site.RegularPages "Section" "news").ByDate.Reverse }}
+      <ul class="item-list">
+        {{ range . }}{{ partial "item-row.html" . }}{{ end }}
+      </ul>
+    {{ else }}
+      <p class="muted">Nothing yet.</p>
+    {{ end }}
     <p><a href="{{ "/news/" | relURL }}">All news &rarr;</a></p>
   </section>
 
