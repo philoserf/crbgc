@@ -133,16 +133,16 @@ Worker's own deploy hook, and Workers Builds rebuilds `main`. So publishing is
 weekly by design — a future-dated post appears on the first Monday on or after
 its date — and any merge or `task deploy` publishes sooner.
 
-That cadence was chosen for posts, and it is in tension with the notices.
-`expires` is the first day a notice is hidden, and nothing ties it to a Monday.
-The 2027 Annual Meeting is on Monday, June 21; its notice expires on Tuesday the
-22nd; the Monday rebuild that morning still sees it as current, and so does
-nothing else until the 28th. For six days the site lists, as pending business,
-a meeting that has already happened, while the notice's own page says "Shown
-through June 21, 2027". The validator cannot catch this, because it checks
-frontmatter, not the gap between builds. Unless a merge lands in that week, this
-is exactly the first lie in the list at the top of this document, made by the
-deploy schedule rather than by an edit.
+The notices live with that cadence on purpose. `expires` is the first day a
+notice is hidden, but it takes effect at the first build on or after that day,
+so a notice whose `expires` falls midweek stays listed as current until the
+next Monday — the 2027 Annual Meeting notice, expiring Tuesday, June 22, would
+come down on the 28th. That lag was weighed and accepted (#155): a notice staying
+up a few days past its meeting does not matter to the Club, and where it would,
+setting `expires` to a Monday lines it up with the rebuild. So the record's
+promise about notices is week-grained, not day-grained, and "Shown through" on a
+notice's page is the intended last day, not a guarantee. Do not add rebuild
+machinery to close the gap without reopening that decision.
 
 ## Where the boundaries are principled, and where they are scars
 
@@ -225,9 +225,9 @@ and nothing prompts any of them.
   config toggle; it reopens the decision that deleted `tags:`.
 - **A notice that must be _retracted_ rather than expire.** The model has one
   lifecycle verb, and it is the clock.
-- **Anything time-sensitive finer than a week**, for the reasons above. The fix
-  is cheap — a different cron, or rebuilding on notice dates — but it is a
-  change to the publishing decision, not to the templates.
+- **Anything time-sensitive finer than a week**, for the reasons above. The
+  mechanism is cheap — a different cron, or rebuilding on notice dates — but it
+  reverses an accepted publishing decision, not a template detail.
 - **Membership as data.** The Bylaws make the Secretary-Treasurer keeper of the
   roll, and the roll exists nowhere in this system — `officers.md` holds a
   hand-written Markdown table. **The system models documents, not the
@@ -247,13 +247,6 @@ change.
 
 Marked plainly, because this is inferred from code, content and commit messages
 rather than from anyone's stated intent.
-
-**Whether the weekly cadence was weighed against the notices.** The commit that
-made publishing weekly (#143) speaks only of future-dated posts. I read the
-notice lag as an unconsidered consequence rather than an accepted cost, but I
-cannot rule out that it was judged acceptable — for instance because notice to
-Members is given in writing elsewhere and the site is a mirror. If so, the
-"record" framing above overstates how much of the record the site itself is.
 
 **Whether the notes belong in the same site as the record.** They are prose, not
 record; the governance rules about amendment and minutes explicitly do not apply
