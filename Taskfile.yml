@@ -7,21 +7,11 @@ tasks:
       - brew bundle --file=Brewfile
       - bun install
 
-  fmt:
-    desc: Format everything bun fmt manages (exclusions in bunfig.toml)
+  format:
+    desc: Format and fix all files (bun fmt exclusions are in bunfig.toml)
     cmds:
       - bun fmt
-
-  biome:
-    desc: Format and lint CSS with Biome
-    cmds:
       - bunx biome check --write assets
-
-  format:
-    desc: Format and fix all files
-    cmds:
-      - task: fmt
-      - task: biome
 
   check:
     desc: Check all files without changing them
