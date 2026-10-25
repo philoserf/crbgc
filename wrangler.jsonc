@@ -1,11 +1,19 @@
 {
   "name": "crbgc",
   "compatibility_date": "2026-10-12",
-  // The whole build, run before every deploy on a Mac (task deploy) or in
-  // Workers Builds: the two task check commands, the validate pass over drafts
-  // and future-dated posts, then the production build. rm -rf because Hugo
-  // never prunes public/. bun is pinned through bunx because the build image's
-  // own bun may predate 1.4.4, the first release with bun fmt.
+  // The build gate, and its only definition: Workers Builds runs it on every
+  // push, task deploy before deploying, and task check through a dry run.
+  // - bun fmt checks all but layouts/ and assets/ (bunfig.toml). bun is pinned
+  //   through bunx because the build image's own may predate 1.4.4, the first
+  //   release with bun fmt.
+  // - Biome owns assets/ because it also lints, and on a hand-written
+  //   stylesheet using relative oklch() that lint is the point (#87).
+  // - The validate pass needs -D --buildFuture: validate-content.html iterates
+  //   .RegularPages, which a default build limits to published posts, so a
+  //   post written ahead of time would go unchecked until the day it publishes.
+  // - --panicOnWarning: Hugo warnings are advisory by default, so a template
+  //   lookup failure would publish a broken section and exit 0 (#87).
+  // - rm -rf because Hugo never prunes public/.
   "build": {
     "command": "bunx bun@1.4.4 fmt --check && bunx biome check assets && hugo --buildFuture -D --renderToMemory --gc --panicOnWarning && rm -rf public && hugo --minify --gc --panicOnWarning",
   },

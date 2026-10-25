@@ -14,14 +14,9 @@ tasks:
       - bunx biome check --write assets
 
   check:
-    desc: Check all files without changing them
+    desc: Run the deploy's own build gate (wrangler.jsonc build.command) without deploying
     cmds:
-      # Biome owns assets/ (bunfig.toml excludes it from bun fmt) because it
-      # also lints, and on a hand-written stylesheet using relative oklch()
-      # that lint is the point (#87). wrangler.jsonc's build.command runs these
-      # same two checks, so keep them in step.
-      - bun fmt --check
-      - bunx biome check assets
+      - bunx wrangler deploy --dry-run
 
   icons:
     desc: Regenerate the favicon rasters and the Open Graph card (macOS only)
@@ -51,22 +46,6 @@ tasks:
     desc: Run Hugo dev server with drafts and future-dated content
     cmds:
       - hugo server -D --buildFuture
-
-  build:
-    desc: Build the site to ./public
-    cmds:
-      # --panicOnWarning: Hugo warnings are advisory by default, so a template
-      # lookup failure publishes a broken section and exits 0 (#87).
-      - hugo --minify --gc --panicOnWarning
-
-  validate:
-    desc: Render drafts and future-dated posts in memory, failing on any warning
-    cmds:
-      # Both flags are load-bearing: validate-content.html iterates
-      # .RegularPages, which excludes future-dated posts (--buildFuture) and
-      # drafts (-D) from a default build, so without them a post written ahead
-      # of time is unchecked until the day it publishes.
-      - hugo --buildFuture -D --renderToMemory --gc --panicOnWarning
 
   deploy:
     desc: Deploy by hand (Workers Builds deploys every push to main)

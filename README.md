@@ -105,16 +105,14 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 
 ```bash
 task serve     # hugo server -D --buildFuture (drafts + future posts visible)
-task build     # hugo --minify --gc --panicOnWarning (production)
 task format    # bun fmt (all but layouts/ and assets/) + biome (css)
-task check     # bun fmt --check + biome check
-task validate  # drafts + future-dated posts rendered in memory, warnings fail
+task check     # the deploy's build gate, run through wrangler deploy --dry-run
 task deploy    # deploy by hand; pushes to main deploy on their own
 ```
 
 `--panicOnWarning` makes Hugo's warnings fail the build instead of advising. Note it does not catch a new section with no templates: `layouts/_default/list.html` and `single.html` answer the lookup. They are the templates news and notes render through, so a new section gets the dated-post layout rather than a warning.
 
-The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and builds every other branch without deploying it. Each build runs `build.command`: the `task check` commands, the validate pass and the production build. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. A cron trigger in `wrangler.jsonc` runs `worker.js` every Monday at 09:00 UTC (05:00 Eastern in summer, 04:00 in winter), which POSTs the Worker's own deploy hook; that is when a future-dated post goes live. Run `task deploy` or merge anything to publish sooner. The script is the Worker's only code: requests are served from `public/`, and one matching no file is handed straight back to asset serving for the 404 page.
+The site is a Cloudflare Worker serving `public/` as static assets (`wrangler.jsonc`), with Hugo's `404.html` as the not-found page. Workers Builds deploys every push to `main` and builds every other branch without deploying it. Each build runs `build.command`: the format and CSS checks, the validate pass and the production build. `task check` runs the same string locally. An unformatted file, a lint error or a broken future-dated post therefore fails the build and stops the deploy rather than riding along. A cron trigger in `wrangler.jsonc` runs `worker.js` every Monday at 09:00 UTC (05:00 Eastern in summer, 04:00 in winter), which POSTs the Worker's own deploy hook; that is when a future-dated post goes live. Run `task deploy` or merge anything to publish sooner. The script is the Worker's only code: requests are served from `public/`, and one matching no file is handed straight back to asset serving for the 404 page.
 
 Dependencies are refreshed manually, roughly quarterly: `bun update && task check`, and verify the deploy. Hugo is not among them — it floats deliberately: unpinned `brew "hugo"` in the `Brewfile`, and `HUGO_VERSION=latest` in the Workers Builds settings (see Cloudflare settings). A breaking release shows up as a failed build rather than a silent change. No Dependabot/Renovate by choice — one devDependency doesn't warrant the PR noise.
 
