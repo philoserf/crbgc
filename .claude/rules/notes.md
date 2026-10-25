@@ -7,7 +7,7 @@ paths:
 
 Loaded when working under `content/notes/`. The rule it serves is stated in the root `CLAUDE.md`: a note gets a `date:` no earlier than any note it cites, and no `draft:`.
 
-**All 65 notes are published, dated one per day** — `2026-06-21` through `2026-09-16`, founding day to the day the dating was done. No note is a draft and none shares a date with another. The run pauses between `2026-07-31` and `2026-08-24`; the three August news posts sit in that gap, so the Club's actual August interrupts the backfill rather than being buried under it.
+**The first 65 notes were dated in one pass, one per day** — `2026-06-21` through `2026-09-16`, founding day to the day the dating was done. Notes added since take their own date under the invariant below. No note is a draft and none shares a date with another. The run pauses between `2026-07-31` and `2026-08-24`; the three August news posts sit in that gap, so the Club's actual August interrupts the backfill rather than being buried under it.
 
 The dates are backdated rather than scheduled, and that is what makes the section coherent: every one is in the past, so they published together on a single build with no window in which a live note pointed at one that had not appeared yet.
 
@@ -17,7 +17,7 @@ The remaining 24, which no note linked to, are ordered as an argument instead: t
 
 **The invariant both orders keep: a note is dated no earlier than the notes it cites.** One citation breaks it, `hickory-era-golf-writing-survey` → `american-golf-writing-19501970`, because the two cite each other and the hickory era genuinely precedes 1950. Seven such mutual clusters exist among the first 41. Preserve this rule when dating anything new: it is what lets the dates be read as a sequence rather than a shuffle.
 
-Adding a note now means giving it a `date:` and no `draft:`. The two move together, and the build now enforces the first half: a post in any dated section without a `date:` fails `validate-content.html`. It used to build clean and exit 0 while `home.rss.xml`, which selects on `PublishDate.IsZero`, dropped it from the feed permanently and `item-row.html` rendered its list row as "January 1, 0001". A date without dropping `draft:` still does nothing at all — that half is unenforceable, since a draft is not built. Note also that `validate-content.html` cannot see a draft or a future-dated page, so its filename-matches-URL check reaches a note only once that note is live.
+Adding a note now means giving it a `date:` and no `draft:`. The two move together, and the build now enforces the first half: a post in any dated section without a `date:` fails `validate-content.html`. It used to build clean and exit 0 while `home.rss.xml`, which selects on `PublishDate.IsZero`, dropped it from the feed permanently and `item-row.html` rendered its list row as "January 1, 0001". A date without dropping `draft:` still does nothing at all — that half is unenforceable, since a draft is not built. A default build cannot see a draft or a future-dated page, which is why the build's validate pass runs with `-D --buildFuture`: every check reaches a note before it goes live.
 
 One consequence, intended:
 
