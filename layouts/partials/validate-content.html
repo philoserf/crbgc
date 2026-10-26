@@ -58,9 +58,13 @@
   remembered to name here would get none of these checks, and since #158 it
   would render through the dated _default templates without a warning. Rules
   that belong to one section are gated on $section.
-  Sorted by file path so a duplicate URL always names the same file as the
-  one to fix (#78) — the first alphabetically owns it, the later one is
-  reported. No section date-prefixes its filenames, so this is alphabetical
+  A URL is claimed only by a page that passes the identity checks below
+  (#175): a misnamed file already has its own error, and letting it claim
+  the URL would tell the published post that owns it to retitle — the edit
+  that moves a cited URL. Two files that both pass can still collide, through
+  a copy in a subdirectory; sorted by file path, the first alphabetically
+  owns the URL and the later one is reported, the same one every build
+  (#78). No section date-prefixes its filenames, so this is alphabetical
   order. .ByDate would not do: nothing stops two posts sharing a date, and a
   date carries no time, so which file got named would be free to drift
   between builds.
@@ -108,10 +112,13 @@
   {{- else if ne .File.ContentBaseName $want -}}
     {{- errorf "%s: title %q normalizes to %q but the filename is %q — this section's URLs come from the filename, so either restore the title or rename the file to %s.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations." $file .Title $want .File.ContentBaseName $want -}}
   {{- end -}}
-  {{- with index $seen .RelPermalink -}}
-    {{- errorf "%s: URL /%s/%s/ is already taken by the earlier post %s — retitle this post." $file $section $seg . -}}
+  {{- if and (eq .File.ContentBaseName $seg) (eq .File.ContentBaseName $want) -}}
+    {{- $url := .RelPermalink -}}
+    {{- with index $seen $url -}}
+      {{- errorf "%s: %s is already published by %s — two files publish to this URL. Move or delete one." $file $url . -}}
+    {{- end -}}
+    {{- $seen = merge $seen (dict .RelPermalink $file) -}}
   {{- end -}}
-  {{- $seen = merge $seen (dict .RelPermalink $file) -}}
   {{/* #112: notice_type and meeting_type carry a controlled vocabulary that
     lived only in README and the new-notice / new-minutes skills. Nothing
     resolved them, so a typo published as a title-cased heading and exited 0
