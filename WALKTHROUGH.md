@@ -201,12 +201,14 @@ would publish with the markup visible.
 
 `RawContent` excludes frontmatter by construction, so only the body is checked.
 
-**Pass 2: heading-fragment citations.** Cross-document links carry anchors, as in
-`/governance/bylaws/#article-iv--officers`. Goldmark derives those anchors from heading
-text, so editing a heading would silently break every inbound citation: the link would
-still resolve, just to the top of the page.
+**Pass 2: internal links and their fragments.** Every root-relative `](/path)` link is
+resolved against the site's pages. A retitled post moves its URL, so a link still using the
+old one would otherwise publish dead. Links that carry an anchor, as in
+`/governance/bylaws/#article-iv--officers`, are also checked against the target's headings.
+Goldmark derives anchors from heading text, so an edited heading would otherwise send every
+inbound citation to the top of the page.
 
-`layouts/partials/validate-content.html` — fragment check
+`layouts/partials/validate-content.html` — link check
 
 ```go-html-template
 {{- $byURL := dict -}}
@@ -216,25 +218,25 @@ still resolve, just to the top of the page.
 {{- range site.Pages -}}
   {{- if .File -}}
     {{- $file := .File.Path -}}
-    {{- range findRESubmatch `\]\((/[^)#\s]*)#([^)\s]+)\)` .RawContent -}}
+    {{- range findRESubmatch `\]\((/[^)#\s]*)(?:#([^)\s]+))?\)` .RawContent -}}
       {{- $path := index . 1 -}}
       {{- $frag := index . 2 -}}
       {{- $key := cond (hasSuffix $path "/") $path (printf "%s/" $path) -}}
       {{- with index $byURL $key -}}
-        {{- if not (in .Fragments.Identifiers $frag) -}}
+        {{- if and $frag (not (in .Fragments.Identifiers $frag)) -}}
 ```
 
-Pages are indexed by `RelPermalink` rather than by content path, because the two disagree
-for governance and section pages. A fragment link whose path matches no page fails as well,
-with its own message.
+The fragment group is optional, and an unmatched group comes back as an empty string, so
+`$frag` doubles as the test for whether to check headings at all. Pages are indexed by
+`RelPermalink` rather than by content path, because the two disagree for governance and
+section pages. A link without a trailing slash still resolves, because `$key` adds one.
 
-Two limits are visible in the code:
+Two limits are named in the header comment:
 
-- The regex requires a `#`, so a plain `](/notes/x/)` is never looked up. Of the 151
-  root-relative links in content, 9 carry a fragment.
-- The header comment names the other: `.Fragments` knows content headings only, so a
-  fragment pointing at an id emitted by a template would be reported as missing. None
-  exist today.
+- **Only real pages are indexed.** A link to an `aliases:` path or to a file under
+  `static/` fails, by design: the record should cite a document by its current address.
+- **`.Fragments` knows content headings only.** A fragment pointing at an id emitted by a
+  template would be reported as missing. None exist today.
 
 **Pass 3: per-page rules over every regular page.**
 
@@ -248,51 +250,54 @@ Two limits are visible in the code:
 ```
 
 The loop names no sections. Rules that belong to one section are gated on `$section`, so a
-section added later is checked without being listed anywhere. Sorting by file path is
-deliberate: when two files claim one URL, the same file is reported every time. `.ByDate`
-would not do, because nothing stops two posts sharing a date, and a bare date carries no
-time, so which file got named would drift between builds.
+section added later is checked without being listed anywhere.
 
 The first rule is that **every post outside governance carries a date**. Governance is
 excluded because its documents are atemporal. An undated post would otherwise publish,
 render its list row as "January 1, 0001", and be missing from the site feed forever (§9
 shows why).
 
-Next comes **the identity check, which branches on section**. It is the one place the
-"title is the URL" rule is not uniform:
+Next comes **the identity check**: two comparisons for every page, chained so that each
+cause reports one error, then the duplicate check for the pages that pass both:
 
 `layouts/partials/validate-content.html` — identity check
 
 ```go-html-template
-  {{- $seg := path.Base .RelPermalink -}}
-  ...
-  {{- if eq $section "governance" -}}
-    {{- $want := urlize .Title -}}
-    {{- if ne .File.ContentBaseName $want -}}
-      ...
-    {{- end -}}
-  {{- else -}}
-    {{- if ne .File.ContentBaseName $seg -}}
-      ...
-    {{- end -}}
+  {{- $want := replace (urlize .Title) "/" "-" -}}
+  {{- if ne .File.ContentBaseName $seg -}}
+    ...
+  {{- else if ne .File.ContentBaseName $want -}}
+    ...
   {{- end -}}
-  {{- with index $seen .RelPermalink -}}
-    {{- errorf "%s: URL /%s/%s/ is already taken by the earlier post %s — retitle this post." $file $section $seg . -}}
+  {{- if and (eq .File.ContentBaseName $seg) (eq .File.ContentBaseName $want) -}}
+    {{- $url := .RelPermalink -}}
+    {{- with index $seen $url -}}
+      {{- errorf "%s: %s is already published by %s — two files publish to this URL. Move or delete one." $file $url . -}}
+    {{- end -}}
+    {{- $seen = merge $seen (dict .RelPermalink $file) -}}
   {{- end -}}
-  {{- $seen = merge $seen (dict .RelPermalink $file) -}}
 ```
 
-- **Dated sections.** The URL segment comes from the title, so requiring the filename to
-  equal it catches a retitle that was not accompanied by a rename. That is the edit that
-  silently moves a published URL.
-- **Governance.** The segment _is_ the filename, so that comparison would be vacuous.
-  Instead the check normalizes the title with `urlize` and compares it to the filename, so
-  a retitle there still has to be accompanied by a rename.
-- **Any section not listed in `[permalinks]`.** It falls into the `else` branch, where the
-  comparison is just as vacuous as it would be for governance, and nothing checks its title.
-- **Duplicate URLs.** The `$seen` dict catches two files that claim one URL. With flat
-  directories and the filename check alongside it, that mostly happens through a
-  subdirectory copy, which nothing else would catch: Hugo builds both pages cleanly.
+`$seg` is `path.Base .RelPermalink`, computed just above. The two comparisons divide the
+work by where a section's URLs come from:
+
+- **Sections in `[permalinks]`** (the four dated ones). The URL segment comes from the
+  title, so requiring the filename to equal it catches a retitle that was not accompanied
+  by a rename. That is the edit that silently moves a published URL. The second comparison
+  is then redundant and never reached.
+- **Sections outside `[permalinks]`** (governance, and any section added without an
+  entry). The segment _is_ the filename, so the first comparison is trivially true. The
+  second normalizes the title and compares it with the filename, so a retitle there still
+  has to be accompanied by a rename.
+- **The slash.** The `replace` maps a slash to a hyphen, because `urlize` keeps a slash
+  that `:slug` turns into a hyphen.
+
+**Only a page that passes both comparisons may claim its URL in `$seen`.** A misnamed file
+already has its own error. If it could claim the URL, the published post that owns it would
+be told it was the duplicate. Two files that both pass can still collide, through a copy in
+a subdirectory, which Hugo builds cleanly and nothing else catches. Sorting the loop by file
+path makes the alphabetically first the owner, so the same file is reported every time.
+`.ByDate` would not do: two posts can share a date, and a bare date carries no time.
 
 The rest of the loop checks frontmatter vocabularies and pairs:
 
@@ -306,11 +311,13 @@ copies:
 
 ```
 ERROR notes/probe-wiki.md: contains an Obsidian wikilink ([[...]]) — Hugo publishes these as literal brackets. Write a root-relative link instead, e.g. [Label](/notes/some-slug/).
+ERROR notes/probe-link.md: link to /notes/no-such-note/ — no page at /notes/no-such-note/. If it was retitled, link to its new URL.
 ERROR notes/probe-frag.md: link to /governance/bylaws/#article-xx--nothing — /governance/bylaws/ has no heading with that anchor. Goldmark derives anchors from heading text, so retitling a heading breaks every citation of it.
 ERROR notes/probe-undated.md: no date — a post in a dated section must carry one. Without it the page publishes but never reaches /index.xml, and its list row renders January 1, 0001.
 ERROR notes/probe-misnamed.md: filename does not match its URL segment "probe-name" — Hugo derives the URL from the title, so rename the file to probe-name.md (note that Hugo drops & entirely; write "and" if you want it in the URL).
-ERROR notes/sub/1744-golf-rules-modernized.md: URL /notes/1744-golf-rules-modernized/ is already taken by the earlier post notes/1744-golf-rules-modernized.md — retitle this post.
-ERROR governance/bylaws.md: title "Constitution and Bylaws" normalizes to "constitution-and-bylaws" but the filename is "bylaws" — governance URLs come from the filename, so either restore the title or rename the file to constitution-and-bylaws.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations.
+ERROR governance/bylaws.md: title "Constitution and Bylaws" normalizes to "constitution-and-bylaws" but the filename is "bylaws" — this section's URLs come from the filename, so either restore the title or rename the file to constitution-and-bylaws.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations.
+ERROR events/probe.md: title "Something Else" normalizes to "something-else" but the filename is "probe" — this section's URLs come from the filename, so either restore the title or rename the file to something-else.md. Renaming moves a URL that other documents cite: add the old path under aliases: and check the citations.
+ERROR notes/sub/1744-golf-rules-modernized.md: /notes/1744-golf-rules-modernized/ is already published by notes/1744-golf-rules-modernized.md — two files publish to this URL. Move or delete one.
 ERROR notices/notice-of-2027-annual-meeting.md: notice_type "anual-meeting" is not one of the four documented values (annual-meeting, special-meeting, previous-notice, bylaw-amendment)
 ERROR notices/notice-of-2027-annual-meeting.md: meeting_date with no expires — a meeting notice must stop being current after its meeting. Set expires to the day after meeting_date.
 ERROR notices/notice-of-2027-annual-meeting.md: expires 2027-06-21 is not after meeting_date 2027-06-21 — expires is the first day the notice is hidden
@@ -318,13 +325,11 @@ ERROR minutes/minutes-2026-annual-meeting.md: approved: true with no approved_on
 ```
 
 _(Transcripts of `hugo --buildFuture -D --renderToMemory --gc --panicOnWarning` against
-planted files and edits in a scratch copy of `HEAD`, one at a time.)_
+planted files and edits in a scratch copy of `HEAD`, one at a time. `events/probe.md` is a
+file in a new section with no `[permalinks]` entry.)_
 
-The duplicate message's advice, "retitle this post", fits the case of two posts sharing a
-title. It does not fit the subdirectory copy shown here, and it can point at the wrong file
-when a new post takes an existing post's title. In that case the new file sorts first,
-fails the filename check, and also claims the URL in `$seen`. The published post is then the
-one told to retitle.
+A new post given an existing post's title, without being renamed, produces only the rename
+error for the new file. The published post is not mentioned.
 
 `errorf` fails the build on its own; a planted typo exits 1 without `--panicOnWarning`.
 That flag is there for Hugo's own warnings, which are advisory by default: without it a
@@ -728,8 +733,9 @@ Authoring has its own tooling under `.claude/`. The `new-notice`, `new-minutes` 
 - **A note needs both a `date:` and no `draft:`.** The two move together. The date half is
   a build failure (§4). The `draft:` half cannot be checked, because a draft is not built in
   production: a dated note that keeps `draft: true` simply never appears.
-- **A new section needs `[permalinks]`.** Without it the section's URLs come from filenames,
-  and §4's identity check compares the filename with itself.
+- **A new section chooses its URLs in `hugo.toml`.** With a `[permalinks]` entry they
+  follow titles, as the dated sections' do; without one they follow filenames, as
+  governance's do. §4 checks either choice.
 - **Hugo floats.** Neither the `Brewfile` nor the build image pins it
   (`HUGO_VERSION=latest`), so a breaking release appears as a failed build rather than a
   silent change.
