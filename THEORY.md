@@ -99,7 +99,8 @@ Some fields were deleted because nothing could verify them:
 
 Other rules were promoted into `validate-content.html` because they had to exist:
 
-- the identity between filename and URL;
+- the identity between title, filename and URL;
+- the requirement that every internal link resolve;
 - the notice expiry rules;
 - the approval pair on minutes;
 - the `notice_type` and `meeting_type` vocabularies;
@@ -150,10 +151,15 @@ passes.
 **1. Wikilinks.** It scans every file for `[[`. This is not a general lint. It is border
 control against the content system the notes came from (see the graft below).
 
-**2. Fragment citations.** It resolves every `](/path#fragment)` link against the target
-page's heading identifiers, matching pages by `RelPermalink`. Goldmark derives anchors from
-heading text, so editing a heading would otherwise break every inbound citation silently.
-The link would still resolve, just to the top of the page.
+**2. Citations.** It resolves every root-relative `](/path)` link against the site's pages,
+matched by `RelPermalink`, and where a link carries a fragment it checks that the target page
+has that heading. Both halves guard against a silent failure. A retitled post moves its URL,
+so a link that still uses the old one would publish dead. Goldmark derives anchors from
+heading text, so an edited heading would send every inbound citation to the top of the page.
+Until #176 only fragment links were looked up, which was 9 of the 151 internal links. Only
+real pages are in the lookup, so a link to an `aliases:` path fails too. That is
+deliberate: the record should cite a document by its current address, and the alias exists
+for readers arriving from outside.
 
 **3. Per-page rules over every regular page,** sorted by file path. A rule that belongs to
 one section is gated on `.Section`. Since #171 the loop does not name the sections it
@@ -161,19 +167,15 @@ checks, which settles two things:
 
 - A new section is dated by default. The date rule reads "everything except governance",
   so a section that forgot its dates fails the build rather than passing.
-- **Sorting by path is deliberate.** When two files claim one URL, the alphabetically first
-  keeps it and the later one is the file reported (#78), so the error never blames the
-  innocent post.
+- **A URL is owned, not first-come.** Only a page that passes the identity checks may claim
+  its URL. A misnamed file already has its own error, and letting it claim the URL used to
+  tell the published post that owns it to retitle, which is the very edit that moves a cited
+  URL (#175).
 
-The duplicate-URL check in that pass looks redundant beside the filename check, but it is
-not. A copy of a post in a subdirectory (`content/news/sub/x.md`) passes the filename check
-and builds cleanly through Hugo. The duplicate-URL check is the only thing that catches it.
-
-The validator's reach is narrower than its role suggests, and that matters more as the
-notes grow. The fragment pass only sees links **with** a fragment: 9 of the 151
-root-relative links in content. A plain `](/notes/some-note/)` to a page that does not exist
-publishes as a dead link and exits 0. All 151 resolve today, and #24 deferred a link
-checker "until cross-content linking proliferates", which has now happened.
+The duplicate-URL check looks redundant beside the identity checks, but it is not. A copy of
+a post in a subdirectory (`content/news/sub/x.md`) passes them and builds cleanly through
+Hugo, and the duplicate check is the only thing that catches it. Sorting by path means the
+same file is reported every time (#78).
 
 ## Time is evaluated at build time
 
@@ -224,14 +226,20 @@ rather than a bug.
 title _is_ the URL. `[permalinks]` uses `:slug`, which falls back to the normalized title,
 and the filename is that same string written by hand. Governance is deliberately absent
 from `[permalinks]`, so its URLs come from filenames and a prose retitle cannot move them.
-That is exactly right for the documents everything else cites. It is also why the
-validator checks governance in the opposite direction: normalized title against filename,
-rather than filename against URL.
+That is exactly right for the documents everything else cites.
 
-The exemption is written as `eq $section "governance"`, not as "any section absent from
-`[permalinks]`". A new section left out of `[permalinks]` falls into the dated branch,
-where the filename-against-URL check is vacuous because the URL already _is_ the filename.
-Its title is then checked against nothing.
+The exemption lives in `hugo.toml`, not in the validator. Since #178 every page gets two
+checks, chained so that each cause reports one error:
+
+1. the filename against the URL segment, which catches a retitle without a rename wherever
+   the URL comes from the title;
+2. the normalized title against the filename, which does the same wherever the URL comes
+   from the filename.
+
+For governance the first check is trivially true and the second does the work. The
+validator names governance only once, to exempt it from the date rule. So whether a
+section's URLs follow its titles is decided by one line in `[permalinks]`, and both choices
+are checked.
 
 **Principled: shared templates know nothing about sections.** After #164–#169, a
 section-specific template exists only where the section has something of its own to say.
@@ -293,12 +301,14 @@ appear inside `{{/* … */}}`. Several comments in `layouts/` are long enough to
 **A new dated section** is possible, and since #171 it is validated without being named. It
 still touches places that nothing prompts:
 
-- `[permalinks]`, without which its URLs come from filenames and its titles go unchecked;
+- `[permalinks]`, if its URLs should follow its titles; without it they follow filenames,
+  as governance's do;
 - the nav slice in `baseof.html`;
 - the explicit section calls in `index.llms.txt`;
 - a feed decision in its `_index.md`.
 
-A section left out of `[permalinks]` is the one that goes wrong quietly.
+Forgetting any of these leaves a visible gap rather than an unchecked one. An atemporal
+section must also be added to the date rule's governance exemption, and the build says so.
 
 **These would require rethinking something:**
 
@@ -325,7 +335,9 @@ A section left out of `[permalinks]` is the one that goes wrong quietly.
 - querying the notices section directly for a listing;
 - adding a frontmatter field without deciding how it gets checked;
 - reintroducing a second definition of the build gate;
-- adding a section without adding it to `[permalinks]`;
+- retitling a published post and fixing the build by renaming the file but not adding the
+  old path under `aliases:` (the build checks the site's own links, but nothing can check
+  links from outside);
 - retitling a governance document without renaming the file;
 - reusing `approved:` outside minutes;
 - adopting the Rules of Golf by deleting the draft paragraph without also adding `adopted:`
