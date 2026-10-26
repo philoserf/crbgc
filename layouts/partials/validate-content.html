@@ -32,6 +32,12 @@
   pages are included: one of the citations lives in minutes/_index.md.
   Limitation: .Fragments knows content headings only, so a fragment pointing
   at an id emitted by a template would report as missing. None do today.
+  #176: every root-relative link is resolved, not only those with a fragment
+  — 142 of the 151 had none, and a plain link to a page that does not exist
+  published dead and exited 0. Retitling a note moves its URL, so a
+  forgotten aliases: entry is the realistic way to strand one. Only real
+  pages are in $byURL, so a link to an alias or to a file under static/
+  also fails: link to the current URL. None link to a file today.
 */}}
 {{- $byURL := dict -}}
 {{- range site.Pages -}}
@@ -40,16 +46,16 @@
 {{- range site.Pages -}}
   {{- if .File -}}
     {{- $file := .File.Path -}}
-    {{- range findRESubmatch `\]\((/[^)#\s]*)#([^)\s]+)\)` .RawContent -}}
+    {{- range findRESubmatch `\]\((/[^)#\s]*)(?:#([^)\s]+))?\)` .RawContent -}}
       {{- $path := index . 1 -}}
       {{- $frag := index . 2 -}}
       {{- $key := cond (hasSuffix $path "/") $path (printf "%s/" $path) -}}
       {{- with index $byURL $key -}}
-        {{- if not (in .Fragments.Identifiers $frag) -}}
+        {{- if and $frag (not (in .Fragments.Identifiers $frag)) -}}
           {{- errorf "%s: link to %s#%s — %s has no heading with that anchor. Goldmark derives anchors from heading text, so retitling a heading breaks every citation of it." $file $path $frag $path -}}
         {{- end -}}
       {{- else -}}
-        {{- errorf "%s: link to %s#%s — no page at %s." $file $path $frag $path -}}
+        {{- errorf "%s: link to %s — no page at %s. If it was retitled, link to its new URL." $file (index . 0 | strings.TrimPrefix "](" | strings.TrimSuffix ")") $path -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}

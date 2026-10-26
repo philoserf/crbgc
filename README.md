@@ -35,11 +35,13 @@ The homepage is curated, not a mirror of the nav. The nav carries five sections;
 - **`governance` is deliberately exempt.** It is absent from `[permalinks]`, so a governance URL comes from its filename and a retitle cannot move it — which is what keeps the site's most heavily cited documents citable. The build checks those the other way round: the normalized title must match the filename, so a retitle that skips the rename still fails rather than orphaning the page from its own name.
 - **A new section is validated without being named.** `validate-content.html` checks every page and treats every section except `governance` as dated, so a new section must carry dates — or, if it is atemporal, be added to the governance exemption. Every page's normalized title must also match its filename, so a section left out of `[permalinks]` — whose URLs then come from filenames, as governance's do — still cannot drift from its titles.
 - **Retitling a published post changes its URL.** Rename the file to match and list the old path under `aliases:`, which Hugo publishes as a redirect. Note that Hugo drops `&` entirely — "Dream Golf & Cabot" would give `dream-golf-cabot`, so write "and" in the title when you want it in the URL.
-- **Heading-fragment citations are checked.** Cross-references such as
-  `[Article IV](/governance/bylaws/#article-iv--officers)` rely on anchors Goldmark derives
-  from the heading text, so retitling a heading would silently send them to the top of the
-  page. The build fails when a `](/path#fragment)` link names an anchor the target page does
-  not have.
+- **Internal links and their heading fragments are checked.** The build fails when a
+  root-relative `](/path)` link names no page — the usual cause is a retitled post linked by
+  its old URL — and when a `](/path#fragment)` link names an anchor the target page does not
+  have. Cross-references such as `[Article IV](/governance/bylaws/#article-iv--officers)`
+  rely on anchors Goldmark derives from the heading text, so retitling a heading would
+  otherwise silently send them to the top of the page. Link to a page's current URL, not to
+  an `aliases:` path.
 - **`description:` feeds the link preview.** It renders as both `meta name="description"` and `og:description`. Every content file carries one; a page without one still builds, and simply publishes with no preview text. Nothing enforces it.
 - **No taxonomies.** `notice_type` and `meeting_type` live in frontmatter and are queried directly in templates.
 - **No `tags:`, no `lastmod:`.** With taxonomy and term pages disabled, tags rendered nowhere and reached no feed. `lastmod:` fed only the feed's `lastBuildDate`, which is also gone — `layouts/home.rss.xml` explains why and what restoring it would cost. Content frontmatter is `title`, `description`, `date`, plus the fields its own section needs.
