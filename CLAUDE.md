@@ -10,8 +10,6 @@ This repo is not the authoritative copy of the governance documents — they ren
 
 `WALKTHROUGH.md` (linear code tour) and `THEORY.md` (domain model and load-bearing abstractions) are **generated** by the `code-walkthrough` and `code-theory` skills, not maintained by hand. They are tracked, and they are allowed to drift: do not edit them to track a code change, do not correct stale line numbers or transcribed output, and do not treat their drift as a finding. When they are wrong enough to matter, regenerate them — patching them between generations is wasted churn.
 
-The current next step for this repo is tracked in the workspace backlog at `../NEXT.md` (the `crbgc` row). Read it when starting work; update it when that step ships.
-
 ## The notes
 
 The club's informal writing — essays, history surveys, course architecture — lives in `content/notes/`. It arrived from the sibling repo `../crbgc-notes/` ([philoserf/crbgc-notes](https://github.com/philoserf/crbgc-notes)), which is **no longer authoritative**: edit notes here, not there. Flowershow, the service that used to publish them, is decommissioned; no link to `crbgc-philoserf.flowershow.me` survives anywhere in this repo, and this sentence is the last mention of it. Do not add one.
