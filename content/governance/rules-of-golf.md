@@ -78,6 +78,7 @@ Moved together with this code, and numbered as the [Standing Rules](/governance/
 1. **Rules of Play 5, Play It as It Lies,** is replaced by: "**The Rules of Golf.** The conduct of play, in the bogey competition and in every match, is governed by the Rules of Golf, adopted as part of these Standing Rules." Its substance is Rule 9 here.
 2. **Course Etiquette 2, 3, and 4** — Ready Play, Lost Ball Protocol, and the Foursomes Provision — are struck. Their substance is Rules 4, 19, and 1 here.
 3. **The glossary entries** for Foursomes, Ready Play, and Reasonable Search are struck.
+4. **Annual Traditions 1, Founders' Day,** is struck, and the Annual Traditions after it are renumbered. Whether the Club keeps a day in honor of its founding is left to its future Members.
 
 Everything else stays where it is. The Bogey Standard and the Bogey Competition are the Club declaring its format; Scoring & Handicaps is how the Club keeps its own ledger. Neither is a rule of play, and this code does not take them in.
 
